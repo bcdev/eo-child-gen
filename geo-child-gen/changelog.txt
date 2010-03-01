@@ -1,0 +1,17 @@
+Changelog for ENVISAT GeoCildGen
+
+Changes from version 1.5
+========================
+- added support for compressed products
+
+Changes from version 1.4
+========================
+- corrected SQADs calculation.
+- General software maintenance.
+
+Changes from version 1.3
+========================
+
+- Added support for AT1_TOA_1P, AT1_NR__2P, AT2_TOA_1P and AT2_NR__2P products.
+- Fixed a bug where spare DSD's in a product triggered a crash.
+- General software maintenance.

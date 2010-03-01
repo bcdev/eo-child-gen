@@ -1,0 +1,80 @@
+package com.bc.merci.geochildgen;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class CmdLineParams {
+
+    CmdLineParams() {
+        propertiesFileName = CmdLineConstants.PROPERTIES_FILE_NAME_DEFAULT;
+        outputDirName = CmdLineConstants.OUTPUT_DIR_NAME_DEFAULT;
+        createChildOption = CmdLineConstants.CREATE_CHILD_OPTION_DEFAULT;
+        inputFileNameList = new ArrayList<String>();
+        siteCategoryNames = new String[0];
+    }
+
+    String getPropertiesFileName() {
+        return propertiesFileName;
+    }
+
+    void setPropertiesFileName(final String fileName) {
+        if (fileName != null) {
+            propertiesFileName = fileName;
+        }
+    }
+
+    String getOutputDirName() {
+        return outputDirName;
+    }
+
+    void setOutputDirName(final String dirName) {
+        if (dirName != null) {
+            outputDirName = dirName;
+        }
+    }
+
+    boolean isCreateChildOption() {
+        return createChildOption;
+    }
+
+    void setCreateChildOption(boolean createChildOption) {
+        this.createChildOption = createChildOption;
+    }
+
+    List<String> getInputFileNameList() {
+        return inputFileNameList;
+    }
+
+    void addInputFileName(final String fileName) {
+        if (fileName != null) {
+            inputFileNameList.add(fileName);
+        }
+    }
+
+    boolean isDatabaseUsed() {
+        return databaseUsed;
+    }
+
+    void setDatabaseUsed(boolean databaseUsed) {
+        this.databaseUsed = databaseUsed;
+    }
+
+    void setSiteCategoryNames(String[] siteCategoryNames) {
+        this.siteCategoryNames = siteCategoryNames;
+    }
+
+    String[] getSiteCategoryNames() {
+        return siteCategoryNames;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    /////// END OF PACKAGE
+    ////////////////////////////////////////////////////////////////////////////////
+
+    private String propertiesFileName;
+    private String outputDirName;
+    private boolean createChildOption;
+    private List<String> inputFileNameList;
+    private boolean databaseUsed;
+    private String[] siteCategoryNames;
+}

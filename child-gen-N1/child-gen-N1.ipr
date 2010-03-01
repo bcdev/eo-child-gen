@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project relativePaths="true" version="4">
+  <component name="AntConfiguration">
+    <defaultAnt bundledAnt="true" />
+  </component>
+  <component name="BuildJarProjectSettings">
+    <option name="BUILD_JARS_ON_MAKE" value="false" />
+  </component>
+  <component name="CodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS" />
+    <option name="USE_PER_PROJECT_SETTINGS" value="false" />
+  </component>
+  <component name="CompilerConfiguration">
+    <option name="DEFAULT_COMPILER" value="Javac" />
+    <option name="DEPLOY_AFTER_MAKE" value="0" />
+    <resourceExtensions>
+      <entry name=".+\.(properties|xml|html|dtd|tld)" />
+      <entry name=".+\.(gif|png|jpeg|jpg)" />
+    </resourceExtensions>
+    <wildcardResourcePatterns>
+      <entry name="?*.properties" />
+      <entry name="?*.xml" />
+      <entry name="?*.gif" />
+      <entry name="?*.png" />
+      <entry name="?*.jpeg" />
+      <entry name="?*.jpg" />
+      <entry name="?*.html" />
+      <entry name="?*.dtd" />
+      <entry name="?*.tld" />
+      <entry name="?*.ftl" />
+    </wildcardResourcePatterns>
+  </component>
+  <component name="CopyrightManager" default="">
+    <module2copyright />
+  </component>
+  <component name="DependencyValidationManager">
+    <option name="SKIP_IMPORT_STATEMENTS" value="false" />
+  </component>
+  <component name="EclipseCompilerSettings">
+    <option name="DEBUGGING_INFO" value="true" />
+    <option name="GENERATE_NO_WARNINGS" value="true" />
+    <option name="DEPRECATION" value="false" />
+    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
+    <option name="MAXIMUM_HEAP_SIZE" value="128" />
+  </component>
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="IdProvider" IDEtalkID="3796BCF05D7BB5A374548C4FBA9D93D4" />
+  <component name="InspectionProjectProfileManager">
+    <option name="PROJECT_PROFILE" value="Project Default" />
+    <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
+    <scopes />
+    <profiles>
+      <profile version="1.0" is_locked="false">
+        <option name="myName" value="Project Default" />
+        <option name="myLocal" value="false" />
+        <inspection_tool class="ForCanBeForeach" level="WARNING" enabled="false">
+          <option name="REPORT_INDEXED_LOOP" value="true" />
+        </inspection_tool>
+        <inspection_tool class="WhileCanBeForeach" level="WARNING" enabled="false" />
+      </profile>
+    </profiles>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="SERVER PROBLEM" />
+      <item index="1" class="java.lang.String" itemvalue="INFO" />
+      <item index="2" class="java.lang.String" itemvalue="WARNING" />
+      <item index="3" class="java.lang.String" itemvalue="ERROR" />
+    </list>
+  </component>
+  <component name="JavacSettings">
+    <option name="DEBUGGING_INFO" value="true" />
+    <option name="GENERATE_NO_WARNINGS" value="false" />
+    <option name="DEPRECATION" value="true" />
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-target 1.5" />
+    <option name="MAXIMUM_HEAP_SIZE" value="128" />
+  </component>
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" />
+    <option name="OPTION_SCOPE" value="protected" />
+    <option name="OPTION_HIERARCHY" value="true" />
+    <option name="OPTION_NAVIGATOR" value="true" />
+    <option name="OPTION_INDEX" value="true" />
+    <option name="OPTION_SEPARATE_INDEX" value="true" />
+    <option name="OPTION_DOCUMENT_TAG_USE" value="false" />
+    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="false" />
+    <option name="OPTION_DOCUMENT_TAG_VERSION" value="false" />
+    <option name="OPTION_DOCUMENT_TAG_DEPRECATED" value="true" />
+    <option name="OPTION_DEPRECATED_LIST" value="true" />
+    <option name="OTHER_OPTIONS" value="" />
+    <option name="HEAP_SIZE" />
+    <option name="LOCALE" />
+    <option name="OPEN_IN_BROWSER" value="true" />
+  </component>
+  <component name="JikesSettings">
+    <option name="JIKES_PATH" value="" />
+    <option name="DEBUGGING_INFO" value="true" />
+    <option name="DEPRECATION" value="true" />
+    <option name="GENERATE_NO_WARNINGS" value="false" />
+    <option name="IS_EMACS_ERRORS_MODE" value="true" />
+    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="Palette2">
+    <group name="Swing">
+      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
+      </item>
+      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
+      </item>
+      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
+      </item>
+      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.png" removable="false" auto-create-binding="false" can-attach-label="true">
+        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
+      </item>
+      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
+        <initial-values>
+          <property name="text" value="Button" />
+        </initial-values>
+      </item>
+      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
+        <initial-values>
+          <property name="text" value="RadioButton" />
+        </initial-values>
+      </item>
+      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
+        <initial-values>
+          <property name="text" value="CheckBox" />
+        </initial-values>
+      </item>
+      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
+        <initial-values>
+          <property name="text" value="Label" />
+        </initial-values>
+      </item>
+      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
+          <preferred-size width="150" height="-1" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
+          <preferred-size width="150" height="-1" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
+          <preferred-size width="150" height="-1" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
+      </item>
+      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
+          <preferred-size width="200" height="200" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
+          <preferred-size width="200" height="200" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
+      </item>
+      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
+      </item>
+      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
+      </item>
+      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
+      </item>
+      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
+          <preferred-size width="-1" height="20" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
+      </item>
+      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
+      </item>
+    </group>
+  </component>
+  <component name="ProjectDetails">
+    <option name="projectName" value="child-gen-N1" />
+  </component>
+  <component name="ProjectFileVersion" converted="true" />
+  <component name="ProjectKey">
+    <option name="state" value="project://default" />
+  </component>
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/child-gen-N1.iml" filepath="$PROJECT_DIR$/child-gen-N1.iml" />
+    </modules>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="ResourceManagerContainer">
+    <option name="myResourceBundles">
+      <value>
+        <list size="0" />
+      </value>
+    </option>
+  </component>
+  <component name="RmicSettings">
+    <option name="IS_EANABLED" value="false" />
+    <option name="DEBUGGING_INFO" value="true" />
+    <option name="GENERATE_NO_WARNINGS" value="false" />
+    <option name="GENERATE_IIOP_STUBS" value="false" />
+    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="" />
+  </component>
+  <component name="WebServicesPlugin" addRequiredLibraries="true" />
+  <component name="libraryTable">
+    <library name="Maven: junit:junit:3.8.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.1/junit-3.8.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.1/junit-3.8.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.1/junit-3.8.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.bc:eo-data-manag:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/eo-data-manag/1.0/eo-data-manag-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/eo-data-manag/1.0/eo-data-manag-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/eo-data-manag/1.0/eo-data-manag-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.mail:mail:1.4">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4/mail-1.4.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4/mail-1.4-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4/mail-1.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.activation:activation:1.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.bc:bc-commons:1.1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/bc-commons/1.1.0/bc-commons-1.1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/bc-commons/1.1.0/bc-commons-1.1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/bc-commons/1.1.0/bc-commons-1.1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: commons-dbcp:commons-dbcp:1.2.2">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-dbcp/commons-dbcp/1.2.2/commons-dbcp-1.2.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-dbcp/commons-dbcp/1.2.2/commons-dbcp-1.2.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-dbcp/commons-dbcp/1.2.2/commons-dbcp-1.2.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.hsqldb:hsqldb:1.8.0.10">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/hsqldb/hsqldb/1.8.0.10/hsqldb-1.8.0.10.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/hsqldb/hsqldb/1.8.0.10/hsqldb-1.8.0.10-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/hsqldb/hsqldb/1.8.0.10/hsqldb-1.8.0.10-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.esa.beam:beam-core:4.7-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/esa/beam/beam-core/4.7-SNAPSHOT/beam-core-4.7-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/esa/beam/beam-core/4.7-SNAPSHOT/beam-core-4.7-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/esa/beam/beam-core/4.7-SNAPSHOT/beam-core-4.7-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.bc.ceres:ceres-core:0.10-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-core/0.10-SNAPSHOT/ceres-core-0.10-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-core/0.10-SNAPSHOT/ceres-core-0.10-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-core/0.10-SNAPSHOT/ceres-core-0.10-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.bc.ceres:ceres-launcher:0.10-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-launcher/0.10-SNAPSHOT/ceres-launcher-0.10-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-launcher/0.10-SNAPSHOT/ceres-launcher-0.10-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-launcher/0.10-SNAPSHOT/ceres-launcher-0.10-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.thoughtworks.xstream:xstream:1.3">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/thoughtworks/xstream/xstream/1.3/xstream-1.3.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/thoughtworks/xstream/xstream/1.3/xstream-1.3-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/thoughtworks/xstream/xstream/1.3/xstream-1.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: xpp3:xpp3_min:1.1.4c">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: xpp3:xpp3:1.1.3.3">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/xpp3/xpp3/1.1.3.3/xpp3-1.1.3.3.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/xpp3/xpp3/1.1.3.3/xpp3-1.1.3.3-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/xpp3/xpp3/1.1.3.3/xpp3-1.1.3.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.bc.ceres:ceres-glayer:0.10-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-glayer/0.10-SNAPSHOT/ceres-glayer-0.10-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-glayer/0.10-SNAPSHOT/ceres-glayer-0.10-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-glayer/0.10-SNAPSHOT/ceres-glayer-0.10-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.bc.ceres:ceres-binding:0.10-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-binding/0.10-SNAPSHOT/ceres-binding-0.10-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-binding/0.10-SNAPSHOT/ceres-binding-0.10-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-binding/0.10-SNAPSHOT/ceres-binding-0.10-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.media.jai:jai-core:1.1.3">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai/jai-core/1.1.3/jai-core-1.1.3.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai/jai-core/1.1.3/jai-core-1.1.3-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai/jai-core/1.1.3/jai-core-1.1.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.media.jai:jai-codec:1.1.3">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai/jai-codec/1.1.3/jai-codec-1.1.3.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai/jai-codec/1.1.3/jai-codec-1.1.3-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai/jai-codec/1.1.3/jai-codec-1.1.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.media.jai:mlibwrapper-jai:1.1.3">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai/mlibwrapper-jai/1.1.3/mlibwrapper-jai-1.1.3.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai/mlibwrapper-jai/1.1.3/mlibwrapper-jai-1.1.3-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai/mlibwrapper-jai/1.1.3/mlibwrapper-jai-1.1.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.media:clibwrapper-jiio:1.2-20090918">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/media/clibwrapper-jiio/1.2-20090918/clibwrapper-jiio-1.2-20090918.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/media/clibwrapper-jiio/1.2-20090918/clibwrapper-jiio-1.2-20090918-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/media/clibwrapper-jiio/1.2-20090918/clibwrapper-jiio-1.2-20090918-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.bc.ceres:ceres-jai:0.10-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-jai/0.10-SNAPSHOT/ceres-jai-0.10-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-jai/0.10-SNAPSHOT/ceres-jai-0.10-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/ceres/ceres-jai/0.10-SNAPSHOT/ceres-jai-0.10-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: jdom:jdom:1.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/jdom/jdom/1.1/jdom-1.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/jdom/jdom/1.1/jdom-1.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/jdom/jdom/1.1/jdom-1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: rhino:js:1.7R1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/rhino/js/1.7R1/js-1.7R1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/rhino/js/1.7R1/js-1.7R1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/rhino/js/1.7R1/js-1.7R1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.media:jai-imageio:1.2-20090918">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/media/jai-imageio/1.2-20090918/jai-imageio-1.2-20090918.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/media/jai-imageio/1.2-20090918/jai-imageio-1.2-20090918-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/media/jai-imageio/1.2-20090918/jai-imageio-1.2-20090918-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.bc:bc-jnn:1.5">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/bc-jnn/1.5/bc-jnn-1.5.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/bc-jnn/1.5/bc-jnn-1.5-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bc/bc-jnn/1.5/bc-jnn-1.5-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: Jama:Jama:1.0.2">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/Jama/Jama/1.0.2/Jama-1.0.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/Jama/Jama/1.0.2/Jama-1.0.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/Jama/Jama/1.0.2/Jama-1.0.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.geotools:gt-api:2.6.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-api/2.6.1/gt-api-2.6.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-api/2.6.1/gt-api-2.6.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-api/2.6.1/gt-api-2.6.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.vividsolutions:jts:1.10">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/vividsolutions/jts/1.10/jts-1.10.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/vividsolutions/jts/1.10/jts-1.10-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/vividsolutions/jts/1.10/jts-1.10-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.geotools:gt-referencing:2.6.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-referencing/2.6.1/gt-referencing-2.6.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-referencing/2.6.1/gt-referencing-2.6.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-referencing/2.6.1/gt-referencing-2.6.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: java3d:vecmath:1.3.2">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/java3d/vecmath/1.3.2/vecmath-1.3.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/java3d/vecmath/1.3.2/vecmath-1.3.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/java3d/vecmath/1.3.2/vecmath-1.3.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.geotools:gt-metadata:2.6.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-metadata/2.6.1/gt-metadata-2.6.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-metadata/2.6.1/gt-metadata-2.6.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-metadata/2.6.1/gt-metadata-2.6.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.opengis:geoapi:2.3-M1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/opengis/geoapi/2.3-M1/geoapi-2.3-M1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/opengis/geoapi/2.3-M1/geoapi-2.3-M1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/opengis/geoapi/2.3-M1/geoapi-2.3-M1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: net.java.dev.jsr-275:jsr-275:1.0-beta-2">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/net/java/dev/jsr-275/jsr-275/1.0-beta-2/jsr-275-1.0-beta-2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/net/java/dev/jsr-275/jsr-275/1.0-beta-2/jsr-275-1.0-beta-2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/net/java/dev/jsr-275/jsr-275/1.0-beta-2/jsr-275-1.0-beta-2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.opengis:geoapi-pending:2.3-M1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/opengis/geoapi-pending/2.3-M1/geoapi-pending-2.3-M1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/opengis/geoapi-pending/2.3-M1/geoapi-pending-2.3-M1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/opengis/geoapi-pending/2.3-M1/geoapi-pending-2.3-M1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.geotools:gt-main:2.6.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-main/2.6.1/gt-main-2.6.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-main/2.6.1/gt-main-2.6.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-main/2.6.1/gt-main-2.6.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: commons-beanutils:commons-beanutils:1.7.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: commons-logging:commons-logging:1.0.4">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.geotools:gt-geotiff:2.6.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-geotiff/2.6.1/gt-geotiff-2.6.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-geotiff/2.6.1/gt-geotiff-2.6.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-geotiff/2.6.1/gt-geotiff-2.6.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.geotools:gt-coverage:2.6.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-coverage/2.6.1/gt-coverage-2.6.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-coverage/2.6.1/gt-coverage-2.6.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-coverage/2.6.1/gt-coverage-2.6.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: it.geosolutions.imageio-ext:imageio-ext-tiff:1.0.5">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/it/geosolutions/imageio-ext/imageio-ext-tiff/1.0.5/imageio-ext-tiff-1.0.5.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/it/geosolutions/imageio-ext/imageio-ext-tiff/1.0.5/imageio-ext-tiff-1.0.5-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/it/geosolutions/imageio-ext/imageio-ext-tiff/1.0.5/imageio-ext-tiff-1.0.5-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.media:jai_core:1.1.3">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai_core/1.1.3/jai_core-1.1.3.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai_core/1.1.3/jai_core-1.1.3-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai_core/1.1.3/jai_core-1.1.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.media:jai_codec:1.1.3">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai_codec/1.1.3/jai_codec-1.1.3.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai_codec/1.1.3/jai_codec-1.1.3-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai_codec/1.1.3/jai_codec-1.1.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.media:jai_imageio:1.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai_imageio/1.1/jai_imageio-1.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai_imageio/1.1/jai_imageio-1.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/media/jai_imageio/1.1/jai_imageio-1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: it.geosolutions.imageio-ext:imageio-ext-utilities:1.0.5">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/it/geosolutions/imageio-ext/imageio-ext-utilities/1.0.5/imageio-ext-utilities-1.0.5.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/it/geosolutions/imageio-ext/imageio-ext-utilities/1.0.5/imageio-ext-utilities-1.0.5-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/it/geosolutions/imageio-ext/imageio-ext-utilities/1.0.5/imageio-ext-utilities-1.0.5-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.geotools:gt-epsg-hsql:2.6.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-epsg-hsql/2.6.1/gt-epsg-hsql-2.6.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-epsg-hsql/2.6.1/gt-epsg-hsql-2.6.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-epsg-hsql/2.6.1/gt-epsg-hsql-2.6.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: hsqldb:hsqldb:1.8.0.7">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/hsqldb/hsqldb/1.8.0.7/hsqldb-1.8.0.7.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/hsqldb/hsqldb/1.8.0.7/hsqldb-1.8.0.7-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/hsqldb/hsqldb/1.8.0.7/hsqldb-1.8.0.7-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.apache.struts:struts-core:1.3.8">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/struts/struts-core/1.3.8/struts-core-1.3.8.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/struts/struts-core/1.3.8/struts-core-1.3.8-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/struts/struts-core/1.3.8/struts-core-1.3.8-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: antlr:antlr:2.7.2">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.2/antlr-2.7.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.2/antlr-2.7.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.2/antlr-2.7.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: commons-chain:commons-chain:1.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-chain/commons-chain/1.1/commons-chain-1.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-chain/commons-chain/1.1/commons-chain-1.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-chain/commons-chain/1.1/commons-chain-1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: commons-digester:commons-digester:1.8">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-digester/commons-digester/1.8/commons-digester-1.8.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-digester/commons-digester/1.8/commons-digester-1.8-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-digester/commons-digester/1.8/commons-digester-1.8-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: commons-validator:commons-validator:1.3.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-validator/commons-validator/1.3.1/commons-validator-1.3.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-validator/commons-validator/1.3.1/commons-validator-1.3.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-validator/commons-validator/1.3.1/commons-validator-1.3.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: oro:oro:2.0.8">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/oro/oro/2.0.8/oro-2.0.8.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/oro/oro/2.0.8/oro-2.0.8-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/oro/oro/2.0.8/oro-2.0.8-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.servlet:servlet-api:2.5">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.5/servlet-api-2.5-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.5/servlet-api-2.5-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.esa.beam:beam-ascii-readerwriter:1.1-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/esa/beam/beam-ascii-readerwriter/1.1-SNAPSHOT/beam-ascii-readerwriter-1.1-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/esa/beam/beam-ascii-readerwriter/1.1-SNAPSHOT/beam-ascii-readerwriter-1.1-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/esa/beam/beam-ascii-readerwriter/1.1-SNAPSHOT/beam-ascii-readerwriter-1.1-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: commons-pool:commons-pool:1.3">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-pool/commons-pool/1.3/commons-pool-1.3.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-pool/commons-pool/1.3/commons-pool-1.3-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-pool/commons-pool/1.3/commons-pool-1.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+  </component>
+  <UsedPathMacros>
+    <macro name="MAVEN_REPOSITORY" description="Maven Local Repostiry" />
+  </UsedPathMacros>
+</project>
+
