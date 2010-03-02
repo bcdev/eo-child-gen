@@ -63,7 +63,7 @@
                 <configuration>
                     <skip>false</skip>
                     <excludes>
-                        <exclude>**/GeoChildGenUtilsTest</exclude>
+                        <exclude>**/GeoChildGenUtilsTest.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
