@@ -84,6 +84,7 @@ public class GeoChildGenUtilsTest extends TestCase {
     private static final String LOCATION_1 = "POINT(12 33)";
     private static final String LOCATION_2 = "POINT(16 38)";
     private static final String LOCATION_3 = "POINT(3 18)";
+    private static final String LOCATION_4 = "POINT(9 108)";
     private static final String META_LOCATION = "POINT(22 14)";
     private static final String RADIUS = "155.7";
     private static final String CATEGORY_1_NAME = "category 1";
@@ -104,10 +105,12 @@ public class GeoChildGenUtilsTest extends TestCase {
             "INSERT INTO Location VALUES(1005, GeomFromText('" + LOCATION_2 + "'));\n" +
             "INSERT INTO Location VALUES(1006, GeomFromText('" + LOCATION_3 + "'));\n" +
             "INSERT INTO Location VALUES(1007, GeomFromText('" + META_LOCATION + "'));\n" +
-            "INSERT INTO Site VALUES(99, 'site_wo_meta', 'a test site without a meta site', 1004, " + RADIUS + ", GeomFromText('" + LOCATION_1 + "'), 234, true, 1, 99, null);\n" +
-            "INSERT INTO Site VALUES(100, 'site_w_meta', 'a test site with a meta site', 1005, " + RADIUS + ", GeomFromText('" + LOCATION_2 + "'), 251, true, 1, 101, null);\n" +
-            "INSERT INTO Site VALUES(101, 'meta_site', 'a test meta site', 1007, " + RADIUS + ", GeomFromText('" + META_LOCATION + "'), 99, true, 1, 101, null);\n" +
-            "INSERT INTO Site VALUES(102, 'cat_site', 'a categorized site', 1006, " + RADIUS + ", GeomFromText('" + LOCATION_3 + "'), 99, true, 1, 102, null);\n" +
+            "INSERT INTO Location VALUES(1008, GeomFromText('" + LOCATION_4 + "'));\n" +
+            "INSERT INTO Site VALUES(99, 'site_wo_meta', 'a test site without a meta site', 1004, " + RADIUS + ", GeomFromText('" + LOCATION_1 + "'), 234, true, true, 1, 99, null);\n" +
+            "INSERT INTO Site VALUES(100, 'site_w_meta', 'a test site with a meta site', 1005, " + RADIUS + ", GeomFromText('" + LOCATION_2 + "'), 251, true, true, 1, 101, null);\n" +
+            "INSERT INTO Site VALUES(101, 'meta_site', 'a test meta site', 1007, " + RADIUS + ", GeomFromText('" + META_LOCATION + "'), 99, true, true, 1, 101, null);\n" +
+            "INSERT INTO Site VALUES(102, 'cat_site', 'a categorized site', 1006, " + RADIUS + ", GeomFromText('" + LOCATION_3 + "'), 99, true, true, 1, 102, null);\n" +
+            "INSERT INTO Site VALUES(103, 'non_systematic_site', 'a non_systematic site', 1008, " + RADIUS + ", GeomFromText('" + LOCATION_4 + "'), 99, true, false, 1, 103, null);\n" +
             "INSERT INTO SiteCategorySite VALUES(99, 510);\n" +
             "INSERT INTO SiteCategorySite VALUES(102, 510);\n" +
             "INSERT INTO SiteCategorySite VALUES(100, 511);";

@@ -54,7 +54,9 @@ class GeoChildGenUtils {
             "  id as id, " +
             "  metaSiteId as metaSiteId " +
             "FROM " +
-            "  Site";
+            "  Site " +
+            "WHERE " +
+            "  isSysDownload = true";
 
     private static final String SQL_SELECT_SITE_CATEGORY = "SELECT " +
             "  id as id " +
@@ -75,7 +77,9 @@ class GeoChildGenUtils {
             "WHERE " +
             "  SiteCategorySite.SiteId = Site.Id " +
             "AND " +
-            "  SiteCategorySite.SiteCategoryId = ${value}";
+            "  SiteCategorySite.SiteCategoryId = ${value} " +
+            "AND " +
+            "  Site.isSysDownload = true";
 
     private static final String SQL_SELECT_SITE_BY_ID = "SELECT " +
             "  locationId as locationId, " +
@@ -83,7 +87,9 @@ class GeoChildGenUtils {
             "FROM " +
             "  Site " +
             "WHERE " +
-            "  Id = ${value}";
+            "  Id = ${value} " +
+            "AND " +
+            "  isSysDownload = true";
 
     private static final String SELECT_LOCATION = "SELECT " +
             "  id as id, " +
