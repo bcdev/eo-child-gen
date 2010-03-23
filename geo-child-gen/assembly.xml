@@ -1,0 +1,38 @@
+<assembly>
+    <id>${artifact.version}</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <files>
+        <file>
+            <source>splitOrbit.bat</source>
+            <outputDirectory>.</outputDirectory>
+            <destName>insitu-reg.bat</destName>
+            <fileMode>0754</fileMode>
+        </file>
+        <file>
+            <source>splitOrbit.sh</source>
+            <outputDirectory>.</outputDirectory>
+            <destName>insitu-reg.sh</destName>
+            <fileMode>0754</fileMode>
+        </file>
+        <file>
+            <source>target/${artifact.artifactId}-${artifact.version}.jar</source>
+            <outputDirectory>lib</outputDirectory>
+            <destName>${artifact.artifactId}-${artifact.version}.jar</destName>
+            <fileMode>0754</fileMode>
+        </file>
+    </files>
+
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <excludes>
+                <!-- remove duplicate includes -->
+                <exclude>jai_*</exclude>
+            </excludes>
+        </dependencySet>
+    </dependencySets>
+
+</assembly>

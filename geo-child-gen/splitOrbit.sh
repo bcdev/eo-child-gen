@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# this software requires a JRE version 1.6 or higher
 export JAVAHOME=/usr/lib/j2sdk1.4.2_04/bin
 export CHILDGENDIR=/home/merci/childgen
 
@@ -7,7 +8,7 @@ export JAVAEXE=$JAVAHOME/java
 export LIBDIR=$CHILDGENDIR/lib
 export OLD_CLASSPATH=$CLASSPATH
 
-export CLASSPATH=$LIBDIR/geochildgen.jar:$LIBDIR/beam.jar:$LIBDIR/bc-commons.jar:$LIBDIR/bc-webapp.jar:$LIBDIR/merci-childgen.jar:$LIBDIR/merci-prodreg.jar:$LIBDIR/merci-commons.jar:$LIBDIR/jai_core.jar:$LIBDIR/commons-dbcp-1.2.1.jar:$LIBDIR/commons-pool-1.2.jar:$LIBDIR/mysql-connector-java-3.1.12-bin.jar:$LIBDIR/commons-collections-3.1.jar
+export CLASSPATH=$LIBDIR/*
 
 export OUT_DIR=$1
 export SPLIT_LINE=$2
