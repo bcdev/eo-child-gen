@@ -2,37 +2,64 @@
     <id>${artifact.version}</id>
     <formats>
         <format>zip</format>
+        <format>dir</format>
     </formats>
 
     <files>
         <file>
             <source>splitOrbit.bat</source>
             <outputDirectory>.</outputDirectory>
-            <destName>insitu-reg.bat</destName>
+            <destName>splitOrbit.bat</destName>
             <fileMode>0754</fileMode>
         </file>
         <file>
             <source>splitOrbit.sh</source>
             <outputDirectory>.</outputDirectory>
-            <destName>insitu-reg.sh</destName>
+            <destName>splitOrbit.sh</destName>
             <fileMode>0754</fileMode>
         </file>
         <file>
+            <source>geochildgen.bat</source>
+            <outputDirectory>.</outputDirectory>
+            <destName>geochildgen.bat</destName>
+            <fileMode>0754</fileMode>
+        </file>
+        <file>
+            <source>geochildgen.sh</source>
+            <outputDirectory>.</outputDirectory>
+            <destName>geochildgen.sh</destName>
+            <fileMode>0754</fileMode>
+        </file>
+        <file>
+            <source>geochildgen.properties</source>
+            <outputDirectory>.</outputDirectory>
+            <destName>geochildgen.properties</destName>
+            <fileMode>0754</fileMode>
+        </file>
+       <file>
             <source>target/${artifact.artifactId}-${artifact.version}.jar</source>
             <outputDirectory>lib</outputDirectory>
             <destName>${artifact.artifactId}-${artifact.version}.jar</destName>
             <fileMode>0754</fileMode>
         </file>
+
     </files>
 
-    <dependencySets>
+    <dependencySets>        
         <dependencySet>
             <outputDirectory>lib</outputDirectory>
             <excludes>
                 <!-- remove duplicate includes -->
                 <exclude>jai_*</exclude>
+                <exclude>hsqldb-1.8.0.1*</exclude>
+                <exclude>junit*</exclude>
+                <exclude>mail*</exclude>
             </excludes>
+            <includes>
+                <include>org.esa.beam:beam.enisat-reader</include>
+            </includes>
         </dependencySet>
     </dependencySets>
+
 
 </assembly>

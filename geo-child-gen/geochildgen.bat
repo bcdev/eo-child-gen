@@ -1,13 +1,15 @@
 @ECHO OFF
 
-SET JAVAHOME=E:\Programme\Java\jre1.5.0_04\bin
+REM this software requires a JRE version 1.6 or higher
+
+SET JAVAHOME=C:\Programme\Java\jdk1.6.0_10\bin
 SET CHILDGENDIR=C:\Temp\geoChildGen
 
 SET JAVAEXE=%JAVAHOME%\java.exe
 SET LIBDIR=%CHILDGENDIR%\lib
 SET OLD_CLASSPATH=%CLASSPATH%
 
-SET CLASSPATH=%LIBDIR%\{{geochildgen-jar}};%LIBDIR%\{{beam-jar}};%LIBDIR%\{{bc-commons-jar}};%LIBDIR%\{{bc-webapp-jar}};%LIBDIR%\{{merci-childgen-jar}};%LIBDIR%\{{merci-commons-jar}};%LIBDIR%\{{jai-core-jar}};%LIBDIR%\{{apache-dbcp-jar}};%LIBDIR%\{{apache-pool-jar}};%LIBDIR%\{{jdbc-jar}};%LIBDIR%\{{apache-collections-jar}};%LIBDIR%\{{ceres-core-jar}};%LIBDIR%\{{ceres-glayer-jar}};%LIBDIR%\{{envisat-reader-jar}};%LIBDIR%\{{jama-jar}}
+SET CLASSPATH=%LIBDIR%/*
 
 
 ::------------------------------------------------------------------

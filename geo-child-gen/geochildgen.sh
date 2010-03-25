@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# this software requires a JRE version 1.6 or higher
 export JAVAHOME=/usr/lib/j2sdk1.4.2_04/bin
 export CHILDGENDIR=/home/merci/childgen
 
