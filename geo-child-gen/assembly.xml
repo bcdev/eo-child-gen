@@ -2,7 +2,6 @@
     <id>${artifact.version}</id>
     <formats>
         <format>zip</format>
-        <format>dir</format>
     </formats>
 
     <files>
@@ -49,17 +48,12 @@
         <dependencySet>
             <outputDirectory>lib</outputDirectory>
             <excludes>
-                <!-- remove duplicate includes -->
                 <exclude>jai_*</exclude>
                 <exclude>hsqldb-1.8.0.1*</exclude>
                 <exclude>junit*</exclude>
                 <exclude>mail*</exclude>
             </excludes>
-            <includes>
-                <include>org.esa.beam:beam.enisat-reader</include>
-            </includes>
         </dependencySet>
     </dependencySets>
-
 
 </assembly>
