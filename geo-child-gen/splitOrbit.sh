@@ -15,9 +15,9 @@ export SPLIT_LINE=$2
 export INPUT_FILE=$3
 
 #                                                            <inputfile> <outputdir> <firstline> <lastline> <pkey> <filecounter> <invalidflag>
-$JAVAEXE -Xms64M -Xmx512M -classpath "$CLASSPATH" com.bc.merci.childgen.ChildGeneratorMain $INPUT_FILE $OUT_DIR 0 $SPLIT_LINE RAL 0001 0
+$JAVAEXE -Xms64M -Xmx512M -classpath "$CLASSPATH" com.bc.childgen.ChildGeneratorMain $INPUT_FILE $OUT_DIR 0 $SPLIT_LINE RAL 0001 0
 
 #                                                            <inputfile> <outputdir> <firstline> <lastline> <pkey> <filecounter> <invalidflag>
-$JAVAEXE -Xms64M -Xmx512M -classpath "$CLASSPATH" com.bc.merci.childgen.ChildGeneratorMain $INPUT_FILE $OUT_DIR $SPLIT_LINE 100000 RAL 0001 0
+$JAVAEXE -Xms64M -Xmx512M -classpath "$CLASSPATH" com.bc.childgen.ChildGeneratorMain $INPUT_FILE $OUT_DIR $SPLIT_LINE 100000 RAL 0001 0
 
 export CLASSPATH=$OLD_CLASSPATH
