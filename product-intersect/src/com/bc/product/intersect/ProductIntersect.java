@@ -1,10 +1,18 @@
 package com.bc.product.intersect;
 
+import java.io.File;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
 public class ProductIntersect {
 
+    public void run(CmdLineParams params) {
+        final String propertiesFileName = params.getPropertiesFileName();
+        final File propertiesFile = new File(propertiesFileName);
+        if (!propertiesFile.isFile()) {
+            throw new IllegalStateException("Properties file '" + propertiesFileName + "' does not exist");
+        }
+    }
 
     ////////////////////////////////////////////////////////////////////////////////
     /////// END OF PUBLIC
