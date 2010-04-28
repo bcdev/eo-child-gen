@@ -24,10 +24,55 @@
             <groupId>org.esa.beam</groupId>
             <artifactId>beam-core</artifactId>
             <version>4.7-SNAPSHOT</version>
-        </dependency>        
+        </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>bc-mvn-repo-closed</id>
+            <name>Private Maven Repository at Brockmann Consult</name>
+            <url>scp://www.brockmann-consult.de/home/maven-cs</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>bc-mvn-repo-closed</id>
+            <name>Private Maven Snapshot Repository at Brockmann Consult</name>
+            <url>scp://www.brockmann-consult.de/home/maven-cs</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>bc-mvn-repo-http</id>
+            <name>Public Maven Repository at Brockmann Consult</name>
+            <url>http://www.brockmann-consult.de/mvn/os</url>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>bc-mvn-repo-closed</id>
+            <name>Private Maven Repository at Brockmann Consult</name>
+            <url>scp://www.brockmann-consult.de/home/maven-cs</url>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <build>
-	<sourceDirectory>src</sourceDirectory>
+        <sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>srcTest</testSourceDirectory>
         <resources>
             <resource>
@@ -45,6 +90,7 @@
                 </excludes>
             </testResource>
         </testResources>
+
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
