@@ -200,10 +200,11 @@ public class GeoChildGen {
             System.out.println("created child product of '" + productFile.getPath() + "'");
         } catch (IOException e) {
             final File childProduct = childGenerator.getTargetProduct();
-            if (childProduct.exists()) {
+            if (childProduct != null && childProduct.exists()) {
                 childProduct.delete();
             }
             System.err.println("Failed to write child product to '" + outputDir.getAbsolutePath() + "'");
+            System.err.println(e.getMessage());            
         } finally {
             if (expandedFile != null) {
                 expandedFile.delete();
