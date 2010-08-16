@@ -7,7 +7,7 @@
     <groupId>com.bc</groupId>
     <artifactId>geo-child-gen</artifactId>
     <name>Geo ChildGen</name>
-    <version>1.7.1</version>
+    <version>1.7.2_SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -18,7 +18,7 @@
         <dependency>
             <groupId>com.bc</groupId>
             <artifactId>eo-data-manag</artifactId>
-            <version>1.1_SNAPSHOT</version>
+            <version>1.2_SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.bc</groupId>

@@ -188,7 +188,7 @@ public class GeoChildGen {
         try {
             File workFile = productFile;
             if (ZipUtils.isCompressedFileName(productFile)) {
-                expandedFile = ZipUtils.UnpackInTempDir(productFile);
+                expandedFile = ZipUtils.unpackInTempDir(productFile);
                 workFile = expandedFile;
             }
 
