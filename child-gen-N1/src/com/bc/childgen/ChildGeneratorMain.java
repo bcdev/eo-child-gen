@@ -1,9 +1,7 @@
 package com.bc.childgen;
 
 
-import com.bc.util.product.ChildGenerator;
-import org.esa.beam.framework.dataio.ProductSubsetDef;
-
+import java.awt.*;
 import java.io.File;
 
 /**
@@ -19,6 +17,7 @@ public class ChildGeneratorMain {
     public static final String PROGRAM_NAME = "childgen";
     public static final String VERSION_INFO = "1.5";
     public static final String COPYRIGHT_INFO = "Copyright (C) 2004-2009 by Brockmann Consult (info@brockmann-consult.de)";
+    private static final int DON_T_CARE = 1121;
 
     /**
      * @param args the command line arguments
@@ -37,21 +36,18 @@ public class ChildGeneratorMain {
             String originatorId = args[4];
 
             int fileCounter = Integer.parseInt(args[5]);
-            int invalidFlag = Integer.parseInt(args[6]);
 
             long start = System.currentTimeMillis();
 
-            ChildGenerator childGenerator = ChildGeneratorFactory.createChildGenerator(inputFile.getName());
+            ChildGeneratorImpl childGenerator = ChildGeneratorFactory.createChildGenerator(inputFile.getName());
             if (childGenerator != null) {
-                ProductSubsetDef subsetInfo = new ProductSubsetDef("");
                 // note width is not evaluated so we set anything here (except 0 !)
-                subsetInfo.setRegion(0, firstLine, 1121, lastLine - firstLine + 1);
+                Rectangle region = new Rectangle(0, firstLine, DON_T_CARE, lastLine - firstLine + 1);
                 childGenerator.process(inputFile,
-                        outputDir,
-                        subsetInfo,
-                        originatorId,
-                        fileCounter,
-                        invalidFlag);
+                                       outputDir,
+                                       originatorId,
+                                       fileCounter,
+                                       region);
             } else {
                 System.out.println("No child was created. Check input file, please. ");
             }
@@ -65,7 +61,7 @@ public class ChildGeneratorMain {
                             "  ATS_TOA_1P, ATS_NR__2P, AT1_TOA_1P, AT1_NR__2P, AT2_TOA_1P, AT2_NR__2P\n\n" +
                             "Usage: java "
                             + ChildGeneratorMain.class.getName()
-                            + " <inputfile> <outputdir> <firstline> <lastline> <pkey> <filecounter> <invalidflag>\n\n");
+                            + " <inputfile> <outputdir> <firstline> <lastline> <pkey> <filecounter>\n\n");
             e.printStackTrace();
         }
     }

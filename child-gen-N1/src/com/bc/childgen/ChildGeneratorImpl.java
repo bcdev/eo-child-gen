@@ -4,8 +4,6 @@
 package com.bc.childgen;
 
 import com.bc.childgen.modules.*;
-import com.bc.util.product.ChildGenerator;
-import org.esa.beam.framework.dataio.ProductSubsetDef;
 
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.FileImageOutputStream;
@@ -21,26 +19,17 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-final class ChildGeneratorImpl implements ChildGenerator {
+final class ChildGeneratorImpl {
 
     /**
      * @param inputFile    the input N1 product file
-     * @param subsetInfo   the subset to be used
      * @param outputDir    the target directory for the child product
      * @param originatorID DPA in MER_FR__1PN<i>DPA</i>20030812_102139_000000982019_00008_07577_0094.N1 Must be THREE
      *                     characters
      * @param fileCounter  the last four numbers in MER_FR__1PNDPA20030812_102139_000000982019_00008_07577_<i>0094</i>.N1
-     * @param invalidValue - ?
      * @throws java.io.IOException
      */
-    final public synchronized void process(final File inputFile,
-                                           final File outputDir,
-                                           final ProductSubsetDef subsetInfo,
-                                           final String originatorID,
-                                           final int fileCounter,
-                                           final int invalidValue)
-            throws IOException {
-        final Rectangle region = subsetInfo.getRegion();
+    final public synchronized void process(File inputFile, File outputDir, String originatorID, int fileCounter, Rectangle region) throws IOException {
         roi.setFirstLine((int) region.getMinY());
         roi.setLastLine((int) region.getMaxY());
 
@@ -57,7 +46,7 @@ final class ChildGeneratorImpl implements ChildGenerator {
             parseSPH(in);
 
             adjustROI();
-            
+
             parseDSs(in);
 
             final Module module = ModuleFactory.getModule(mph);
@@ -367,9 +356,9 @@ final class ChildGeneratorImpl implements ChildGenerator {
             if (targetDsd.getDsType() != 'M') {
                 // these can be copied normally
                 copyDS(sourceOffset, targetDsd.getDsOffset(), targetDsd.getDsSize(), in, out);
-            }  else {
+            } else {
                 // here, we have to take the attach_flag into account
-                copyDS(sourceOffset, targetDsd.getDsOffset(), targetDsd.getDsSize(), in, out);                
+                copyDS(sourceOffset, targetDsd.getDsOffset(), targetDsd.getDsSize(), in, out);
             }
         }
     }
@@ -400,6 +389,7 @@ final class ChildGeneratorImpl implements ChildGenerator {
      * Diese werden so gewaehlt, dass sie genau auf die Tie Point Grids
      * passen.
      */
+
     private void adjustROI() throws ChildGenException {
         final Module module = ModuleFactory.getModule(mph);
         module.adjustRoi(roi, sourceSph);

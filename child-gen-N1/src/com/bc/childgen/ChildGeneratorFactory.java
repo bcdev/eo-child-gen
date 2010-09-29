@@ -3,8 +3,6 @@
  */
 package com.bc.childgen;
 
-import com.bc.util.product.ChildGenerator;
-
 /**
  * Factory class to create instances of an implementation of the <code>ChildGenerator</code> interface.
  *
@@ -19,12 +17,12 @@ public final class ChildGeneratorFactory {
      * @return the new instance
      * @see com.bc.util.product.ChildGenerator
      */
-    public static ChildGenerator createChildGenerator(String fileName) throws ChildGenException {
+    public static ChildGeneratorImpl createChildGenerator(String fileName) throws ChildGenException {
         final ChildGeneratorImpl childGeneratorImpl = new ChildGeneratorImpl();
 
         final Config config = getConfigFor(fileName);
         childGeneratorImpl.setConfig(config);
-        
+
         return childGeneratorImpl;
     }
 
