@@ -19,12 +19,16 @@ public class IIOTest extends TestCase {
     private static final int RR_FRAME_SIZE = 16;
     private static final int M = 1024 * 1024;
 
+
     public void testStreamingIO() throws ChildGenException, IOException {
+        InputStream is = getClass().getResourceAsStream(N1_TEST_DATA_NAME);
+        assertNotNull("Test data not found: " + N1_TEST_DATA_NAME, is);
+        ImageInputStream iis = new FileCacheImageInputStream(is, null);
 
         int expectedNumTpDsr;
 
         expectedNumTpDsr = 8;
-        testContents(process("XYZ-1", 0, 100),
+        testContents(process(iis, "XYZ-1", 0, 100),
                      4243731L,
                      "XYZ-1",
                      "DS_NAME=\"Tie points ADS              \"\n" +
@@ -45,7 +49,7 @@ public class IIOTest extends TestCase {
                              "                                \n");
 
         expectedNumTpDsr = 11;
-        testContents(process("XYZ-2", 50, 200),
+        testContents(process(iis, "XYZ-2", 50, 200),
                      6040101L,
                      "XYZ-2",
                      "DS_NAME=\"Tie points ADS              \"\n" +
@@ -66,7 +70,7 @@ public class IIOTest extends TestCase {
                              "                                \n");
 
         // same as before, but this time on tie-point boundaries
-        testContents(process("XYZ-3", 3 * 16, 13 * 16),
+        testContents(process(iis, "XYZ-3", 3 * 16, 13 * 16),
                      6040101L,
                      "XYZ-3",
                      "DS_NAME=\"Tie points ADS              \"\n" +
@@ -85,24 +89,20 @@ public class IIOTest extends TestCase {
                              "NUM_DSR=+0000000" + ((expectedNumTpDsr-1) * RR_FRAME_SIZE + 1) + "\n" +
                              "DSR_SIZE=+0000002255<bytes>\n" +
                              "                                \n");
+
+        iis.close();
     }
 
-    private byte[] process(String productName, int firstLine, int lastLine) throws IOException, ChildGenException {
-        InputStream is = getClass().getResourceAsStream(N1_TEST_DATA_NAME);
-        assertNotNull("Test data not found: " + N1_TEST_DATA_NAME, is);
-
+    private static byte[] process(ImageInputStream iis, String productName, int firstLine, int lastLine) throws IOException, ChildGenException {
         ByteArrayOutputStream os = new ByteArrayOutputStream(16 * M);
-        ImageInputStream iis = new FileCacheImageInputStream(is, null);
         ImageOutputStream ios = new FileCacheImageOutputStream(os, null);
 
         ChildGeneratorImpl childGenerator = ChildGeneratorFactory.createChildGenerator("MER_RR");
         childGenerator.process(iis, ios, productName, firstLine, lastLine);
 
         ios.close();
-        iis.close();
 
-        byte[] contents = os.toByteArray();
-        return contents;
+        return os.toByteArray();
     }
 
     private void testContents(byte[] contents, long size, String productName, String tiePointsAdsDsd, String radianceMds1Dsd) {

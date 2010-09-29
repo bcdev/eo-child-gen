@@ -25,9 +25,9 @@ class MerisModule implements Module {
 
         DatasetDescriptor firstMDSDsd = null;
         final DatasetDescriptor[] dsds = sph.getDsds();
-        for (int i = 0; i < dsds.length; i++) {
-            if (dsds[i].getDsType() == 'M') {
-                firstMDSDsd = dsds[i];
+        for (DatasetDescriptor dsd : dsds) {
+            if (dsd.getDsType() == 'M') {
+                firstMDSDsd = dsd;
                 break;
             }
         }

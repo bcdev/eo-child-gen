@@ -91,6 +91,7 @@ public final class ChildGeneratorImpl {
 
     /**
      * Performs the child generation processing.
+     *
      * @param inputFile    the input N1 product file
      * @param outputDir    the target directory for the child product
      * @param originatorID DPA in MER_FR__1PN<i>DPA</i>20030812_102139_000000982019_00008_07577_0094.N1 Must be THREE
@@ -111,13 +112,14 @@ public final class ChildGeneratorImpl {
 
     /**
      * Performs the child generation processing.
+     *
      * @param inputFile    the input N1 product file
      * @param outputDir    the target directory for the child product
      * @param originatorID DPA in MER_FR__1PN<i>DPA</i>20030812_102139_000000982019_00008_07577_0094.N1 Must be THREE
      *                     characters
      * @param fileCounter  the last four numbers in MER_FR__1PNDPA20030812_102139_000000982019_00008_07577_<i>0094</i>.N1
-     * @param firstLine The first scan line
-     * @param lastLine The last scan line
+     * @param firstLine    The first scan line
+     * @param lastLine     The last scan line
      * @throws java.io.IOException If an I/O error occurs
      */
     public void process(File inputFile,
@@ -129,14 +131,17 @@ public final class ChildGeneratorImpl {
 
         checkArguments(outputDir, originatorID, fileCounter);
 
-        outputFile = getOutputFile(outputDir, originatorID, fileCounter);
+        roi.setFirstLine(firstLine);
+        roi.setLastLine(lastLine);
 
         ImageInputStream in = new FileImageInputStream(inputFile);
         try {
+            read(in);
+            outputFile = new File(outputDir, createProductName(originatorID, fileCounter));
             ImageOutputStream out = new FileImageOutputStream(outputFile);
             try {
-                process(in, out, outputFile.getName(), firstLine, lastLine);
-            } catch (IOException e) {
+                write(in, out, outputFile.getName());
+            } finally {
                 out.close();
             }
         } finally {
@@ -146,10 +151,12 @@ public final class ChildGeneratorImpl {
 
     /**
      * Performs the child generation processing.
-     * @param in    The N1 input stream
-     * @param out    The N1 output stream
-     * @param firstLine The first scan line
-     * @param lastLine The last scan line
+     *
+     * @param in          The N1 input stream
+     * @param out         The N1 output stream
+     * @param productName The N1 product name
+     * @param firstLine   The first scan line
+     * @param lastLine    The last scan line
      * @throws java.io.IOException If an I/O error occurs
      */
     public void process(ImageInputStream in,
@@ -157,34 +164,40 @@ public final class ChildGeneratorImpl {
                         String productName,
                         int firstLine,
                         int lastLine) throws IOException {
-
+        // todo - check that this.config is set and valid. (nf, 29.09.2010)
         roi.setFirstLine(firstLine);
         roi.setLastLine(lastLine);
+        read(in);
+        write(in, out, productName);
+    }
 
-        // todo - check that this.config is set and valid. (nf, 29.09.2010)
-
+    private void read(ImageInputStream in) throws IOException {
         try {
             readMPH(in);
             parseSPH(in);
             adjustROI();
             parseDSs(in);
+        } catch (ChildGenException e) {
+            throw new IOException(e.getMessage(), e);
+        }
+    }
 
-            Module module = ModuleFactory.getModule(mph);
-            MdsrLineMap lineMap = module.createLineMap(sourceSph.getDsds(), in);
-
+    private void write(ImageInputStream in, ImageOutputStream out, String productName) throws IOException {
+        try {
+            MdsrLineMap lineMap = ModuleFactory.getModule(mph).createLineMap(sourceSph.getDsds(), in);
             copyHeader(out);
             copyDataSets(in, out, lineMap);
-
             patchMPH(out, productName);
             patchSPH(out);
             targetSph.patchDatasets(out, roi.getFirstLine());
         } catch (ChildGenException e) {
-            throw new IOException(e.getMessage());
+            throw new IOException(e.getMessage(), e);
         }
     }
 
     /**
      * Sets the product-type specific configuration.
+     *
      * @param config The product-type specific configuration.
      */
     public void setConfig(Config config) {
@@ -194,7 +207,7 @@ public final class ChildGeneratorImpl {
     /**
      * Retrieves the target product written by the last call to process().
      *
-     * @return The target product's file path. May be {@code null}, if unknown. 
+     * @return The target product's file path. May be {@code null}, if unknown.
      */
     public File getTargetProduct() {
         return outputFile;
@@ -224,9 +237,7 @@ public final class ChildGeneratorImpl {
 
     private void parseDSs(ImageInputStream in) throws IOException {
         final DatasetDescriptor[] dsds = sourceSph.getDsds();
-        for (int i = 0; i < dsds.length; i++) {
-            final DatasetDescriptor descriptor = dsds[i];
-
+        for (final DatasetDescriptor descriptor : dsds) {
             if (descriptor.isSpare()) {
                 continue;
             }
@@ -258,7 +269,7 @@ public final class ChildGeneratorImpl {
         }
     }
 
-    private File getOutputFile(File outputDir, String originatorID, int fileCounter) {
+    private String createProductName(String originatorID, int fileCounter) {
         final StringBuffer sb = new StringBuffer(mph.getProductFileName());
         final TimeZone utc = TimeZone.getTimeZone("UTC");
         DecimalFormat decFormat = new DecimalFormat("00000000");
@@ -284,8 +295,7 @@ public final class ChildGeneratorImpl {
         if (productName.length() > MPH_PRODUCTNAME_LENGTH) {
             throw new IllegalStateException("Product name too long: " + productName);
         }
-
-        return new File(outputDir, sb.toString());
+        return productName;
     }
 
     private void patchSPH(ImageOutputStream out) throws IOException {
@@ -317,7 +327,7 @@ public final class ChildGeneratorImpl {
 
     private void patchMPH(ImageOutputStream out, String productName) throws IOException {
         if (productName.length() != MPH_PRODUCTNAME_LENGTH) {
-           productName = String.format("%-" + MPH_PRODUCTNAME_LENGTH + "s", productName);
+            productName = String.format("%-" + MPH_PRODUCTNAME_LENGTH + "s", productName);
         }
 
         mph.setProductFileName(productName);
@@ -588,5 +598,40 @@ public final class ChildGeneratorImpl {
         SimpleDateFormat dateFormat = new SimpleDateFormat(HEADER_DATE_FORMAT, Locale.ENGLISH);
         dateFormat.setTimeZone(utc);
         return dateFormat;
+    }
+
+    public void fragment(ImageInputStream in, String originatorID, int numLines, FragmentHandler fragmentHandler) throws IOException {
+        int firstLine = 0;
+        for (int index = 0; ; index++) {
+            try {
+                int lastLine = firstLine + numLines - 1;
+                roi.setFirstLine(firstLine);
+                roi.setLastLine(lastLine);
+                read(in); // Note: adjusts firstLine / lastLine
+                String productName = createProductName(originatorID, index + 1);
+                ImageOutputStream out = fragmentHandler.beginFragment(index, productName, roi.getFirstLine(), roi.getLastLine());
+                try {
+                    write(in, out, productName);
+                    firstLine = roi.getLastLine();
+                    fragmentHandler.endFragment(index, out);
+                    if (lastLine > roi.getLastLine()) {
+                        break;
+                    }
+                } finally {
+                    out.close();
+                }
+            } catch (IOException e) {
+                fragmentHandler.handleError(index, e);
+                throw e;
+            }
+        }
+    }
+
+    public interface FragmentHandler {
+        ImageOutputStream beginFragment(int fragmentIndex, String productName, int firstLine, int lastLine)throws IOException ;
+
+        void endFragment(int fragmentIndex, ImageOutputStream out)throws IOException ;
+
+        void handleError(int fragmentIndex, IOException e);
     }
 }
