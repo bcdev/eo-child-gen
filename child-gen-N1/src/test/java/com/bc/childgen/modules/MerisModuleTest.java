@@ -14,7 +14,7 @@ public class MerisModuleTest extends TestCase {
 
     // @todo 3 tb/tb add tests for no adjustments on first and/or last line
     public void testAdjustRoi() throws ChildGenException {
-        final TestSph sph = new TestSph();
+        final TstSph sph = new TstSph();
         final Roi roi = new Roi();
         sph.getDsds()[0] = new DatasetDescriptor();
         sph.setLinesPerTiePoint(16);

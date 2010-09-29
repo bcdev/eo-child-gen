@@ -16,7 +16,7 @@ public class AatsrModuleTest extends TestCase {
     }
 
     public void testAdjustRoi_snapToTiePoints() throws ChildGenException {
-        final TestSph sph = new TestSph();
+        final TstSph sph = new TstSph();
         final DatasetDescriptor geolocationDSD = new DatasetDescriptor();
         geolocationDSD.setDsName(ChildGenConstants.AATSR_TIE_PT_ADS_NAME);
         geolocationDSD.setNumDsr(4000);     // set high enough to avoid roi clipping
@@ -65,7 +65,7 @@ public class AatsrModuleTest extends TestCase {
     }
 
     public void testAdjustRoi_clipAtProductEnd() throws ChildGenException {
-        final TestSph sph = new TestSph();
+        final TstSph sph = new TstSph();
         final DatasetDescriptor geolocationDSD = new DatasetDescriptor();
         geolocationDSD.setDsName(ChildGenConstants.AATSR_TIE_PT_ADS_NAME);
         geolocationDSD.setNumDsr(101);     // equals 3200 lines

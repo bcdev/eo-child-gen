@@ -5,13 +5,13 @@ import com.bc.childgen.DatasetDescriptor;
 
 import javax.imageio.stream.ImageOutputStream;
 
-class TestSph extends Sph {
+class TstSph extends Sph {
 
-    TestSph() {
+    TstSph() {
         super(12, 1, 1);
     }
 
-    public TestSph(int byteSize, int numDsds, int dsdSize) {
+    public TstSph(int byteSize, int numDsds, int dsdSize) {
         super(byteSize, numDsds, dsdSize);
     }
 

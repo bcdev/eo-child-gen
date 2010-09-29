@@ -59,7 +59,7 @@ public class SphTest extends TestCase {
         final Sph source = createPreparedSph(sphLength, numDsds, dsdSize);
         source.parseDSDs();
 
-        final Sph target = new TestSph(sphLength, numDsds, dsdSize);
+        final Sph target = new TstSph(sphLength, numDsds, dsdSize);
 
         source.assignTo(target);
 
@@ -181,7 +181,7 @@ public class SphTest extends TestCase {
 
         final StringBuffer buffer = createSph(dsdStartPos, dsdSize);
 
-        final Sph sph = new TestSph(sphLength, numDsds, dsdSize);
+        final Sph sph = new TstSph(sphLength, numDsds, dsdSize);
         sph.buffer = buffer.toString().getBytes();
         return sph;
     }
