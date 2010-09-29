@@ -13,14 +13,13 @@ public final class ChildGeneratorFactory {
     /**
      * Creates an instance of a <code>ChildGenerator</code> implementation.
      *
-     * @param fileName
-     * @return the new instance
-     * @see com.bc.util.product.ChildGenerator
+     * @param productType The product type name. Supported names start with "MER_RR", "MER_FR", "AT".
+     * @return The new instance.
      */
-    public static ChildGeneratorImpl createChildGenerator(String fileName) throws ChildGenException {
+    public static ChildGeneratorImpl createChildGenerator(String productType) throws ChildGenException {
         final ChildGeneratorImpl childGeneratorImpl = new ChildGeneratorImpl();
 
-        final Config config = getConfigFor(fileName);
+        final Config config = getConfigFor(productType);
         childGeneratorImpl.setConfig(config);
 
         return childGeneratorImpl;
@@ -30,9 +29,9 @@ public final class ChildGeneratorFactory {
     /////// END OF PUBLIC
     ////////////////////////////////////////////////////////////////////////////////
 
-    static Config getConfigFor(String fileName) throws ChildGenException {
+    static Config getConfigFor(String productType) throws ChildGenException {
         final Config config = new Config();
-        final String fileNameCapitals = fileName.toUpperCase();
+        final String fileNameCapitals = productType.toUpperCase();
 
         if (fileNameCapitals.startsWith("MER_RR")) {
             config.setTiePointAdsName(ChildGenConstants.MERIS_TIE_PT_ADS_NAME);
@@ -53,7 +52,7 @@ public final class ChildGeneratorFactory {
             config.setTiePointLonOffset(ChildGenConstants.AATSR_TIE_PT_LON_OFFSET);
             config.setNumberOfGeoCoordinates(ChildGenConstants.AATSR_NUM_OF_GEOCOORDS);
         } else {
-            throw new ChildGenException("Invalid file name: " + fileName);
+            throw new ChildGenException("Invalid file name: " + productType);
         }
 
         return config;

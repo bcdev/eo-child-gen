@@ -1,5 +1,5 @@
 package com.bc.childgen;
-
+/*
 import junit.framework.Assert;
 import org.esa.beam.framework.datamodel.MetadataElement;
 import org.esa.beam.framework.datamodel.Product;
@@ -7,10 +7,10 @@ import org.esa.beam.framework.datamodel.ProductData;
 import org.esa.beam.framework.datamodel.TiePointGrid;
 
 import java.io.IOException;
-
+*/
 @SuppressWarnings({"MagicNumber"})
 class AatsrProductTester extends ProductTester {
-
+/*
     static void test_ATS_NR_2P_Basics(Product product) {
         Assert.assertEquals(ATS_NR__2P_CHILD_PRODUCT_NAME, product.getName());
         Assert.assertEquals(512, product.getSceneRasterWidth());
@@ -1270,4 +1270,5 @@ class AatsrProductTester extends ProductTester {
             Assert.assertEquals(10 * (i - 59), xyTiePts.getElemIntAt(i));
         }
     }
+*/
 }

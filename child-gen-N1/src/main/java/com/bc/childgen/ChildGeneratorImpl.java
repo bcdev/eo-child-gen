@@ -3,13 +3,17 @@
  */
 package com.bc.childgen;
 
-import com.bc.childgen.modules.*;
+import com.bc.childgen.modules.MdsrLineMap;
+import com.bc.childgen.modules.Module;
+import com.bc.childgen.modules.ModuleFactory;
+import com.bc.childgen.modules.Roi;
+import com.bc.childgen.modules.Sph;
 
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.imageio.stream.ImageInputStream;
 import javax.imageio.stream.ImageOutputStream;
-import java.awt.*;
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -19,40 +23,154 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-final class ChildGeneratorImpl {
+/**
+ * A child generation tool for Envisat N1 files.
+ */
+public final class ChildGeneratorImpl {
+
+    private static final int MPH_PRODUCTNAME_LENGTH = 62;
+
+    private static final int SPH_LAST_LINE_TIME_OFFSET = 180;
+    private static final int SPH_FIRST_LINE_TIME_OFFSET = 135;
+
+    private static final int DSD_DS_OFFSET_LENGTH = 21;
+    private static final int DSD_DS_OFFSET_OFFSET = 133;
+    private static final int DSD_DS_SIZE_LENGTH = 21;
+    private static final int DSD_DS_SIZE_OFFSET = 170;
+    private static final int DSD_NUM_DSR_LENGTH = 11;
+    private static final int DSD_NUM_DSR_OFFSET = 207;
+
+    private static final int FIRST_FIRST_LAT_OFFSET = 225;
+    private static final int FIRST_FIRST_LON_OFFSET = 264;
+    private static final int FIRST_MID_LAT_OFFSET = 300;
+    private static final int FIRST_MID_LON_OFFSET = 337;
+    private static final int FIRST_LAST_ALT_OFFSET = 374;
+    private static final int FIRST_LAST_LON_OFFSET = 412;
+    private static final int LAST_FIRST_LAT_OFFSET = 449;
+    private static final int LAST_FIRST_LON_OFFSET = 487;
+    private static final int LAST_MID_LAT_OFFSET = 522;
+    private static final int LAST_MID_LON_OFFSET = 558;
+    private static final int LAST_LAST_LAT_OFFSET = 594;
+    private static final int LAST_LAST_LON_OFFSET = 631;
+    private static final int ROI_FIELD_LENGTH = 11;
+
+    private static final String FILENAME_DATE_FORMAT = "yyyyMMdd_HHmmss";
+    private static final String HEADER_DATE_FORMAT = "dd-MMM-yyyy HH:mm:ss";
+
+    private static final int FILE_COUNTER_MAX = 9999;
+
+    private Config config;
+
+    private File outputFile;
+
+    private int lastLastLon;
+    private int firstLastLon;
+    private int lastMidLon;
+    private int firstMidLon;
+    private int lastFirstLon;
+    private int firstFirstLon;
+    private int lastLastLat;
+    private int firstLastLat;
+    private int lastMidLat;
+    private int firstMidLat;
+    private int lastFirstLat;
+    private int firstFirstLat;
+
+    private int stopMics;
+    private int stopSecs;
+    private int stopDays;
+    private int startMics;
+    private int startSecs;
+    private int startDays;
+
+    private Mph mph;
+    private Sph sourceSph;
+    private Sph targetSph;
+    private Roi roi;
+
 
     /**
+     * Performs the child generation processing.
      * @param inputFile    the input N1 product file
      * @param outputDir    the target directory for the child product
      * @param originatorID DPA in MER_FR__1PN<i>DPA</i>20030812_102139_000000982019_00008_07577_0094.N1 Must be THREE
      *                     characters
      * @param fileCounter  the last four numbers in MER_FR__1PNDPA20030812_102139_000000982019_00008_07577_<i>0094</i>.N1
-     * @throws java.io.IOException
+     * @throws java.io.IOException If an I/O error occurs
+     * @deprecated Since version 1.6
      */
-    final public synchronized void process(File inputFile, File outputDir, String originatorID, int fileCounter, Rectangle region) throws IOException {
-        roi.setFirstLine((int) region.getMinY());
-        roi.setLastLine((int) region.getMaxY());
+    @Deprecated
+    public synchronized void process(File inputFile,
+                                     File outputDir,
+                                     String originatorID,
+                                     int fileCounter,
+                                     Rectangle region) throws IOException {
+        process(inputFile, outputDir, originatorID, fileCounter,
+                (int) region.getMinY(), (int) region.getMaxY());
+    }
+
+    /**
+     * Performs the child generation processing.
+     * @param inputFile    the input N1 product file
+     * @param outputDir    the target directory for the child product
+     * @param originatorID DPA in MER_FR__1PN<i>DPA</i>20030812_102139_000000982019_00008_07577_0094.N1 Must be THREE
+     *                     characters
+     * @param fileCounter  the last four numbers in MER_FR__1PNDPA20030812_102139_000000982019_00008_07577_<i>0094</i>.N1
+     * @param firstLine The first scan line
+     * @param lastLine The last scan line
+     * @throws java.io.IOException If an I/O error occurs
+     */
+    public void process(File inputFile,
+                        File outputDir,
+                        String originatorID,
+                        int fileCounter,
+                        int firstLine,
+                        int lastLine) throws IOException {
 
         checkArguments(outputDir, originatorID, fileCounter);
 
-        this.outputDir = outputDir;
+        outputFile = getOutputFile(outputDir, originatorID, fileCounter);
 
-        ImageInputStream in = null;
-        ImageOutputStream out = null;
+        ImageInputStream in = new FileImageInputStream(inputFile);
         try {
-            in = new FileImageInputStream(inputFile);
+            ImageOutputStream out = new FileImageOutputStream(outputFile);
+            try {
+                process(in, out, firstLine, lastLine);
+            } catch (IOException e) {
+                out.close();
+            }
+        } finally {
+            in.close();
+        }
+    }
 
+    /**
+     * Performs the child generation processing.
+     * @param in    The N1 input stream
+     * @param out    The N1 output stream
+     * @param firstLine The first scan line
+     * @param lastLine The last scan line
+     * @throws java.io.IOException If an I/O error occurs
+     */
+    public void process(ImageInputStream in,
+                        ImageOutputStream out,
+                        int firstLine,
+                        int lastLine) throws IOException {
+
+        roi.setFirstLine(firstLine);
+        roi.setLastLine(lastLine);
+
+        // todo - check that this.config is set and valid. (nf, 29.09.2010)
+
+        try {
             readMPH(in);
             parseSPH(in);
-
             adjustROI();
-
             parseDSs(in);
 
-            final Module module = ModuleFactory.getModule(mph);
-            final MdsrLineMap lineMap = module.createLineMap(sourceSph.getDsds(), in);
+            Module module = ModuleFactory.getModule(mph);
+            MdsrLineMap lineMap = module.createLineMap(sourceSph.getDsds(), in);
 
-            out = new FileImageOutputStream(getOutputFile(originatorID, fileCounter));
             copyHeader(out);
             copyDataSets(in, out, lineMap);
 
@@ -61,42 +179,39 @@ final class ChildGeneratorImpl {
             targetSph.patchDatasets(out, roi.getFirstLine());
         } catch (ChildGenException e) {
             throw new IOException(e.getMessage());
-        } finally {
-            if (in != null) {
-                in.close();
-            }
-            if (out != null) {
-                out.close();
-            }
         }
     }
 
+    /**
+     * Sets the product-type specific configuration.
+     * @param config The product-type specific configuration.
+     */
     public void setConfig(Config config) {
         this.config = config;
     }
 
     /**
-     * Retrieves the target product written by the last call to process()
+     * Retrieves the target product written by the last call to process().
      *
-     * @return the product created
+     * @return The target product's file path.
      */
     public File getTargetProduct() {
         return outputFile;
     }
 
     /**
-     * Tells whether the childgenerator can perfomr band subsetting or not
+     * Tells whether the child generator can perform band sub-setting or not
      *
-     * @return yes or no
+     * @return {@code true} if so.
      */
     public boolean canDoBandSubset() {
         return false;
     }
 
     /**
-     * Tells wheter the childgenerator can only cut across the whole product or subset also the lines.
+     * Tells whether the child generator can only cut across the whole product or subset also the lines.
      *
-     * @return yes or no
+     * @return {@code true} if so.
      */
     public boolean canDoLineSubset() {
         return false;
@@ -142,7 +257,7 @@ final class ChildGeneratorImpl {
         }
     }
 
-    private File getOutputFile(String originatorID, int fileCounter) {
+    private File getOutputFile(File outputDir, String originatorID, int fileCounter) {
         final StringBuffer sb = new StringBuffer(mph.getProductFileName());
         final TimeZone utc = TimeZone.getTimeZone("UTC");
         DecimalFormat decFormat = new DecimalFormat("00000000");
@@ -169,9 +284,7 @@ final class ChildGeneratorImpl {
             throw new IllegalStateException("Product name too long: " + productName);
         }
 
-        this.outputFile = new File(outputDir.getPath() + File.separator + sb.toString());
-
-        return outputFile;
+        return new File(outputDir, sb.toString());
     }
 
     private void patchSPH(ImageOutputStream out) throws IOException {
@@ -179,8 +292,8 @@ final class ChildGeneratorImpl {
         patchRoiFields(out);
 
         final DatasetDescriptor[] dsds = targetSph.getDsds();
-        for (int i = 0; i < dsds.length; i++) {
-            patchDSD(dsds[i], out);
+        for (DatasetDescriptor dsd : dsds) {
+            patchDSD(dsd, out);
         }
     }
 
@@ -427,67 +540,6 @@ final class ChildGeneratorImpl {
     ////////////////////////////////////////////////////////////////////////////////
     /////// END OF PACKAGE
     ////////////////////////////////////////////////////////////////////////////////
-
-    private static final int MPH_PRODUCTNAME_LENGTH = 62;
-
-    private static final int SPH_LAST_LINE_TIME_OFFSET = 180;
-    private static final int SPH_FIRST_LINE_TIME_OFFSET = 135;
-
-    private static final int DSD_DS_OFFSET_LENGTH = 21;
-    private static final int DSD_DS_OFFSET_OFFSET = 133;
-    private static final int DSD_DS_SIZE_LENGTH = 21;
-    private static final int DSD_DS_SIZE_OFFSET = 170;
-    private static final int DSD_NUM_DSR_LENGTH = 11;
-    private static final int DSD_NUM_DSR_OFFSET = 207;
-
-    private static final int FIRST_FIRST_LAT_OFFSET = 225;
-    private static final int FIRST_FIRST_LON_OFFSET = 264;
-    private static final int FIRST_MID_LAT_OFFSET = 300;
-    private static final int FIRST_MID_LON_OFFSET = 337;
-    private static final int FIRST_LAST_ALT_OFFSET = 374;
-    private static final int FIRST_LAST_LON_OFFSET = 412;
-    private static final int LAST_FIRST_LAT_OFFSET = 449;
-    private static final int LAST_FIRST_LON_OFFSET = 487;
-    private static final int LAST_MID_LAT_OFFSET = 522;
-    private static final int LAST_MID_LON_OFFSET = 558;
-    private static final int LAST_LAST_LAT_OFFSET = 594;
-    private static final int LAST_LAST_LON_OFFSET = 631;
-    private static final int ROI_FIELD_LENGTH = 11;
-
-    private static final String FILENAME_DATE_FORMAT = "yyyyMMdd_HHmmss";
-    private static final String HEADER_DATE_FORMAT = "dd-MMM-yyyy HH:mm:ss";
-
-    private static final int FILE_COUNTER_MAX = 9999;
-
-    private Config config;
-
-    private File outputDir;
-    private File outputFile;
-
-    private int lastLastLon;
-    private int firstLastLon;
-    private int lastMidLon;
-    private int firstMidLon;
-    private int lastFirstLon;
-    private int firstFirstLon;
-    private int lastLastLat;
-    private int firstLastLat;
-    private int lastMidLat;
-    private int firstMidLat;
-    private int lastFirstLat;
-    private int firstFirstLat;
-
-    private int stopMics;
-    private int stopSecs;
-    private int stopDays;
-    private int startMics;
-    private int startSecs;
-    private int startDays;
-
-    private Mph mph;
-    private Sph sourceSph;
-    private Sph targetSph;
-    private Roi roi;
 
     private void checkArguments(File outputDir, String originatorID, int fileCounter) {
         if (!roi.isValid()) {

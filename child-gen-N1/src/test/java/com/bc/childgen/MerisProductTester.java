@@ -1,16 +1,17 @@
 package com.bc.childgen;
 
+/*
 import junit.framework.Assert;
 import org.esa.beam.framework.datamodel.MetadataElement;
 import org.esa.beam.framework.datamodel.Product;
 import org.esa.beam.framework.datamodel.ProductData;
 import org.esa.beam.framework.datamodel.TiePointGrid;
-
 import java.io.IOException;
+*/
 
 @SuppressWarnings({"MagicNumber"})
 class MerisProductTester extends ProductTester {
-
+/*
     static void test_RR_1P_Basics(Product product) {
         Assert.assertEquals(MER_RR__1P_CHILD_PRODUCT_NAME, product.getName());
         Assert.assertEquals(1121, product.getSceneRasterWidth());
@@ -549,4 +550,5 @@ class MerisProductTester extends ProductTester {
 
     private static final String MER_RR__1P_CHILD_PRODUCT_NAME = "MER_RR__1PNTOM20060509_092353_000000452047_00308_21905_0345.N1";
     private static final String MER_FR_2P_CHILD_PRODUCT_NAME = "MER_FR__2PNTOM20050417_102106_000000142036_00280_16366_0976.N1";
+*/
 }

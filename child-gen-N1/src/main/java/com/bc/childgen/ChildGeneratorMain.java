@@ -15,9 +15,9 @@ import java.io.File;
 public class ChildGeneratorMain {
 
     public static final String PROGRAM_NAME = "childgen";
-    public static final String VERSION_INFO = "1.5";
-    public static final String COPYRIGHT_INFO = "Copyright (C) 2004-2009 by Brockmann Consult (info@brockmann-consult.de)";
-    private static final int DON_T_CARE = 1121;
+    public static final String VERSION_INFO = "1.6";
+    public static final String COPYRIGHT_INFO = "Copyright (C) 2004-2010 by Brockmann Consult (info@brockmann-consult.de)";
+    private static final int IGNORED_NUM_COLUMNS = 1121;
 
     /**
      * @param args the command line arguments
@@ -42,7 +42,8 @@ public class ChildGeneratorMain {
             ChildGeneratorImpl childGenerator = ChildGeneratorFactory.createChildGenerator(inputFile.getName());
             if (childGenerator != null) {
                 // note width is not evaluated so we set anything here (except 0 !)
-                Rectangle region = new Rectangle(0, firstLine, DON_T_CARE, lastLine - firstLine + 1);
+                int numLines = lastLine - firstLine + 1;
+                Rectangle region = new Rectangle(0, firstLine, IGNORED_NUM_COLUMNS, numLines);
                 childGenerator.process(inputFile,
                                        outputDir,
                                        originatorId,

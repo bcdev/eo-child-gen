@@ -1,13 +1,14 @@
 package com.bc.childgen;
-
+/*
 import com.bc.ceres.core.ProgressMonitor;
 import junit.framework.Assert;
 import org.esa.beam.framework.datamodel.*;
 
 import java.io.IOException;
-
+*/
 @SuppressWarnings({"MagicNumber"})
 class ProductTester {
+/*
     protected static final String MPH = "MPH";
     protected static final String SPH = "SPH";
 
@@ -76,4 +77,5 @@ class ProductTester {
         Assert.assertEquals(expX, pixelPos.getX(), 1);
         Assert.assertEquals(expY, pixelPos.getY(), 1);
     }
+*/
 }
