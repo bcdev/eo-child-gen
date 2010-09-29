@@ -135,7 +135,7 @@ public final class ChildGeneratorImpl {
         try {
             ImageOutputStream out = new FileImageOutputStream(outputFile);
             try {
-                process(in, out, firstLine, lastLine);
+                process(in, out, outputFile.getName(), firstLine, lastLine);
             } catch (IOException e) {
                 out.close();
             }
@@ -154,6 +154,7 @@ public final class ChildGeneratorImpl {
      */
     public void process(ImageInputStream in,
                         ImageOutputStream out,
+                        String productName,
                         int firstLine,
                         int lastLine) throws IOException {
 
@@ -174,7 +175,7 @@ public final class ChildGeneratorImpl {
             copyHeader(out);
             copyDataSets(in, out, lineMap);
 
-            patchMPH(out);
+            patchMPH(out, productName);
             patchSPH(out);
             targetSph.patchDatasets(out, roi.getFirstLine());
         } catch (ChildGenException e) {
@@ -193,7 +194,7 @@ public final class ChildGeneratorImpl {
     /**
      * Retrieves the target product written by the last call to process().
      *
-     * @return The target product's file path.
+     * @return The target product's file path. May be {@code null}, if unknown. 
      */
     public File getTargetProduct() {
         return outputFile;
@@ -314,9 +315,13 @@ public final class ChildGeneratorImpl {
         oWrite(descriptor.getNumDsr(), DSD_NUM_DSR_LENGTH, out);
     }
 
-    private void patchMPH(ImageOutputStream out) throws IOException {
-        mph.setProductFileName(outputFile.getName());
-        mph.setTotalSize(outputFile.length());
+    private void patchMPH(ImageOutputStream out, String productName) throws IOException {
+        if (productName.length() != MPH_PRODUCTNAME_LENGTH) {
+           productName = String.format("%-" + MPH_PRODUCTNAME_LENGTH + "s", productName);
+        }
+
+        mph.setProductFileName(productName);
+        mph.setTotalSize(out.length());
 
         final Calendar startCalendar = getUtcCalendar(startDays, startSecs, 0);
         mph.setSensingStart(startCalendar.getTime(), startMics);

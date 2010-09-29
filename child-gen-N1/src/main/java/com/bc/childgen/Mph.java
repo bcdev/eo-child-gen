@@ -7,6 +7,38 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class Mph {
+    private static final int PRODUCTNAME_OFFSET = 9;
+    private static final int PRODUCTNAME_LENGTH = 62;
+    private static final int SOFTWARE_VER_OFFSET = 279;
+    private static final int SOFTWARE_VER_LENGTH = 14;
+    private static final int NUM_DSD_OFFSET = 1141;
+    private static final int NUM_DSD_LENGTH = 10;
+    private static final int DSD_SIZE_OFFSET = 1162;
+    private static final int DSD_SIZE_LENGTH = 10;
+    private static final int SPH_SIZE_OFFSET = 1114;
+    private static final int SPH_SIZE_LENGTH = 10;
+    private static final int TOT_SIZE_OFFSET = 1076;
+    private static final int TOT_SIZE_LENGTH = 20;
+    private static final int SENSING_START_OFFSET = 351;
+    private static final int SENSING_STOP_OFFSET = 394;
+    private static final int UTC_DATE_LENGTH = 27;
+
+    private static final String HEADER_DATE_FORMAT = "dd-MMM-yyyy HH:mm:ss";
+
+    private DecimalFormat sizeFormat;
+    private DecimalFormat microSecsFormat;
+    private SimpleDateFormat dateFormat;
+    byte[] buffer;
+
+    Mph() {
+        buffer = new byte[ChildGenConstants.MPH_SIZE_IN_BYTES];
+        sizeFormat = new DecimalFormat("00000000000000000000");
+        microSecsFormat = new DecimalFormat("000000");
+
+        final TimeZone utc = TimeZone.getTimeZone("UTC");
+        dateFormat = new SimpleDateFormat(HEADER_DATE_FORMAT, Locale.ENGLISH);
+        dateFormat.setTimeZone(utc);
+    }
 
     public byte[] getRawData() {
         return buffer;
@@ -62,43 +94,6 @@ public class Mph {
             throw new ChildGenException("Illegal MPH field 'SPH_SIZE': " + sphSizeString);
         }
         return sphSize;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////
-    /////// END OF PUBLIC
-    ////////////////////////////////////////////////////////////////////////////////
-
-    private static final int PRODUCTNAME_OFFSET = 9;
-    private static final int PRODUCTNAME_LENGTH = 62;
-    private static final int SOFTWARE_VER_OFFSET = 279;
-    private static final int SOFTWARE_VER_LENGTH = 14;
-    private static final int NUM_DSD_OFFSET = 1141;
-    private static final int NUM_DSD_LENGTH = 10;
-    private static final int DSD_SIZE_OFFSET = 1162;
-    private static final int DSD_SIZE_LENGTH = 10;
-    private static final int SPH_SIZE_OFFSET = 1114;
-    private static final int SPH_SIZE_LENGTH = 10;
-    private static final int TOT_SIZE_OFFSET = 1076;
-    private static final int TOT_SIZE_LENGTH = 20;
-    private static final int SENSING_START_OFFSET = 351;
-    private static final int SENSING_STOP_OFFSET = 394;
-    private static final int UTC_DATE_LENGTH = 27;
-
-    private static final String HEADER_DATE_FORMAT = "dd-MMM-yyyy HH:mm:ss";
-
-    private DecimalFormat sizeFormat;
-    private DecimalFormat microSecsFormat;
-    private SimpleDateFormat dateFormat;
-    byte[] buffer;
-
-    Mph() {
-        buffer = new byte[ChildGenConstants.MPH_SIZE_IN_BYTES];
-        sizeFormat = new DecimalFormat("00000000000000000000");
-        microSecsFormat = new DecimalFormat("000000");
-
-        final TimeZone utc = TimeZone.getTimeZone("UTC");
-        dateFormat = new SimpleDateFormat(HEADER_DATE_FORMAT, Locale.ENGLISH);
-        dateFormat.setTimeZone(utc);
     }
 
     void setTotalSize(long size) {

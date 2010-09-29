@@ -40,18 +40,15 @@ public class ChildGeneratorMain {
             long start = System.currentTimeMillis();
 
             ChildGeneratorImpl childGenerator = ChildGeneratorFactory.createChildGenerator(inputFile.getName());
-            if (childGenerator != null) {
-                // note width is not evaluated so we set anything here (except 0 !)
-                int numLines = lastLine - firstLine + 1;
-                Rectangle region = new Rectangle(0, firstLine, IGNORED_NUM_COLUMNS, numLines);
-                childGenerator.process(inputFile,
-                                       outputDir,
-                                       originatorId,
-                                       fileCounter,
-                                       region);
-            } else {
-                System.out.println("No child was created. Check input file, please. ");
-            }
+            int numLines = lastLine - firstLine + 1;
+            // note width is not evaluated so we set anything here (except 0 !)
+            Rectangle region = new Rectangle(0, firstLine, IGNORED_NUM_COLUMNS, numLines);
+            childGenerator.process(inputFile,
+                                   outputDir,
+                                   originatorId,
+                                   fileCounter,
+                                   region);
+            
             long stop = System.currentTimeMillis();
             System.out.println("Processed in " + (stop - start) + " ms");
         } catch (Exception e) {
