@@ -284,7 +284,9 @@ public final class ChildGeneratorImpl {
         long durationInMillisecs = calendarStop.getTimeInMillis() - calendarStart.getTimeInMillis();
         int durationInSeconds = (int) (Math.floor(durationInMillisecs * 1e-3 + 0.5));
 
-        sb.replace(11, 14, originatorID);
+        if (originatorID != null) {
+            sb.replace(11, 14, originatorID);
+        }
         sb.replace(14, 29, startTime);
         sb.replace(30, 38, decFormat.format(durationInSeconds));
 
@@ -565,7 +567,7 @@ public final class ChildGeneratorImpl {
             throw new IllegalArgumentException("Illegal directory: " + outputDir.getPath());
         }
 
-        if (originatorID == null || originatorID.length() != 3) {
+        if (originatorID != null && originatorID.length() != 3) {
             throw new IllegalArgumentException("Illegal originator ID: " + originatorID);
         }
 
@@ -600,7 +602,7 @@ public final class ChildGeneratorImpl {
         return dateFormat;
     }
 
-    public void fragment(ImageInputStream in, String originatorID, int numLines, FragmentHandler fragmentHandler) throws IOException {
+    public void fragment(ImageInputStream in, int numLines, FragmentHandler fragmentHandler) throws IOException {
         int firstLine = 0;
         for (int index = 0; ; index++) {
             try {
@@ -608,18 +610,22 @@ public final class ChildGeneratorImpl {
                 roi.setFirstLine(firstLine);
                 roi.setLastLine(lastLine);
                 read(in); // Note: adjusts firstLine / lastLine
-                String productName = createProductName(originatorID, index + 1);
+                String productName = createProductName(null, index + 1);
                 ImageOutputStream out = fragmentHandler.beginFragment(index, productName, roi.getFirstLine(), roi.getLastLine());
+                long bytesWritten;
                 try {
                     write(in, out, productName);
+                    bytesWritten = out.length();
                     firstLine = roi.getLastLine();
-                    fragmentHandler.endFragment(index, out);
-                    if (lastLine > roi.getLastLine()) {
-                        break;
-                    }
                 } finally {
                     out.close();
                 }
+
+                fragmentHandler.endFragment(index, productName, bytesWritten);
+                if (lastLine > roi.getLastLine()) {
+                    break;
+                }
+
             } catch (IOException e) {
                 fragmentHandler.handleError(index, e);
                 throw e;
@@ -630,7 +636,7 @@ public final class ChildGeneratorImpl {
     public interface FragmentHandler {
         ImageOutputStream beginFragment(int fragmentIndex, String productName, int firstLine, int lastLine)throws IOException ;
 
-        void endFragment(int fragmentIndex, ImageOutputStream out)throws IOException ;
+        void endFragment(int fragmentIndex, String productName, long bytesWritten)throws IOException ;
 
         void handleError(int fragmentIndex, IOException e);
     }
