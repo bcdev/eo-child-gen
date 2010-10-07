@@ -89,6 +89,12 @@ public final class ChildGeneratorImpl {
     private Roi roi;
 
 
+    ChildGeneratorImpl() {
+        mph = new Mph();
+        roi = new Roi();
+    }
+
+
     /**
      * Performs the child generation processing.
      *
@@ -169,6 +175,51 @@ public final class ChildGeneratorImpl {
         roi.setLastLine(lastLine);
         read(in);
         write(in, out, productName);
+    }
+
+    /**
+     * Slices a parent N1 data product into a number of child products.
+     * The actual number of lines used for the generated child products will
+     * be aligned on tie-point frame boundaries. E.g. for MERIS RR
+     * {@code numLinesActual = 16 * ((numLines+1) / 16) + 1}, for the child
+     * 1 to n-1. The n-th child may (and in most cases will) comprise less
+     * lines than {@code numLinesActual}.
+     *
+     * @param in           The input stream used to read from the parent product.
+     * @param numLines     The number of lines
+     * @param sliceHandler The handler that is informed when a new child slice has been generated.
+     * @throws IOException If an I/O error occurs.
+     */
+    public void slice(ImageInputStream in, int numLines, SliceHandler sliceHandler) throws IOException {
+        int firstLine = 0;
+        for (int index = 0; ; index++) {
+            try {
+                int lastLine = firstLine + numLines - 1;
+                roi.setFirstLine(firstLine);
+                roi.setLastLine(lastLine);
+                read(in); // Note: adjusts firstLine / lastLine
+                String productName = createProductName(null, index + 1);
+                ImageOutputStream out = sliceHandler.beginSlice(index, productName, roi.getFirstLine(), roi.getLastLine());
+                long bytesWritten;
+                try {
+                    write(in, out, productName);
+                    bytesWritten = out.length();
+                    firstLine = roi.getLastLine();
+                } finally {
+                    out.close();
+                }
+
+                sliceHandler.endSlice(index, productName, bytesWritten);
+                if (lastLine > roi.getLastLine()) {
+                    break;
+                }
+
+            } catch (IOException e) {
+                if (!sliceHandler.handleError(index, e)) {
+                    throw e;
+                }
+            }
+        }
     }
 
     private void read(ImageInputStream in) throws IOException {
@@ -546,15 +597,6 @@ public final class ChildGeneratorImpl {
     }
 
     ////////////////////////////////////////////////////////////////////////////////
-    /////// END OF PUBLIC
-    ////////////////////////////////////////////////////////////////////////////////
-
-    ChildGeneratorImpl() {
-        mph = new Mph();
-        roi = new Roi();
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////
     /////// END OF PACKAGE
     ////////////////////////////////////////////////////////////////////////////////
 
@@ -602,42 +644,41 @@ public final class ChildGeneratorImpl {
         return dateFormat;
     }
 
-    public void fragment(ImageInputStream in, int numLines, FragmentHandler fragmentHandler) throws IOException {
-        int firstLine = 0;
-        for (int index = 0; ; index++) {
-            try {
-                int lastLine = firstLine + numLines - 1;
-                roi.setFirstLine(firstLine);
-                roi.setLastLine(lastLine);
-                read(in); // Note: adjusts firstLine / lastLine
-                String productName = createProductName(null, index + 1);
-                ImageOutputStream out = fragmentHandler.beginFragment(index, productName, roi.getFirstLine(), roi.getLastLine());
-                long bytesWritten;
-                try {
-                    write(in, out, productName);
-                    bytesWritten = out.length();
-                    firstLine = roi.getLastLine();
-                } finally {
-                    out.close();
-                }
+    /**
+     * A handler that is informed when new slices are being generated
+     * by the {@link ChildGeneratorImpl#slice} method.
+     */
+    public interface SliceHandler {
 
-                fragmentHandler.endFragment(index, productName, bytesWritten);
-                if (lastLine > roi.getLastLine()) {
-                    break;
-                }
+        /**
+         * Called in order begin a new slice.
+         * @param sliceIndex  The current slice's index.
+         * @param productName A generated name for the child slice.
+         * @param firstLine The first scan line within the parent product.
+         * @param lastLine The last scan line within the parent product.
+         * @return An output stream used to write the new child slice.
+         * @throws IOException If an I/O error occurs.
+         */
+        ImageOutputStream beginSlice(int sliceIndex, String productName, int firstLine, int lastLine) throws IOException;
 
-            } catch (IOException e) {
-                fragmentHandler.handleError(index, e);
-                throw e;
-            }
-        }
-    }
+        /**
+         * Called in order to end the current slice.
+         * @param sliceIndex  The current slice's index.
+         * @param productName A generated name for the child slice.
+         * @param bytesWritten The total number of bytes written into the output stream opened by {@link #beginSlice}.
+         * @throws IOException If an I/O error occurs.
+         */
+        void endSlice(int sliceIndex, String productName, long bytesWritten) throws IOException;
 
-    public interface FragmentHandler {
-        ImageOutputStream beginFragment(int fragmentIndex, String productName, int firstLine, int lastLine)throws IOException ;
-
-        void endFragment(int fragmentIndex, String productName, long bytesWritten)throws IOException ;
-
-        void handleError(int fragmentIndex, IOException e);
+        /**
+         * Called in order to handle an error occurred during the generation of
+         * the current child slice.
+         * @param sliceIndex The current slice's index.
+         * @param cause The cause exception.
+         * @return {@code true} if the error has been handled. Slice generation will be continued in this case.
+         * {@code false} if the error could not handled. Slice generation will be aborted
+         * by throwing the {@code cause} again.
+         */
+        boolean handleError(int sliceIndex, IOException cause);
     }
 }

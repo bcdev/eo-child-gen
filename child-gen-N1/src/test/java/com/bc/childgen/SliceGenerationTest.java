@@ -10,7 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class FragmentationTest extends TestCase {
+public class SliceGenerationTest extends TestCase {
 
     private static final String N1_TEST_DATA_NAME = "MER_RR__1P.N1";
 
@@ -20,71 +20,71 @@ public class FragmentationTest extends TestCase {
         ImageInputStream iis = new FileCacheImageInputStream(is, null);
 
         ChildGeneratorImpl childGenerator = ChildGeneratorFactory.createChildGenerator("MER_RR");
-        MyFragmentHandler myFragmentHandler = new MyFragmentHandler();
-        childGenerator.fragment(iis, 16 * 3, myFragmentHandler);
+        MySliceHandler myFragmentHandler = new MySliceHandler();
+        childGenerator.slice(iis, 16 * 3, myFragmentHandler);
 
         String expectedTrace =
-                "beginFragment:\n" +
-                "  fragmentIndex = 0\n" +
+                "beginSlice:\n" +
+                "  sliceIndex = 0\n" +
                 "  productName = MER_RR__1PPBCM20090804_080334_000000082081_00207_38838_0001.N1\n" +
                 "  firstLine = 0\n" +
                 "  lastLine = 48\n" +
-                "endFragment:\n" +
-                "  fragmentIndex = 0\n" +
+                "endSlice:\n" +
+                "  sliceIndex = 0\n" +
                 "  bytesWritten = 1848615\n" +
-                "beginFragment:\n" +
-                "  fragmentIndex = 1\n" +
+                "beginSlice:\n" +
+                "  sliceIndex = 1\n" +
                 "  productName = MER_RR__1PPBCM20090804_080343_000000082081_00207_38838_0002.N1\n" +
                 "  firstLine = 48\n" +
                 "  lastLine = 96\n" +
-                "endFragment:\n" +
-                "  fragmentIndex = 1\n" +
+                "endSlice:\n" +
+                "  sliceIndex = 1\n" +
                 "  bytesWritten = 1848615\n" +
-                "beginFragment:\n" +
-                "  fragmentIndex = 2\n" +
+                "beginSlice:\n" +
+                "  sliceIndex = 2\n" +
                 "  productName = MER_RR__1PPBCM20090804_080351_000000082081_00207_38838_0003.N1\n" +
                 "  firstLine = 96\n" +
                 "  lastLine = 144\n" +
-                "endFragment:\n" +
-                "  fragmentIndex = 2\n" +
+                "endSlice:\n" +
+                "  sliceIndex = 2\n" +
                 "  bytesWritten = 1848648\n" +
-                "beginFragment:\n" +
-                "  fragmentIndex = 3\n" +
+                "beginSlice:\n" +
+                "  sliceIndex = 3\n" +
                 "  productName = MER_RR__1PPBCM20090804_080359_000000082081_00207_38838_0004.N1\n" +
                 "  firstLine = 144\n" +
                 "  lastLine = 192\n" +
-                "endFragment:\n" +
-                "  fragmentIndex = 3\n" +
+                "endSlice:\n" +
+                "  sliceIndex = 3\n" +
                 "  bytesWritten = 1848615\n" +
-                "beginFragment:\n" +
-                "  fragmentIndex = 4\n" +
+                "beginSlice:\n" +
+                "  sliceIndex = 4\n" +
                 "  productName = MER_RR__1PPBCM20090804_080408_000000082081_00207_38838_0005.N1\n" +
                 "  firstLine = 192\n" +
                 "  lastLine = 240\n" +
-                "endFragment:\n" +
-                "  fragmentIndex = 4\n" +
+                "endSlice:\n" +
+                "  sliceIndex = 4\n" +
                 "  bytesWritten = 1848615\n" +
-                "beginFragment:\n" +
-                "  fragmentIndex = 5\n" +
+                "beginSlice:\n" +
+                "  sliceIndex = 5\n" +
                 "  productName = MER_RR__1PPBCM20090804_080416_000000082081_00207_38838_0006.N1\n" +
                 "  firstLine = 240\n" +
                 "  lastLine = 288\n" +
-                "endFragment:\n" +
-                "  fragmentIndex = 5\n" +
+                "endSlice:\n" +
+                "  sliceIndex = 5\n" +
                 "  bytesWritten = 1848648\n" +
-                "beginFragment:\n" +
-                "  fragmentIndex = 6\n" +
+                "beginSlice:\n" +
+                "  sliceIndex = 6\n" +
                 "  productName = MER_RR__1PPBCM20090804_080425_000000032081_00207_38838_0007.N1\n" +
                 "  firstLine = 288\n" +
                 "  lastLine = 305\n" +
-                "endFragment:\n" +
-                "  fragmentIndex = 6\n" +
+                "endSlice:\n" +
+                "  sliceIndex = 6\n" +
                 "  bytesWritten = 688258\n";
 
         assertEquals(expectedTrace, myFragmentHandler.getTrace());
     }
 
-    private static class MyFragmentHandler implements ChildGeneratorImpl.FragmentHandler {
+    private static class MySliceHandler implements ChildGeneratorImpl.SliceHandler {
         private static final String NL = "\n";
         private StringBuilder trace = new StringBuilder();
 
@@ -93,9 +93,9 @@ public class FragmentationTest extends TestCase {
         }
 
         @Override
-        public ImageOutputStream beginFragment(int fragmentIndex, String productName, int firstLine, int lastLine) throws IOException {
-            trace.append("beginFragment:").append(NL)
-                    .append("  fragmentIndex = ").append(fragmentIndex).append(NL)
+        public ImageOutputStream beginSlice(int sliceIndex, String productName, int firstLine, int lastLine) throws IOException {
+            trace.append("beginSlice:").append(NL)
+                    .append("  sliceIndex = ").append(sliceIndex).append(NL)
                     .append("  productName = ").append(productName).append(NL)
                     .append("  firstLine = ").append(firstLine).append(NL)
                     .append("  lastLine = ").append(lastLine).append(NL);
@@ -103,17 +103,18 @@ public class FragmentationTest extends TestCase {
         }
 
         @Override
-        public void endFragment(int fragmentIndex, String productName, long bytesWritten) throws IOException {
-            trace.append("endFragment:").append(NL)
-                    .append("  fragmentIndex = ").append(fragmentIndex).append(NL)
+        public void endSlice(int sliceIndex, String productName, long bytesWritten) throws IOException {
+            trace.append("endSlice:").append(NL)
+                    .append("  sliceIndex = ").append(sliceIndex).append(NL)
                     .append("  bytesWritten = ").append(bytesWritten).append(NL);
         }
 
         @Override
-        public void handleError(int fragmentIndex, IOException e) {
+        public boolean handleError(int sliceIndex, IOException cause) {
             trace.append("handleError:").append(NL)
-                    .append("  fragmentIndex = ").append(fragmentIndex).append(NL)
-                    .append("  e.getMessage() = ").append(e.getMessage()).append(NL);
+                    .append("  sliceIndex = ").append(sliceIndex).append(NL)
+                    .append("  e.getMessage() = ").append(cause.getMessage()).append(NL);
+            return true;
         }
     }
 }
