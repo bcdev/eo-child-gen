@@ -94,6 +94,8 @@ public class GeoChildGen {
 
                         copyProduct(inputFile, outputFile);
                     }
+                } else {
+                    System.out.println("No intersections with file " + inputFileName);
                 }
             }
 
