@@ -194,9 +194,6 @@ public class GeoChildGen {
                 workFile = expandedFile;
             }
 
-//            final ProductSubsetDef subset = new ProductSubsetDef();
-//            subset.setRegion(0, firstLine, MAX_PRODUCT_WIDTH, lastLine - firstLine);
-
             childGenerator.process(workFile, outputDir, childProductOriginatorId, 1, firstLine, lastLine);
 
             System.out.println("created child product of '" + productFile.getPath() + "'");
