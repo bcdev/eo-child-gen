@@ -2,6 +2,7 @@ package com.bc.merci.geochildgen;
 
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.ChildGeneratorFactory;
+import com.bc.childgen.ChildGeneratorImpl;
 import com.bc.util.bean.BeanUtils;
 import com.bc.util.file.StreamUtils;
 import com.bc.util.file.ZipUtils;
@@ -9,13 +10,11 @@ import com.bc.util.geom.Geometry;
 import com.bc.util.geom.GeometryParser;
 import com.bc.util.geom.GeometryUtils;
 import com.bc.util.geom.RangeConverter;
-import com.bc.util.product.ChildGenerator;
 import com.bc.util.product.ProductHelper;
 import com.bc.util.sql.BcDatabase;
 import com.bc.util.sql.DataSourceConfig;
 import com.bc.util.sql.SqlUtils;
 import org.esa.beam.framework.dataio.ProductIO;
-import org.esa.beam.framework.dataio.ProductSubsetDef;
 import org.esa.beam.framework.datamodel.GeoCoding;
 import org.esa.beam.framework.datamodel.Product;
 import org.esa.beam.util.logging.BeamLogManager;
@@ -184,9 +183,10 @@ public class GeoChildGen {
         final int firstLine = (int) range.getMin();
         final int lastLine = (int) range.getMax();
 
-        final ChildGenerator childGenerator = ChildGeneratorFactory.createChildGenerator(productFile.getName());
+        final ChildGeneratorImpl childGenerator = ChildGeneratorFactory.createChildGenerator(productFile.getName());
 
         File expandedFile = null;
+
         try {
             File workFile = productFile;
             if (ZipUtils.isCompressedFileName(productFile)) {
@@ -194,10 +194,10 @@ public class GeoChildGen {
                 workFile = expandedFile;
             }
 
-            final ProductSubsetDef subset = new ProductSubsetDef();
-            subset.setRegion(0, firstLine, MAX_PRODUCT_WIDTH, lastLine - firstLine);
+//            final ProductSubsetDef subset = new ProductSubsetDef();
+//            subset.setRegion(0, firstLine, MAX_PRODUCT_WIDTH, lastLine - firstLine);
 
-            childGenerator.process(workFile, outputDir, subset, childProductOriginatorId, 1, 1);
+            childGenerator.process(workFile, outputDir, childProductOriginatorId, 1, firstLine, lastLine);
 
             System.out.println("created child product of '" + productFile.getPath() + "'");
         } catch (IOException e) {
