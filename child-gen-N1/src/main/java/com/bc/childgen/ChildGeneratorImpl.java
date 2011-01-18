@@ -134,11 +134,10 @@ public final class ChildGeneratorImpl {
                         int fileCounter,
                         int firstLine,
                         int lastLine) throws IOException {
-
-        checkArguments(outputDir, originatorID, fileCounter);
-
         roi.setFirstLine(firstLine);
         roi.setLastLine(lastLine);
+
+        checkArguments(outputDir, originatorID, fileCounter);
 
         ImageInputStream in = new FileImageInputStream(inputFile);
         try {
