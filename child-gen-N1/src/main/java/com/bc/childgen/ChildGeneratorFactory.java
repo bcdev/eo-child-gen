@@ -15,6 +15,7 @@ public final class ChildGeneratorFactory {
      *
      * @param productType The product type name. Supported names start with "MER_RR", "MER_FR", "AT".
      * @return The new instance.
+     * @throws ChildGenException on creation failues (e.g. unsupported format ..)
      */
     public static ChildGeneratorImpl createChildGenerator(String productType) throws ChildGenException {
         final ChildGeneratorImpl childGeneratorImpl = new ChildGeneratorImpl();
@@ -39,12 +40,18 @@ public final class ChildGeneratorFactory {
             config.setTiePointLatOffset(ChildGenConstants.MERIS_TIE_PT_LAT_OFFSET);
             config.setTiePointLonOffset(ChildGenConstants.MERIS_RR_TIE_PT_LON_OFFSET);
             config.setNumberOfGeoCoordinates(ChildGenConstants.MERIS_RR_NUM_OF_GEOCOORDS);
-        } else if (fileNameCapitals.startsWith("MER_FR")) {
+        } else if (fileNameCapitals.startsWith("MER_FR_")) {
             config.setTiePointAdsName(ChildGenConstants.MERIS_TIE_PT_ADS_NAME);
             config.setQualityAdsName(ChildGenConstants.MERIS_QUALITY_ADS_NAME);
             config.setTiePointLatOffset(ChildGenConstants.MERIS_TIE_PT_LAT_OFFSET);
             config.setTiePointLonOffset(ChildGenConstants.MERIS_FR_TIE_PT_LON_OFFSET);
             config.setNumberOfGeoCoordinates(ChildGenConstants.MERIS_FR_NUM_OF_GEOCOORDS);
+        } else if (fileNameCapitals.startsWith("MER_FRS")) {
+            config.setTiePointAdsName(ChildGenConstants.MERIS_TIE_PT_ADS_NAME);
+            config.setQualityAdsName(ChildGenConstants.MERIS_QUALITY_ADS_NAME);
+            config.setTiePointLatOffset(ChildGenConstants.MERIS_TIE_PT_LAT_OFFSET);
+            config.setTiePointLonOffset(ChildGenConstants.MERIS_FRS_TIE_PT_LON_OFFSET);
+            config.setNumberOfGeoCoordinates(ChildGenConstants.MERIS_FRS_NUM_OF_GEOCOORDS);
         } else if (fileNameCapitals.startsWith("AT")) {
             config.setTiePointAdsName(ChildGenConstants.AATSR_TIE_PT_ADS_NAME);
             config.setQualityAdsName(ChildGenConstants.AATSR_QUALITY_ADS_NAME);
