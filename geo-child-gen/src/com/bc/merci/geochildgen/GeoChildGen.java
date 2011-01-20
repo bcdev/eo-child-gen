@@ -85,14 +85,13 @@ public class GeoChildGen {
                             createChildProduct(inputFile, ranges[k], outputDir, config.getChildProductOriginatorId());
                         }
                     } else {
-                        final File outputFile = new File(outputDir.getAbsolutePath() + File.separator + inputFile.getName());
-                        if (!outputFile.createNewFile()) {
-                            System.err.println("File '" + outputFile.getAbsolutePath() + "' already exists or could not be created");
-                            break;
-                        }
-
+                        final File outputFile = createTargetFile(outputDir, inputFile);
                         copyProduct(inputFile, outputFile);
                     }
+                }
+                if (contains(siteGeometry, productBoundary)) {
+                    final File outputFile = createTargetFile(outputDir, inputFile);
+                    copyProduct(inputFile, outputFile);
                 } else {
                     System.out.println("No intersections with file " + inputFileName);
                 }
@@ -100,6 +99,15 @@ public class GeoChildGen {
 
             product.dispose();
         }
+    }
+
+    private static File createTargetFile(File outputDir, File inputFile) throws IOException {
+        final File outputFile = new File(outputDir.getAbsolutePath() + File.separator + inputFile.getName());
+        if (!outputFile.createNewFile()) {
+            System.err.println("File '" + outputFile.getAbsolutePath() + "' already exists or could not be created");
+            return null;
+        }
+        return outputFile;
     }
 
     static void printUsageTo(OutputStream out) {
@@ -203,7 +211,7 @@ public class GeoChildGen {
                 childProduct.delete();
             }
             System.err.println("Failed to write child product to '" + outputDir.getAbsolutePath() + "'");
-            System.err.println(e.getMessage());            
+            System.err.println(e.getMessage());
         } finally {
             if (expandedFile != null) {
                 expandedFile.delete();
@@ -223,7 +231,7 @@ public class GeoChildGen {
                                              final Geometry productBoundary, final GeoCoding geoCoding,
                                              final int width, final int height) {
         final Range[] ranges = RangeConverter.getRangeFromPolygonGeometry(siteGeometry, productBoundary, geoCoding,
-                width, height);
+                                                                          width, height);
 
         for (int i = 0; i < ranges.length; i++) {
             RangeConverter.adjustRange(ranges[i], height, MINIMUM_NUMBER_OF_LINES, ranges[i]);
@@ -232,14 +240,16 @@ public class GeoChildGen {
         return ranges;
     }
 
-    /**
-     * @param geometry
-     * @param geometry2
-     * @return whether they intersect or not
-     */
     private static boolean isIntersection(final Geometry geometry, final Geometry geometry2) {
         final int status = GeometryUtils.performGeometryOp(GeometryUtils.GEOM_OP_INTERSECTS,
-                geometry, geometry2);
+                                                           geometry, geometry2);
+
+        return status == Geometry.TRUE;
+    }
+
+    private static boolean contains(final Geometry geometry, final Geometry geometry2) {
+        final int status = GeometryUtils.performGeometryOp(GeometryUtils.GEOM_OP_CONTAINS,
+                                                           geometry, geometry2);
 
         return status == Geometry.TRUE;
     }

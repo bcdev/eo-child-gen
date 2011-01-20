@@ -106,11 +106,11 @@ public class GeoChildGenUtilsTest extends TestCase {
             "INSERT INTO Location VALUES(1006, GeomFromText('" + LOCATION_3 + "'));\n" +
             "INSERT INTO Location VALUES(1007, GeomFromText('" + META_LOCATION + "'));\n" +
             "INSERT INTO Location VALUES(1008, GeomFromText('" + LOCATION_4 + "'));\n" +
-            "INSERT INTO Site VALUES(99, 'site_wo_meta', 'a test site without a meta site', 1004, " + RADIUS + ", GeomFromText('" + LOCATION_1 + "'), 234, true, 1, 99, null, TRUE);\n" +
-            "INSERT INTO Site VALUES(100, 'site_w_meta', 'a test site with a meta site', 1005, " + RADIUS + ", GeomFromText('" + LOCATION_2 + "'), 251, true, 1, 101, null, TRUE);\n" +
-            "INSERT INTO Site VALUES(101, 'meta_site', 'a test meta site', 1007, " + RADIUS + ", GeomFromText('" + META_LOCATION + "'), 99, true, 1, 101, null, TRUE);\n" +
-            "INSERT INTO Site VALUES(102, 'cat_site', 'a categorized site', 1006, " + RADIUS + ", GeomFromText('" + LOCATION_3 + "'), 99, true, 1, 102, null, TRUE);\n" +
-            "INSERT INTO Site VALUES(103, 'non_systematic_site', 'a non_systematic site', 1008, " + RADIUS + ", GeomFromText('" + LOCATION_4 + "'), 99, true, 1, 103, null, FALSE);\n" +
+            "INSERT INTO Site VALUES(99, 'site_wo_meta', 'a test site without a meta site', 1004, " + RADIUS + ", GeomFromText('" + LOCATION_1 + "'), 234, true, 1, 99, null, TRUE, FALSE);\n" +
+            "INSERT INTO Site VALUES(100, 'site_w_meta', 'a test site with a meta site', 1005, " + RADIUS + ", GeomFromText('" + LOCATION_2 + "'), 251, true, 1, 101, null, TRUE, FALSE);\n" +
+            "INSERT INTO Site VALUES(101, 'meta_site', 'a test meta site', 1007, " + RADIUS + ", GeomFromText('" + META_LOCATION + "'), 99, true, 1, 101, null, TRUE, TRUE);\n" +
+            "INSERT INTO Site VALUES(102, 'cat_site', 'a categorized site', 1006, " + RADIUS + ", GeomFromText('" + LOCATION_3 + "'), 99, true, 1, 102, null, TRUE, FALSE);\n" +
+            "INSERT INTO Site VALUES(103, 'non_systematic_site', 'a non_systematic site', 1008, " + RADIUS + ", GeomFromText('" + LOCATION_4 + "'), 99, true, 1, 103, null, FALSE, FALSE);\n" +
             "INSERT INTO SiteCategorySite VALUES(99, 510);\n" +
             "INSERT INTO SiteCategorySite VALUES(102, 510);\n" +
             "INSERT INTO SiteCategorySite VALUES(100, 511);";
