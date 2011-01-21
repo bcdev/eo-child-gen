@@ -1,5 +1,12 @@
 Changelog for ENVISAT GeoCildGen
 
+Changes from version 1.7.1
+==========================
+- corrected SPH for MERIS FRS products
+- added check if product is completely contained in the
+  search area - if software, the product is just copied instead of
+  being processed with the child-gen
+
 Changes from version 1.5
 ========================
 - added support for compressed products
