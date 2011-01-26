@@ -33,9 +33,20 @@ class MerisModule implements Module {
         }
 
         roi.setFirstTiePointLine(firstLine / linesPerTiePoint);
-        if (firstMDSDsd != null && roi.getLastLine() > firstMDSDsd.getNumDsr()) {
-            roi.setLastLine(firstMDSDsd.getNumDsr());
-            roi.setLastTiePointLine(roi.getLastLine() / linesPerTiePoint);
+        if (firstMDSDsd != null && roi.getLastLine() >= firstMDSDsd.getNumDsr()) {
+            roi.setLastLine(firstMDSDsd.getNumDsr() - 1);
+
+            DatasetDescriptor firstTDSDsd = null;
+            for (DatasetDescriptor dsd : dsds) {
+                if (dsd.getDsType() == 'A') {
+                    firstTDSDsd = dsd;
+                    break;
+                }
+            }
+            if (firstTDSDsd == null) {
+                throw new IllegalStateException("No Tie Point DSDs found");
+            }
+            roi.setLastTiePointLine(firstTDSDsd.getNumDsr() - 1);
         } else {
             roi.setLastTiePointLine(lastLine / linesPerTiePoint);
         }

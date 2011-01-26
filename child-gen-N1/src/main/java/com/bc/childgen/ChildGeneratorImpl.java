@@ -3,17 +3,13 @@
  */
 package com.bc.childgen;
 
-import com.bc.childgen.modules.MdsrLineMap;
-import com.bc.childgen.modules.Module;
-import com.bc.childgen.modules.ModuleFactory;
-import com.bc.childgen.modules.Roi;
-import com.bc.childgen.modules.Sph;
+import com.bc.childgen.modules.*;
 
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.imageio.stream.ImageInputStream;
 import javax.imageio.stream.ImageOutputStream;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -547,9 +543,11 @@ public final class ChildGeneratorImpl {
         final byte[] buf = new byte[(int) size];
 
         in.seek(sourceOffset);
-        in.read(buf);
-        out.seek(targetOffset);
-        out.write(buf);
+        final int bytesRead = in.read(buf);
+        if (bytesRead > 0) {
+            out.seek(targetOffset);
+            out.write(buf, 0, bytesRead);
+        }
     }
 
     private void parseSPH(ImageInputStream in) throws IOException, ChildGenException {
@@ -651,10 +649,11 @@ public final class ChildGeneratorImpl {
 
         /**
          * Called in order begin a new slice.
+         *
          * @param sliceIndex  The current slice's index.
          * @param productName A generated name for the child slice.
-         * @param firstLine The first scan line within the parent product.
-         * @param lastLine The last scan line within the parent product.
+         * @param firstLine   The first scan line within the parent product.
+         * @param lastLine    The last scan line within the parent product.
          * @return An output stream used to write the new child slice.
          * @throws IOException If an I/O error occurs.
          */
@@ -662,8 +661,9 @@ public final class ChildGeneratorImpl {
 
         /**
          * Called in order to end the current slice.
-         * @param sliceIndex  The current slice's index.
-         * @param productName A generated name for the child slice.
+         *
+         * @param sliceIndex   The current slice's index.
+         * @param productName  A generated name for the child slice.
          * @param bytesWritten The total number of bytes written into the output stream opened by {@link #beginSlice}.
          * @throws IOException If an I/O error occurs.
          */
@@ -672,11 +672,12 @@ public final class ChildGeneratorImpl {
         /**
          * Called in order to handle an error occurred during the generation of
          * the current child slice.
+         *
          * @param sliceIndex The current slice's index.
-         * @param cause The cause exception.
+         * @param cause      The cause exception.
          * @return {@code true} if the error has been handled. Slice generation will be continued in this case.
-         * {@code false} if the error could not handled. Slice generation will be aborted
-         * by throwing the {@code cause} again.
+         *         {@code false} if the error could not handled. Slice generation will be aborted
+         *         by throwing the {@code cause} again.
          */
         boolean handleError(int sliceIndex, IOException cause);
     }

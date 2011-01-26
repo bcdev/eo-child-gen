@@ -58,6 +58,41 @@ public class MerisModuleTest extends TestCase {
         assertEquals(106, result.getLastTiePointLine());
     }
 
+    public void testAdjustRoi_clipOnLastLine() throws ChildGenException {
+        final TstSph sph = new TstSph(2);
+        final Roi roi = new Roi();
+        final DatasetDescriptor mdsDsd = new DatasetDescriptor();
+        mdsDsd.setDsType('M');
+        final DatasetDescriptor adsDsd = new DatasetDescriptor();
+        adsDsd.setDsType('A');
+        sph.getDsds()[0] = mdsDsd;
+        sph.getDsds()[1] = adsDsd;
+
+        sph.setLinesPerTiePoint(16);
+        mdsDsd.setNumDsr(192);
+        adsDsd.setNumDsr(192/16);
+        roi.setFirstLine(116);
+        roi.setLastLine(203);
+
+        Roi result = module.adjustRoi(roi, sph);
+        assertEquals(112, result.getFirstLine());
+        assertEquals(191, result.getLastLine());
+        assertEquals(7, result.getFirstTiePointLine());
+        assertEquals(11, result.getLastTiePointLine());
+
+        sph.setLinesPerTiePoint(64);
+        mdsDsd.setNumDsr(3200);
+        adsDsd.setNumDsr(3200/64);
+        roi.setFirstLine(1419);
+        roi.setLastLine(3203);
+
+        result = module.adjustRoi(roi, sph);
+        assertEquals(1408, result.getFirstLine());
+        assertEquals(3199, result.getLastLine());
+        assertEquals(22, result.getFirstTiePointLine());
+        assertEquals(49, result.getLastTiePointLine());
+    }
+
     ////////////////////////////////////////////////////////////////////////////////
     /////// END OF PUBLIC
     ////////////////////////////////////////////////////////////////////////////////

@@ -76,10 +76,10 @@ public class SliceGenerationTest extends TestCase {
                 "  sliceIndex = 6\n" +
                 "  productName = MER_RR__1PPBCM20090804_080425_000000032081_00207_38838_0007.N1\n" +
                 "  firstLine = 288\n" +
-                "  lastLine = 305\n" +
+                "  lastLine = 304\n" +
                 "endSlice:\n" +
                 "  sliceIndex = 6\n" +
-                "  bytesWritten = 688258\n";
+                "  bytesWritten = 651057\n";
 
         assertEquals(expectedTrace, myFragmentHandler.getTrace());
     }

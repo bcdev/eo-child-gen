@@ -11,6 +11,10 @@ class TstSph extends Sph {
         super(12, 1, 1);
     }
 
+    TstSph(int numDsds) {
+        super(12, numDsds, 1);
+    }
+
     public TstSph(int byteSize, int numDsds, int dsdSize) {
         super(byteSize, numDsds, dsdSize);
     }

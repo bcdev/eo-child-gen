@@ -44,7 +44,7 @@ public class GeoChildGen {
 
         if (!(outputDir.isDirectory() || outputDir.mkdirs())) {
             System.err.println("Output directory '" + outputDir.getAbsolutePath() +
-                    "' does not exist or could not be created");
+                                       "' does not exist or could not be created");
             return;
         }
 
@@ -78,7 +78,10 @@ public class GeoChildGen {
             for (int j = 0; j < siteGeometryList.size(); ++j) {
                 final Geometry siteGeometry = siteGeometryList.get(j);
 
-                if (isIntersection(siteGeometry, productBoundary)) {
+                if (contains(siteGeometry, productBoundary)) {
+                    final File outputFile = createTargetFile(outputDir, inputFile);
+                    copyProduct(inputFile, outputFile);
+                } else if (isIntersection(siteGeometry, productBoundary)) {
                     if (params.isCreateChildOption()) {
                         final Range[] ranges = intersectionRange(siteGeometry, productBoundary, geoCoding, width, height);
                         for (int k = 0; k < ranges.length; k++) {
@@ -88,10 +91,6 @@ public class GeoChildGen {
                         final File outputFile = createTargetFile(outputDir, inputFile);
                         copyProduct(inputFile, outputFile);
                     }
-                }
-                if (contains(siteGeometry, productBoundary)) {
-                    final File outputFile = createTargetFile(outputDir, inputFile);
-                    copyProduct(inputFile, outputFile);
                 } else {
                     System.out.println("No intersections with file " + inputFileName);
                 }
@@ -171,7 +170,7 @@ public class GeoChildGen {
             System.out.println("copied product '" + inputFile.getPath() + "'");
         } catch (IOException e) {
             System.err.println("Failed to copy '" + inputFile.getAbsolutePath() +
-                    "' to output directory");
+                                       "' to output directory");
         }
 
         fis.close();
