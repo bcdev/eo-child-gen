@@ -3,6 +3,8 @@
  */
 package com.bc.childgen;
 
+import com.bc.childgen.modules.aatsr.AatsrConfig;
+
 /**
  * Factory class to create instances of an implementation of the <code>ChildGenerator</code> interface.
  *
@@ -31,7 +33,7 @@ public final class ChildGeneratorFactory {
     ////////////////////////////////////////////////////////////////////////////////
 
     static Config getConfigFor(String productType) throws ChildGenException {
-        final Config config = new Config();
+        ConfigImpl config = new ConfigImpl();
         final String fileNameCapitals = productType.toUpperCase();
 
         if (fileNameCapitals.startsWith("MER_RR")) {
@@ -53,11 +55,7 @@ public final class ChildGeneratorFactory {
             config.setTiePointLonOffset(ChildGenConstants.MERIS_FRS_TIE_PT_LON_OFFSET);
             config.setNumberOfGeoCoordinates(ChildGenConstants.MERIS_FRS_NUM_OF_GEOCOORDS);
         } else if (fileNameCapitals.startsWith("AT")) {
-            config.setTiePointAdsName(ChildGenConstants.AATSR_TIE_PT_ADS_NAME);
-            config.setQualityAdsName(ChildGenConstants.AATSR_QUALITY_ADS_NAME);
-            config.setTiePointLatOffset(ChildGenConstants.AATSR_TIE_PT_LAT_OFFSET);
-            config.setTiePointLonOffset(ChildGenConstants.AATSR_TIE_PT_LON_OFFSET);
-            config.setNumberOfGeoCoordinates(ChildGenConstants.AATSR_NUM_OF_GEOCOORDS);
+            return new AatsrConfig();
         } else {
             throw new ChildGenException("Invalid file name: " + productType);
         }

@@ -41,11 +41,11 @@ public class ChildGeneratorFactoryTest extends TestCase {
         final Config config = ChildGeneratorFactory.getConfigFor("ATS_NR__2PNPDK20060329_103452_000065272046_00223_21319_0188.N1");
         assertNotNull(config);
 
-        assertEquals(ChildGenConstants.AATSR_TIE_PT_ADS_NAME, config.getTiePointAdsName());
-        assertEquals(ChildGenConstants.AATSR_QUALITY_ADS_NAME, config.getQualityAdsName());
-        assertEquals(ChildGenConstants.AATSR_TIE_PT_LAT_OFFSET, config.getTiePointLatOffset());
-        assertEquals(ChildGenConstants.AATSR_TIE_PT_LON_OFFSET, config.getTiePointLonOffset());
-        assertEquals(ChildGenConstants.AATSR_NUM_OF_GEOCOORDS, config.getNumberOfGeoCoordinates());
+        assertEquals("GEOLOCATION_ADS             ", config.getTiePointAdsName());
+        assertEquals("SUMMARY_QUALITY_ADS         ", config.getQualityAdsName());
+        assertEquals(20, config.getTiePointLatOffset());
+        assertEquals(112, config.getTiePointLonOffset());
+        assertEquals(23, config.getNumberOfGeoCoordinates());
     }
 
     public void testGetConfigFor_unknown() {

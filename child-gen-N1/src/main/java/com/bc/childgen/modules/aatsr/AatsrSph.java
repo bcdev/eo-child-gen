@@ -1,6 +1,5 @@
 package com.bc.childgen.modules.aatsr;
 
-import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.DatasetDescriptor;
 import com.bc.childgen.modules.MdsrLineMap;
 import com.bc.childgen.modules.Sph;
@@ -124,7 +123,7 @@ public class AatsrSph extends Sph {
         if (dsName == null || dsName.length() == 0) {
             return false;
         }
-        return ChildGenConstants.AATSR_QUALITY_ADS_NAME.indexOf(dsName) != -1;
+        return Constants.QUALITY_ADS_NAME.indexOf(dsName) != -1;
     }
 
     // sqad dataset record

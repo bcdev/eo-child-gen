@@ -70,9 +70,9 @@ public class ConfigTest extends TestCase {
     /////// END OF PUBLIC
     ////////////////////////////////////////////////////////////////////////////////
 
-    private Config config;
+    private ConfigImpl config;
 
     protected void setUp() {
-        config = new Config();
+        config = new ConfigImpl();
     }
 }

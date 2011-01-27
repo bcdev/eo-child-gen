@@ -1,6 +1,5 @@
 package com.bc.childgen.modules.aatsr;
 
-import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.DatasetDescriptor;
 import com.bc.childgen.modules.MdsrLineMap;
@@ -76,8 +75,8 @@ public class AatsrModule implements Module {
             final int records = geolocationDsd.getNumDsr() - 1;
             for (int adsIndex = 0; adsIndex < records; adsIndex++) {
                 final int flagIndex = adsIndex * geolocationDsd.getDsrSize() + 12;
-                for (int scanIndex = 0; scanIndex < ChildGenConstants.AATSR_LINES_PER_TIE_POINT; scanIndex++) {
-                    final int line = adsIndex * ChildGenConstants.AATSR_LINES_PER_TIE_POINT + scanIndex;
+                for (int scanIndex = 0; scanIndex < Constants.LINES_PER_TIE_POINT; scanIndex++) {
+                    final int line = adsIndex * Constants.LINES_PER_TIE_POINT + scanIndex;
                     if (buffer[flagIndex] != 0) {
                         lineMap[line] = -1;
                     } else {
@@ -94,12 +93,12 @@ public class AatsrModule implements Module {
 
     private int calculateExpectedProductHeight(DatasetDescriptor geolocationDsd) {
         final int tiePointLines = geolocationDsd.getNumDsr();
-        return (tiePointLines - 1) * ChildGenConstants.AATSR_LINES_PER_TIE_POINT;
+        return (tiePointLines - 1) * Constants.LINES_PER_TIE_POINT;
     }
 
     private DatasetDescriptor getGeolocationDsd(DatasetDescriptor[] dsds) throws ChildGenException {
         for (int i = 0; i < dsds.length; i++) {
-            if (ChildGenConstants.AATSR_TIE_PT_ADS_NAME.equals(dsds[i].getDsName())) {
+            if (Constants.TIE_PT_ADS_NAME.equals(dsds[i].getDsName())) {
                 return dsds[i];
             }
         }

@@ -1,6 +1,5 @@
 package com.bc.childgen.modules.aatsr;
 
-import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.DatasetDescriptor;
 import com.bc.childgen.modules.MdsrLineMap;
@@ -23,8 +22,8 @@ public class AatsrSphTest extends TestCase {
     public void testAdjustSqadDsds() throws ChildGenException {
         MdsrLineMap lineMap = new MdsrLineMap();
         final StringBuffer sphBuffer = SphTest.createBlankBuffer(12);
-        SphTest.appendDsdToBuffer(sphBuffer, ChildGenConstants.AATSR_QUALITY_ADS_NAME, 'A', "                                                              ", 7077, 6966, 81, 86);
-        SphTest.appendDsdToBuffer(sphBuffer, ChildGenConstants.AATSR_TIE_PT_ADS_NAME, 'A', "                                                              ", 14044, 6966, 81, 86);
+        SphTest.appendDsdToBuffer(sphBuffer, Constants.QUALITY_ADS_NAME, 'A', "                                                              ", 7077, 6966, 81, 86);
+        SphTest.appendDsdToBuffer(sphBuffer, Constants.TIE_PT_ADS_NAME, 'A', "                                                              ", 14044, 6966, 81, 86);
         final byte[] bytes = sphBuffer.toString().getBytes();
 
         final AatsrSph sph = new AatsrSph(bytes.length, 2, 280);
@@ -77,7 +76,7 @@ public class AatsrSphTest extends TestCase {
         lineMap.setMappingInfo(mdsrLines);
         
         final StringBuffer sphBuffer = SphTest.createBlankBuffer(12);
-        SphTest.appendDsdToBuffer(sphBuffer, ChildGenConstants.AATSR_TIE_PT_ADS_NAME, 'A', "                                                              ", 7077, 6966, 81, 86);
+        SphTest.appendDsdToBuffer(sphBuffer, Constants.TIE_PT_ADS_NAME, 'A', "                                                              ", 7077, 6966, 81, 86);
         SphTest.appendDsdToBuffer(sphBuffer, "MEASUREMENT_DATA            ", 'M', "                                                              ", 14044, 6966, 81, 86);
         final byte[] bytes = sphBuffer.toString().getBytes();
 
@@ -99,6 +98,7 @@ public class AatsrSphTest extends TestCase {
         final DatasetDescriptor mdsDsd = dsds[1];
         assertEquals(8, mdsDsd.getNumDsr());
         assertEquals(8 * 86, mdsDsd.getDsSize());
+        //noinspection PointlessArithmeticExpression
         assertEquals(7077 + 1 * 86, mdsDsd.getDsOffset());
     }
 
@@ -125,7 +125,7 @@ public class AatsrSphTest extends TestCase {
         dsd.setDsOffset(dsOffset);
         dsd.setDsrSize(dsrSize);
         dsd.setDsType('A');
-        dsd.setDsName(ChildGenConstants.AATSR_QUALITY_ADS_NAME);
+        dsd.setDsName(Constants.QUALITY_ADS_NAME);
         assertEquals(dsOffset, sph.calculateSourceOffset(175, 4, dsd, lineMap));
 
         dsd.setDsOffset(dsOffset);

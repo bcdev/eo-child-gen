@@ -1,54 +1,14 @@
 package com.bc.childgen;
 
-class Config {
+public interface Config {
 
-    void setTiePointAdsName(String tiePointAdsName) {
-        this.tiePointAdsName = tiePointAdsName;
-    }
+    public String getTiePointAdsName();
 
-    String getTiePointAdsName() {
-        return tiePointAdsName;
-    }
+    public String getQualityAdsName();
 
-    void setQualityAdsName(String qualityAdsName) {
-        this.qualityAdsName = qualityAdsName;
-    }
+    public int getTiePointLatOffset();
 
-    String getQualityAdsName() {
-        return qualityAdsName;
-    }
+    public int getTiePointLonOffset();
 
-    void setTiePointLatOffset(int tiePointLatOffset) {
-        this.tiePointLatOffset = tiePointLatOffset;
-    }
-
-    int getTiePointLatOffset() {
-        return tiePointLatOffset;
-    }
-
-    void setTiePointLonOffset(int tiePointLonOffset) {
-        this.tiePointLonOffset = tiePointLonOffset;
-    }
-
-    int getTiePointLonOffset() {
-        return tiePointLonOffset;
-    }
-
-    void setNumberOfGeoCoordinates(int numberOfGeoCoordinates) {
-        this.numberOfGeoCoordinates = numberOfGeoCoordinates;
-    }
-
-    int getNumberOfGeoCoordinates() {
-        return numberOfGeoCoordinates;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////
-    /////// END OF PUBLIC
-    ////////////////////////////////////////////////////////////////////////////////
-
-    private String tiePointAdsName;
-    private String qualityAdsName;
-    private int tiePointLatOffset = -1;
-    private int tiePointLonOffset = -1;
-    private int numberOfGeoCoordinates = -1;
+    public int getNumberOfGeoCoordinates();
 }

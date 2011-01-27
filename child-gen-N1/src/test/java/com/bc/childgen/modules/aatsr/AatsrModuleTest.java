@@ -1,6 +1,5 @@
 package com.bc.childgen.modules.aatsr;
 
-import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.DatasetDescriptor;
 import com.bc.childgen.modules.*;
@@ -19,7 +18,7 @@ public class AatsrModuleTest extends TestCase {
     public void testAdjustRoi_snapToTiePoints() throws ChildGenException {
         final TstSph sph = new TstSph();
         final DatasetDescriptor geolocationDSD = new DatasetDescriptor();
-        geolocationDSD.setDsName(ChildGenConstants.AATSR_TIE_PT_ADS_NAME);
+        geolocationDSD.setDsName(Constants.TIE_PT_ADS_NAME);
         geolocationDSD.setNumDsr(4000);     // set high enough to avoid roi clipping
         sph.getDsds()[0] = geolocationDSD;
         final Roi roi = new Roi();
@@ -68,7 +67,7 @@ public class AatsrModuleTest extends TestCase {
     public void testAdjustRoi_clipAtProductEnd() throws ChildGenException {
         final TstSph sph = new TstSph();
         final DatasetDescriptor geolocationDSD = new DatasetDescriptor();
-        geolocationDSD.setDsName(ChildGenConstants.AATSR_TIE_PT_ADS_NAME);
+        geolocationDSD.setDsName(Constants.TIE_PT_ADS_NAME);
         geolocationDSD.setNumDsr(101);     // equals 3200 lines
         sph.getDsds()[0] = geolocationDSD;
         final Roi roi = new Roi();
@@ -93,7 +92,7 @@ public class AatsrModuleTest extends TestCase {
 
         dsd = new DatasetDescriptor();
         dsd.setDsType('M');
-        dsd.setNumDsr((15 - 1) * ChildGenConstants.AATSR_LINES_PER_TIE_POINT);
+        dsd.setNumDsr((15 - 1) * Constants.LINES_PER_TIE_POINT);
         dsds[1] = dsd;
 
         try {
@@ -106,13 +105,13 @@ public class AatsrModuleTest extends TestCase {
     public void testCreateLineMap_noMapping() throws IOException, ChildGenException {
         final DatasetDescriptor[] dsds = new DatasetDescriptor[2];
         DatasetDescriptor dsd = new DatasetDescriptor();
-        dsd.setDsName(ChildGenConstants.AATSR_TIE_PT_ADS_NAME);
+        dsd.setDsName(Constants.TIE_PT_ADS_NAME);
         dsd.setNumDsr(15);
         dsds[0] = dsd;
 
         dsd = new DatasetDescriptor();
         dsd.setDsType('M');
-        dsd.setNumDsr((15 - 1) * ChildGenConstants.AATSR_LINES_PER_TIE_POINT);
+        dsd.setNumDsr((15 - 1) * Constants.LINES_PER_TIE_POINT);
         dsds[1] = dsd;
 
         final MdsrLineMap map = module.createLineMap(dsds, null);
@@ -122,13 +121,13 @@ public class AatsrModuleTest extends TestCase {
     public void testCreateLineMap_noMDS_DSD() throws IOException, ChildGenException {
         final DatasetDescriptor[] dsds = new DatasetDescriptor[2];
         DatasetDescriptor dsd = new DatasetDescriptor();
-        dsd.setDsName(ChildGenConstants.AATSR_TIE_PT_ADS_NAME);
+        dsd.setDsName(Constants.TIE_PT_ADS_NAME);
         dsd.setNumDsr(15);
         dsds[0] = dsd;
 
         dsd = new DatasetDescriptor();
         dsd.setDsType('D');
-        dsd.setNumDsr((15 - 1) * ChildGenConstants.AATSR_LINES_PER_TIE_POINT);
+        dsd.setNumDsr((15 - 1) * Constants.LINES_PER_TIE_POINT);
         dsds[1] = dsd;
 
         try {
