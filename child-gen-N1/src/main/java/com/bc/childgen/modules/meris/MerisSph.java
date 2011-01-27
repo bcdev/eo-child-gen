@@ -16,7 +16,7 @@ public class MerisSph extends Sph {
     }
 
     public int getLinesPerTiePoint() throws ChildGenException {
-        final String linesPerTiePointString = new String(getRawData(), ChildGenConstants.MERIS_LINES_PER_TIE_OFFSET, 3);
+        final String linesPerTiePointString = new String(getRawData(), Constants.MERIS_LINES_PER_TIE_OFFSET, 3);
 
         int numLines;
         try {
@@ -90,7 +90,7 @@ public class MerisSph extends Sph {
         if (dsName == null || dsName.length() == 0) {
             return false;
         }
-        return ChildGenConstants.MERIS_QUALITY_ADS_NAME.indexOf(dsName) != -1;
+        return Constants.QUALITY_ADS_NAME.indexOf(dsName) != -1;
     }
 
     private int getSqadIndex(int lineNumber) throws ChildGenException {

@@ -4,6 +4,9 @@
 package com.bc.childgen;
 
 import com.bc.childgen.modules.aatsr.AatsrConfig;
+import com.bc.childgen.modules.meris.MerisFRConfig;
+import com.bc.childgen.modules.meris.MerisFRSConfig;
+import com.bc.childgen.modules.meris.MerisRRConfig;
 
 /**
  * Factory class to create instances of an implementation of the <code>ChildGenerator</code> interface.
@@ -37,29 +40,15 @@ public final class ChildGeneratorFactory {
         final String fileNameCapitals = productType.toUpperCase();
 
         if (fileNameCapitals.startsWith("MER_RR")) {
-            config.setTiePointAdsName(ChildGenConstants.MERIS_TIE_PT_ADS_NAME);
-            config.setQualityAdsName(ChildGenConstants.MERIS_QUALITY_ADS_NAME);
-            config.setTiePointLatOffset(ChildGenConstants.MERIS_TIE_PT_LAT_OFFSET);
-            config.setTiePointLonOffset(ChildGenConstants.MERIS_RR_TIE_PT_LON_OFFSET);
-            config.setNumberOfGeoCoordinates(ChildGenConstants.MERIS_RR_NUM_OF_GEOCOORDS);
+            return new MerisRRConfig();
         } else if (fileNameCapitals.startsWith("MER_FR_")) {
-            config.setTiePointAdsName(ChildGenConstants.MERIS_TIE_PT_ADS_NAME);
-            config.setQualityAdsName(ChildGenConstants.MERIS_QUALITY_ADS_NAME);
-            config.setTiePointLatOffset(ChildGenConstants.MERIS_TIE_PT_LAT_OFFSET);
-            config.setTiePointLonOffset(ChildGenConstants.MERIS_FR_TIE_PT_LON_OFFSET);
-            config.setNumberOfGeoCoordinates(ChildGenConstants.MERIS_FR_NUM_OF_GEOCOORDS);
+           return new MerisFRConfig();
         } else if (fileNameCapitals.startsWith("MER_FRS")) {
-            config.setTiePointAdsName(ChildGenConstants.MERIS_TIE_PT_ADS_NAME);
-            config.setQualityAdsName(ChildGenConstants.MERIS_QUALITY_ADS_NAME);
-            config.setTiePointLatOffset(ChildGenConstants.MERIS_TIE_PT_LAT_OFFSET);
-            config.setTiePointLonOffset(ChildGenConstants.MERIS_FRS_TIE_PT_LON_OFFSET);
-            config.setNumberOfGeoCoordinates(ChildGenConstants.MERIS_FRS_NUM_OF_GEOCOORDS);
+            return new MerisFRSConfig();
         } else if (fileNameCapitals.startsWith("AT")) {
             return new AatsrConfig();
         } else {
             throw new ChildGenException("Invalid file name: " + productType);
         }
-
-        return config;
     }
 }

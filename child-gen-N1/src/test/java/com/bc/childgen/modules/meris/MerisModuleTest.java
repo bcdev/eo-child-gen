@@ -68,7 +68,7 @@ public class MerisModuleTest extends TestCase {
         final DatasetDescriptor mdsDsd = new DatasetDescriptor();
         mdsDsd.setDsType('M');
         final DatasetDescriptor adsDsd = new DatasetDescriptor();
-        adsDsd.setDsName(ChildGenConstants.MERIS_TIE_PT_ADS_NAME);
+        adsDsd.setDsName(Constants.TIE_POINTS_ADS_NAME);
         sph.getDsds()[0] = mdsDsd;
         sph.getDsds()[1] = adsDsd;
 

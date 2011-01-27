@@ -55,7 +55,7 @@ public class MerisSphTest extends TestCase {
         dsd.setDsOffset(dsOffset);
         dsd.setDsrSize(dsrSize);
         dsd.setDsType('A');
-        dsd.setDsName(ChildGenConstants.MERIS_QUALITY_ADS_NAME);
+        dsd.setDsName(Constants.QUALITY_ADS_NAME);
         assertEquals(dsOffset, sph.calculateSourceOffset(175, 4, dsd, lineMap));
 
         dsd.setDsOffset(dsOffset);

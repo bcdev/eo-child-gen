@@ -43,7 +43,7 @@ public class MerisModule implements Module {
 
             DatasetDescriptor firstTDSDsd = null;
             for (DatasetDescriptor dsd : dsds) {
-                if (ChildGenConstants.MERIS_TIE_PT_ADS_NAME.equals(dsd.getDsName())) {
+                if (Constants.TIE_POINTS_ADS_NAME.equals(dsd.getDsName())) {
                     firstTDSDsd = dsd;
                     break;
                 }
