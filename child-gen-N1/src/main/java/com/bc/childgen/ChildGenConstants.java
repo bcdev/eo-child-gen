@@ -6,7 +6,7 @@ public class ChildGenConstants {
     static final int MERIS_RR_TIE_PT_LON_OFFSET = 297;
     static final int MERIS_FR_TIE_PT_LON_OFFSET = 157;
     static final int MERIS_FRS_TIE_PT_LON_OFFSET = 297;
-    static final String MERIS_TIE_PT_ADS_NAME = "Tie points ADS              ";
+    public static final String MERIS_TIE_PT_ADS_NAME = "Tie points ADS              ";
     public static final String MERIS_QUALITY_ADS_NAME = "Quality ADS                 ";
     static final int MERIS_RR_NUM_OF_GEOCOORDS = 71;
     static final int MERIS_FR_NUM_OF_GEOCOORDS = 36;

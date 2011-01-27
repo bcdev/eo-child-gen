@@ -1,15 +1,17 @@
-package com.bc.childgen.modules;
+package com.bc.childgen.modules.aatsr;
 
 import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.DatasetDescriptor;
+import com.bc.childgen.modules.MdsrLineMap;
+import com.bc.childgen.modules.Sph;
 import com.bc.childgen.sqad.AatsrSqadUtils;
 
 import javax.imageio.stream.ImageOutputStream;
 import java.io.IOException;
 
-class AatsrSph extends Sph {
+public class AatsrSph extends Sph {
 
-    AatsrSph(int byteSize, int numDsds, int dsdSize) {
+    public AatsrSph(int byteSize, int numDsds, int dsdSize) {
         super(byteSize, numDsds, dsdSize);
     }
 
@@ -21,6 +23,7 @@ class AatsrSph extends Sph {
         long offset = 0;
 
         // detect the first non-spare and use offset as starting point
+        final DatasetDescriptor[] dsds = getDsds();
         for (int i = 0; i < dsds.length; i++) {
             if (!dsds[i].isSpare()) {
                 offset = dsds[i].getDsOffset();
@@ -80,6 +83,7 @@ class AatsrSph extends Sph {
 
     // @todo 1 tb/tb write test
     public void patchDatasets(ImageOutputStream out, int startLine) throws IOException {
+        final DatasetDescriptor[] dsds = getDsds();
         for (int i = 0; i < dsds.length; i++) {
             final DatasetDescriptor descriptor = dsds[i];
 

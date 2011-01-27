@@ -99,6 +99,46 @@ public class SphTest extends TestCase {
         assertTrue(Sph.isInvalidDsd(invalidBuffer, 0));
     }
 
+    public static StringBuffer createBlankBuffer(int sphLength) {
+        final StringBuffer buffer = new StringBuffer(sphLength);
+        for (int n = 0; n < sphLength; n++) {
+            buffer.append(" ");
+        }
+        return buffer;
+    }
+
+    public static void appendDsdToBuffer(StringBuffer buffer, String name, char type, String fileName,
+                                         long offset, long size, int numDsr, int dsrSize) {
+        buffer.append("DS_NAME=\"");
+        buffer.append(name);
+        buffer.append("\"\n");
+        buffer.append("DS_TYPE=");
+        buffer.append(type);
+        buffer.append("\n");
+        buffer.append("FILENAME=\"");
+        buffer.append(fileName);
+        buffer.append("\"\n");
+        buffer.append("DS_OFFSET=+");
+        final DecimalFormat longFormat = new DecimalFormat("00000000000000000000");
+        buffer.append(longFormat.format(offset));
+        buffer.append("<bytes>");
+        buffer.append("\n");
+        buffer.append("DS_SIZE=+");
+        buffer.append(longFormat.format(size));
+        buffer.append("<bytes>");
+        buffer.append("\n");
+        buffer.append("NUM_DSR=+");
+        final DecimalFormat shortFormat = new DecimalFormat("0000000000");
+        buffer.append(shortFormat.format(numDsr));
+        buffer.append("\n");
+        buffer.append("DSR_SIZE=+");
+        buffer.append(shortFormat.format(dsrSize));
+        buffer.append("<bytes>");
+        buffer.append("\n");
+        buffer.append("                                ");
+        buffer.append("\n");
+    }
+
     ////////////////////////////////////////////////////////////////////////////////
     /////// END OF PUBLIC
     ////////////////////////////////////////////////////////////////////////////////
@@ -134,46 +174,6 @@ public class SphTest extends TestCase {
         for (int n = 0; n < dsdSize; n++) {
             buffer.append(" ");
         }
-    }
-
-    static void appendDsdToBuffer(StringBuffer buffer, String name, char type, String fileName,
-                                  long offset, long size, int numDsr, int dsrSize) {
-        buffer.append("DS_NAME=\"");
-        buffer.append(name);
-        buffer.append("\"\n");
-        buffer.append("DS_TYPE=");
-        buffer.append(type);
-        buffer.append("\n");
-        buffer.append("FILENAME=\"");
-        buffer.append(fileName);
-        buffer.append("\"\n");
-        buffer.append("DS_OFFSET=+");
-        final DecimalFormat longFormat = new DecimalFormat("00000000000000000000");
-        buffer.append(longFormat.format(offset));
-        buffer.append("<bytes>");
-        buffer.append("\n");
-        buffer.append("DS_SIZE=+");
-        buffer.append(longFormat.format(size));
-        buffer.append("<bytes>");
-        buffer.append("\n");
-        buffer.append("NUM_DSR=+");
-        final DecimalFormat shortFormat = new DecimalFormat("0000000000");
-        buffer.append(shortFormat.format(numDsr));
-        buffer.append("\n");
-        buffer.append("DSR_SIZE=+");
-        buffer.append(shortFormat.format(dsrSize));
-        buffer.append("<bytes>");
-        buffer.append("\n");
-        buffer.append("                                ");
-        buffer.append("\n");
-    }
-
-    static StringBuffer createBlankBuffer(int sphLength) {
-        final StringBuffer buffer = new StringBuffer(sphLength);
-        for (int n = 0; n < sphLength; n++) {
-            buffer.append(" ");
-        }
-        return buffer;
     }
 
     private Sph createPreparedSph(int sphLength, int numDsds, int dsdSize) {

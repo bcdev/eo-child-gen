@@ -1,12 +1,17 @@
-package com.bc.childgen.modules;
+package com.bc.childgen.modules.meris;
 
+import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.DatasetDescriptor;
+import com.bc.childgen.modules.MdsrLineMap;
+import com.bc.childgen.modules.Module;
+import com.bc.childgen.modules.Roi;
+import com.bc.childgen.modules.Sph;
 
 import javax.imageio.stream.ImageInputStream;
 
 
-class MerisModule implements Module {
+public class MerisModule implements Module {
 
     public Roi adjustRoi(Roi roi, Sph sph) throws ChildGenException {
         final int linesPerTiePoint = sph.getLinesPerTiePoint();
@@ -38,7 +43,7 @@ class MerisModule implements Module {
 
             DatasetDescriptor firstTDSDsd = null;
             for (DatasetDescriptor dsd : dsds) {
-                if (dsd.getDsType() == 'A') {
+                if (ChildGenConstants.MERIS_TIE_PT_ADS_NAME.equals(dsd.getDsName())) {
                     firstTDSDsd = dsd;
                     break;
                 }

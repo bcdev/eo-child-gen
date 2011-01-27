@@ -1,8 +1,11 @@
-package com.bc.childgen.modules;
+package com.bc.childgen.modules.aatsr;
 
 import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.DatasetDescriptor;
+import com.bc.childgen.modules.MdsrLineMap;
+import com.bc.childgen.modules.SphTest;
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
 @SuppressWarnings({"MagicNumber"})
@@ -14,7 +17,7 @@ public class AatsrSphTest extends TestCase {
     }
 
     public void testGetLinesPerTiePoint() {
-        assertEquals(32, sph.getLinesPerTiePoint());
+        Assert.assertEquals(32, sph.getLinesPerTiePoint());
     }
 
     public void testAdjustSqadDsds() throws ChildGenException {
@@ -25,7 +28,7 @@ public class AatsrSphTest extends TestCase {
         final byte[] bytes = sphBuffer.toString().getBytes();
 
         final AatsrSph sph = new AatsrSph(bytes.length, 2, 280);
-        sph.buffer = bytes;
+        sph.setRawData(bytes);
         sph.parseDSDs();
 
         sph.adjustDSDs(24867, 1423, 5, lineMap);   // expect dsds 48 - 51
@@ -79,7 +82,7 @@ public class AatsrSphTest extends TestCase {
         final byte[] bytes = sphBuffer.toString().getBytes();
 
         final AatsrSph sph = new AatsrSph(bytes.length, 2, 280);
-        sph.buffer = bytes;
+        sph.setRawData(bytes);
         sph.parseDSDs();
 
         sph.adjustDSDs(10, 12, 1, lineMap);

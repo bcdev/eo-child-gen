@@ -1,8 +1,9 @@
-package com.bc.childgen.modules;
+package com.bc.childgen.modules.aatsr;
 
 import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.DatasetDescriptor;
+import com.bc.childgen.modules.*;
 import junit.framework.TestCase;
 
 import java.io.IOException;

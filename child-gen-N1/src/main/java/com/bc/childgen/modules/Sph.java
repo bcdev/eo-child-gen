@@ -9,8 +9,19 @@ import java.util.Arrays;
 
 abstract public class Sph {
 
+    public Sph(int byteSize, int numDsds, int dsdSize) {
+        buffer = new byte[byteSize];
+        dsds = new DatasetDescriptor[numDsds];
+        this.numDsds = numDsds;
+        this.dsdSize = dsdSize;
+    }
+
     public byte[] getRawData() {
         return buffer;
+    }
+
+    public void setRawData(byte[] buffer) {
+        this.buffer = buffer;
     }
 
     public void parseDSDs() throws ChildGenException {
@@ -81,13 +92,6 @@ abstract public class Sph {
     int numDsds;
     int dsdSize;
     DatasetDescriptor dsds[];
-
-    Sph(int byteSize, int numDsds, int dsdSize) {
-        buffer = new byte[byteSize];
-        dsds = new DatasetDescriptor[numDsds];
-        this.numDsds = numDsds;
-        this.dsdSize = dsdSize;
-    }
 
     // package access for testing purpose
     static boolean isInvalidDsd(byte[] buffer, int offset) {

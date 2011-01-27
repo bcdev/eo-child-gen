@@ -1,7 +1,11 @@
-package com.bc.childgen.modules;
+package com.bc.childgen.modules.meris;
 
+import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.DatasetDescriptor;
+import com.bc.childgen.modules.Module;
+import com.bc.childgen.modules.Roi;
+import com.bc.childgen.modules.TstSph;
 import junit.framework.TestCase;
 
 
@@ -64,13 +68,13 @@ public class MerisModuleTest extends TestCase {
         final DatasetDescriptor mdsDsd = new DatasetDescriptor();
         mdsDsd.setDsType('M');
         final DatasetDescriptor adsDsd = new DatasetDescriptor();
-        adsDsd.setDsType('A');
+        adsDsd.setDsName(ChildGenConstants.MERIS_TIE_PT_ADS_NAME);
         sph.getDsds()[0] = mdsDsd;
         sph.getDsds()[1] = adsDsd;
 
         sph.setLinesPerTiePoint(16);
         mdsDsd.setNumDsr(192);
-        adsDsd.setNumDsr(192/16);
+        adsDsd.setNumDsr(192 / 16);
         roi.setFirstLine(116);
         roi.setLastLine(203);
 
@@ -82,7 +86,7 @@ public class MerisModuleTest extends TestCase {
 
         sph.setLinesPerTiePoint(64);
         mdsDsd.setNumDsr(3200);
-        adsDsd.setNumDsr(3200/64);
+        adsDsd.setNumDsr(3200 / 64);
         roi.setFirstLine(1419);
         roi.setLastLine(3203);
 

@@ -1,8 +1,9 @@
-package com.bc.childgen.modules;
+package com.bc.childgen.modules.meris;
 
+import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.DatasetDescriptor;
-import com.bc.childgen.ChildGenConstants;
+import com.bc.childgen.modules.MdsrLineMap;
 import junit.framework.TestCase;
 
 @SuppressWarnings({"MagicNumber"})
@@ -15,12 +16,12 @@ public class MerisSphTest extends TestCase {
 
     public void testGetLinesPerTiePoint() throws ChildGenException {
         String testLinesPerTp = "+045";
-        System.arraycopy(testLinesPerTp.getBytes(), 0, sph.buffer, 1437, 4);
+        System.arraycopy(testLinesPerTp.getBytes(), 0, sph.getRawData(), 1437, 4);
 
         assertEquals(45, sph.getLinesPerTiePoint());
 
         testLinesPerTp = "+abc";
-        System.arraycopy(testLinesPerTp.getBytes(), 0, sph.buffer, 1437, 4);
+        System.arraycopy(testLinesPerTp.getBytes(), 0, sph.getRawData(), 1437, 4);
 
         try {
             sph.getLinesPerTiePoint();
@@ -50,7 +51,7 @@ public class MerisSphTest extends TestCase {
         assertEquals(dsOffset + 4 * dsrSize, sph.calculateSourceOffset(175, 4, dsd, lineMap));
 
         String testLinesPerTp = "+045";
-        System.arraycopy(testLinesPerTp.getBytes(), 0, sph.buffer, 1437, 4);
+        System.arraycopy(testLinesPerTp.getBytes(), 0, sph.getRawData(), 1437, 4);
         dsd.setDsOffset(dsOffset);
         dsd.setDsrSize(dsrSize);
         dsd.setDsType('A');

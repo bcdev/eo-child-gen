@@ -1,14 +1,18 @@
-package com.bc.childgen.modules;
+package com.bc.childgen.modules.aatsr;
 
 import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.DatasetDescriptor;
+import com.bc.childgen.modules.MdsrLineMap;
+import com.bc.childgen.modules.Module;
+import com.bc.childgen.modules.Roi;
+import com.bc.childgen.modules.Sph;
 
 import javax.imageio.stream.ImageInputStream;
 import java.io.IOException;
 
 
-class AatsrModule implements Module {
+public class AatsrModule implements Module {
 
     public Roi adjustRoi(Roi roi, Sph sph) throws ChildGenException {
         final int linesPerTiePoint = sph.getLinesPerTiePoint();

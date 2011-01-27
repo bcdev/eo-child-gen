@@ -1,20 +1,22 @@
-package com.bc.childgen.modules;
+package com.bc.childgen.modules.meris;
 
 import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.DatasetDescriptor;
+import com.bc.childgen.modules.MdsrLineMap;
+import com.bc.childgen.modules.Sph;
 
 import javax.imageio.stream.ImageOutputStream;
 import java.io.IOException;
 
-class MerisSph extends Sph {
+public class MerisSph extends Sph {
 
-    MerisSph(int byteSize, int numDsds, int dsdSize) {
+    public MerisSph(int byteSize, int numDsds, int dsdSize) {
         super(byteSize, numDsds, dsdSize);
     }
 
     public int getLinesPerTiePoint() throws ChildGenException {
-        final String linesPerTiePointString = new String(buffer, ChildGenConstants.MERIS_LINES_PER_TIE_OFFSET, 3);
+        final String linesPerTiePointString = new String(getRawData(), ChildGenConstants.MERIS_LINES_PER_TIE_OFFSET, 3);
 
         int numLines;
         try {
@@ -28,6 +30,7 @@ class MerisSph extends Sph {
 
     // @todo 1 tb/tb TEST THIS!
     public void adjustDSDs(int startLine, int height, int tpHeight, MdsrLineMap lineMap) {
+        final DatasetDescriptor[] dsds = getDsds();
         long offset = dsds[0].getDsOffset();
         for (int i = 0; i < dsds.length; i++) {
             final DatasetDescriptor currentDsd = dsds[i];

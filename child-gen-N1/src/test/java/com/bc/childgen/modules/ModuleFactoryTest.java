@@ -3,6 +3,10 @@ package com.bc.childgen.modules;
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.DummyMph;
 import com.bc.childgen.Mph;
+import com.bc.childgen.modules.aatsr.AatsrModule;
+import com.bc.childgen.modules.aatsr.AatsrSph;
+import com.bc.childgen.modules.meris.MerisModule;
+import com.bc.childgen.modules.meris.MerisSph;
 import junit.framework.TestCase;
 
 @SuppressWarnings({"MagicNumber"})
