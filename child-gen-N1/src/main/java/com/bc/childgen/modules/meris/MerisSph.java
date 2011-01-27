@@ -1,6 +1,5 @@
 package com.bc.childgen.modules.meris;
 
-import com.bc.childgen.ChildGenConstants;
 import com.bc.childgen.ChildGenException;
 import com.bc.childgen.DatasetDescriptor;
 import com.bc.childgen.modules.MdsrLineMap;
@@ -41,7 +40,7 @@ public class MerisSph extends Sph {
                         final int startIndex = getSqadIndex(startLine);
                         final int endIndex = getSqadIndex(startLine + height);
 
-                        final int numDsr = endIndex - startIndex + 1;
+                        final int numDsr = endIndex - startIndex;
                         currentDsd.setNumDsr(numDsr);
                         currentDsd.setDsSize(numDsr * currentDsd.getDsrSize());
                     } catch (ChildGenException e) {
