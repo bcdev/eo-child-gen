@@ -12,5 +12,6 @@ class CmdLineConstants {
     static final String OUTPUT_DIR_NAME_DEFAULT = ".";
     static final boolean CREATE_CHILD_OPTION_DEFAULT = false;
 
-    static final String VERSION_STRING = "1.7.2_SNAPSHOT";
+    static final String VERSION_STRING = "1.7.3";
+    static final String VERBOSE_OPTION = "-v";
 }

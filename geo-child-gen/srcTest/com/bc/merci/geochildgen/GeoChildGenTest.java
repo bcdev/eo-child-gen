@@ -13,7 +13,7 @@ public class GeoChildGenTest extends TestCase {
                 "Usage: geochildgen [" + CmdLineConstants.GEO_PROPS_OPTION + " <propertiesFile>] " +
                 "[" + CmdLineConstants.DB_PROPS_OPTION + " <propertiesFile>]" + lineSep +
                 "       [" + CmdLineConstants.SITE_CAT_OPTION + " <cat_a, cat_b, ...>] [" + CmdLineConstants.CREATE_CHILD_OPTION + "]" + lineSep +
-                "       [" + CmdLineConstants.OUT_DIR_OPTION + " <outputDir>] <inputFile>..." + lineSep +
+                "       [" + CmdLineConstants.OUT_DIR_OPTION + " <outputDir>] [" + CmdLineConstants.VERBOSE_OPTION + "] <inputFile>..." + lineSep +
                 lineSep +
                 "Options:" + lineSep +
                 "    " + CmdLineConstants.GEO_PROPS_OPTION + " - select to use geometry properties" + lineSep +
@@ -25,7 +25,8 @@ public class GeoChildGenTest extends TestCase {
                 "    " + CmdLineConstants.CREATE_CHILD_OPTION + " - select to create a child product in <outputDir>." + lineSep +
                 "         If not set, intersecting products are copied." + lineSep +
                 "    " + CmdLineConstants.OUT_DIR_OPTION + " - defines the <outputDir>." + lineSep +
-                "         If not set, current directory is used." + lineSep;
+                "         If not set, current directory is used." + lineSep +
+                 "    " + CmdLineConstants.VERBOSE_OPTION + " - set program to verbose logging." + lineSep;
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream(2048);
 

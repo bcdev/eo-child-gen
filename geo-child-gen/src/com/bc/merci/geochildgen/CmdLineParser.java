@@ -13,7 +13,9 @@ class CmdLineParser {
                 final String current_arg = args[i];
                 if (CmdLineConstants.CREATE_CHILD_OPTION.equalsIgnoreCase(current_arg)) {
                     params.setCreateChildOption(true);
-                } else if (CmdLineConstants.OUT_DIR_OPTION.equalsIgnoreCase(current_arg)) {
+                } else if (CmdLineConstants.VERBOSE_OPTION.equalsIgnoreCase(current_arg)) {
+                    params.setVerbose(true);
+                }else if (CmdLineConstants.OUT_DIR_OPTION.equalsIgnoreCase(current_arg)) {
                     i++;
                     params.setOutputDirName(args[i]);
                 } else if (CmdLineConstants.GEO_PROPS_OPTION.equalsIgnoreCase(current_arg)) {

@@ -10,6 +10,7 @@ public class CmdLineConstantsTest extends TestCase {
         assertEquals("-g", CmdLineConstants.GEO_PROPS_OPTION);
         assertEquals("-d", CmdLineConstants.DB_PROPS_OPTION);
         assertEquals("-s", CmdLineConstants.SITE_CAT_OPTION);
+        assertEquals("-v", CmdLineConstants.VERBOSE_OPTION);
 
         assertEquals("", CmdLineConstants.PROPERTIES_FILE_NAME_DEFAULT);
         assertEquals(".", CmdLineConstants.OUTPUT_DIR_NAME_DEFAULT);
@@ -17,6 +18,6 @@ public class CmdLineConstantsTest extends TestCase {
     }
 
     public void testVersionConstant() {
-        assertEquals("1.7.2_SNAPSHOT", CmdLineConstants.VERSION_STRING);
+        assertEquals("1.7.3", CmdLineConstants.VERSION_STRING);
     }
 }

@@ -36,6 +36,7 @@ public class CmdLineParserTest extends TestCase {
         assertEquals(1, params.getInputFileNameList().size());
         assertTrue(params.getInputFileNameList().contains(INPUT_FILE_NAME));
         assertFalse(params.isDatabaseUsed());
+        assertFalse(params.isVerbose());
     }
 
     public void testOutputDirOption() {
@@ -51,6 +52,7 @@ public class CmdLineParserTest extends TestCase {
         assertEquals(1, params.getInputFileNameList().size());
         assertTrue(params.getInputFileNameList().contains(INPUT_FILE_NAME));
         assertTrue(params.isDatabaseUsed());
+        assertFalse(params.isVerbose());
     }
 
     public void testCreateChildOption() {
@@ -66,6 +68,7 @@ public class CmdLineParserTest extends TestCase {
         assertEquals(1, params.getInputFileNameList().size());
         assertTrue(params.getInputFileNameList().contains(INPUT_FILE_NAME));
         assertFalse(params.isDatabaseUsed());
+        assertFalse(params.isVerbose());
     }
 
     public void testIsDatabaseIsToggledCorrectly() {
@@ -105,6 +108,13 @@ public class CmdLineParserTest extends TestCase {
         assertEquals(cat_1, siteCategoryNames[0]);
         assertEquals(cat_2, siteCategoryNames[1]);
         assertEquals(cat_3, siteCategoryNames[2]);
+    }
+
+    public void testParseVerbose() {
+        final String[] args = {"-v", "-g",  PROPERTIES_FILE_NAME, INPUT_FILE_NAME};
+
+        final CmdLineParams params = CmdLineParser.parse(args);
+        assertTrue(params.isVerbose());
     }
 
     public void testIllegalArgs() {

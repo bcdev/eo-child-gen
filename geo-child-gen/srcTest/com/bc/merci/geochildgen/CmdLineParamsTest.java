@@ -85,6 +85,14 @@ public class CmdLineParamsTest extends TestCase {
         assertEquals(catNames_2, params.getSiteCategoryNames());
     }
 
+    public void testSetIsVerbose() {
+        params.setVerbose(true);
+        assertTrue(params.isVerbose());
+
+        params.setVerbose(false);
+        assertFalse(params.isVerbose());
+    }
+
     ////////////////////////////////////////////////////////////////////////////////
     /////// END OF PUBLIC
     ////////////////////////////////////////////////////////////////////////////////

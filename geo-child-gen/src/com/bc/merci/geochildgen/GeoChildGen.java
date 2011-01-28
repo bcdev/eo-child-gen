@@ -92,7 +92,9 @@ public class GeoChildGen {
                         copyProduct(inputFile, outputFile);
                     }
                 } else {
-                    System.out.println("No intersections with file " + inputFileName);
+                    if (params.isVerbose()) {
+                        System.out.println("No intersections with file " + inputFileName);
+                    }
                 }
             }
 
@@ -128,7 +130,9 @@ public class GeoChildGen {
         stream.println("]");
         stream.print("       [");
         stream.print(CmdLineConstants.OUT_DIR_OPTION);
-        stream.println(" <outputDir>] <inputFile>...");
+        stream.print(" <outputDir>] [");
+        stream.print(CmdLineConstants.VERBOSE_OPTION);
+        stream.println("] <inputFile>...");
         stream.println();
         stream.println("Options:");
         stream.print("    ");
@@ -151,6 +155,9 @@ public class GeoChildGen {
         stream.print(CmdLineConstants.OUT_DIR_OPTION);
         stream.println(" - defines the <outputDir>.");
         stream.println("         If not set, current directory is used.");
+        stream.print("    ");
+        stream.print(CmdLineConstants.VERBOSE_OPTION);
+        stream.println(" - set program to verbose logging.");
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -159,7 +166,6 @@ public class GeoChildGen {
 
     private static final int PRODUCT_BOUNDARY_STEP = 128;
     private static final int MINIMUM_NUMBER_OF_LINES = 300;
-    private static final int MAX_PRODUCT_WIDTH = 2241;
 
     private static void copyProduct(File inputFile, File outputFile) throws IOException {
         final FileInputStream fis = new FileInputStream(inputFile);

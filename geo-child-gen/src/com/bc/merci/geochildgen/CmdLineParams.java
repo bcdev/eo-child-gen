@@ -5,6 +5,14 @@ import java.util.List;
 
 class CmdLineParams {
 
+    private String propertiesFileName;
+    private String outputDirName;
+    private boolean createChildOption;
+    private List<String> inputFileNameList;
+    private boolean databaseUsed;
+    private String[] siteCategoryNames;
+    private boolean verbose;
+
     CmdLineParams() {
         propertiesFileName = CmdLineConstants.PROPERTIES_FILE_NAME_DEFAULT;
         outputDirName = CmdLineConstants.OUTPUT_DIR_NAME_DEFAULT;
@@ -67,14 +75,11 @@ class CmdLineParams {
         return siteCategoryNames;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////
-    /////// END OF PACKAGE
-    ////////////////////////////////////////////////////////////////////////////////
+    void setVerbose(boolean verbose) {
+        this.verbose = verbose;
+    }
 
-    private String propertiesFileName;
-    private String outputDirName;
-    private boolean createChildOption;
-    private List<String> inputFileNameList;
-    private boolean databaseUsed;
-    private String[] siteCategoryNames;
+    boolean isVerbose() {
+        return verbose;
+    }
 }
