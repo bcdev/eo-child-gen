@@ -29,12 +29,12 @@ public class IIOTest extends TestCase {
 
         expectedNumTpDsr = 8;
         testContents(process(iis, "XYZ-1", 0, 100),
-                     4243698L,
+                     4243731L,
                      "XYZ-1",
                      "DS_NAME=\"Tie points ADS              \"\n" +
                              "DS_TYPE=A\n" +
                              "FILENAME=\"                                                              \"\n" +
-                             "DS_OFFSET=+00000000000000011481<bytes>\n" +
+                             "DS_OFFSET=+00000000000000011514<bytes>\n" +
                              "DS_SIZE=+00000000000000028504<bytes>\n" +
                              "NUM_DSR=+000000000" + expectedNumTpDsr + "\n" +
                              "DSR_SIZE=+0000003563<bytes>\n" +
@@ -42,7 +42,7 @@ public class IIOTest extends TestCase {
                      "DS_NAME=\"Radiance MDS(1)             \"\n" +
                              "DS_TYPE=M\n" +
                              "FILENAME=\"                                                              \"\n" +
-                             "DS_OFFSET=+00000000000000039985<bytes>\n" +
+                             "DS_OFFSET=+00000000000000040018<bytes>\n" +
                              "DS_SIZE=+00000000000000254815<bytes>\n" +
                              "NUM_DSR=+0000000" + ((expectedNumTpDsr - 1) * RR_FRAME_SIZE + 1) + "\n" +
                              "DSR_SIZE=+0000002255<bytes>\n" +
@@ -50,12 +50,12 @@ public class IIOTest extends TestCase {
 
         expectedNumTpDsr = 11;
         testContents(process(iis, "XYZ-2", 50, 200),
-                     6040068L,
+                     6040101L,
                      "XYZ-2",
                      "DS_NAME=\"Tie points ADS              \"\n" +
                              "DS_TYPE=A\n" +
                              "FILENAME=\"                                                              \"\n" +
-                             "DS_OFFSET=+00000000000000011514<bytes>\n" +
+                             "DS_OFFSET=+00000000000000011547<bytes>\n" +
                              "DS_SIZE=+00000000000000039193<bytes>\n" +
                              "NUM_DSR=+00000000"+expectedNumTpDsr+"\n" +
                              "DSR_SIZE=+0000003563<bytes>\n" +
@@ -63,7 +63,7 @@ public class IIOTest extends TestCase {
                      "DS_NAME=\"Radiance MDS(1)             \"\n" +
                              "DS_TYPE=M\n" +
                              "FILENAME=\"                                                              \"\n" +
-                             "DS_OFFSET=+00000000000000050707<bytes>\n" +
+                             "DS_OFFSET=+00000000000000050740<bytes>\n" +
                              "DS_SIZE=+00000000000000363055<bytes>\n" +
                              "NUM_DSR=+0000000" + ((expectedNumTpDsr-1) * RR_FRAME_SIZE + 1) + "\n" +
                              "DSR_SIZE=+0000002255<bytes>\n" +
@@ -71,12 +71,12 @@ public class IIOTest extends TestCase {
 
         // same as before, but this time on tie-point boundaries
         testContents(process(iis, "XYZ-3", 3 * 16, 13 * 16),
-                     6040068L,
+                     6040101L,
                      "XYZ-3",
                      "DS_NAME=\"Tie points ADS              \"\n" +
                              "DS_TYPE=A\n" +
                              "FILENAME=\"                                                              \"\n" +
-                             "DS_OFFSET=+00000000000000011514<bytes>\n" +
+                             "DS_OFFSET=+00000000000000011547<bytes>\n" +
                              "DS_SIZE=+00000000000000039193<bytes>\n" +
                              "NUM_DSR=+00000000"+expectedNumTpDsr+"\n" +
                              "DSR_SIZE=+0000003563<bytes>\n" +
@@ -84,7 +84,7 @@ public class IIOTest extends TestCase {
                      "DS_NAME=\"Radiance MDS(1)             \"\n" +
                              "DS_TYPE=M\n" +
                              "FILENAME=\"                                                              \"\n" +
-                             "DS_OFFSET=+00000000000000050707<bytes>\n" +
+                             "DS_OFFSET=+00000000000000050740<bytes>\n" +
                              "DS_SIZE=+00000000000000363055<bytes>\n" +
                              "NUM_DSR=+0000000" + ((expectedNumTpDsr-1) * RR_FRAME_SIZE + 1) + "\n" +
                              "DSR_SIZE=+0000002255<bytes>\n" +

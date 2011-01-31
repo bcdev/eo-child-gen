@@ -31,7 +31,7 @@ public class SliceGenerationTest extends TestCase {
                 "  lastLine = 48\n" +
                 "endSlice:\n" +
                 "  sliceIndex = 0\n" +
-                "  bytesWritten = 1848582\n" +
+                "  bytesWritten = 1848615\n" +
                 "beginSlice:\n" +
                 "  sliceIndex = 1\n" +
                 "  productName = MER_RR__1PPBCM20090804_080343_000000082081_00207_38838_0002.N1\n" +
@@ -39,7 +39,7 @@ public class SliceGenerationTest extends TestCase {
                 "  lastLine = 96\n" +
                 "endSlice:\n" +
                 "  sliceIndex = 1\n" +
-                "  bytesWritten = 1848582\n" +
+                "  bytesWritten = 1848615\n" +
                 "beginSlice:\n" +
                 "  sliceIndex = 2\n" +
                 "  productName = MER_RR__1PPBCM20090804_080351_000000082081_00207_38838_0003.N1\n" +
@@ -55,7 +55,7 @@ public class SliceGenerationTest extends TestCase {
                 "  lastLine = 192\n" +
                 "endSlice:\n" +
                 "  sliceIndex = 3\n" +
-                "  bytesWritten = 1848582\n" +
+                "  bytesWritten = 1848615\n" +
                 "beginSlice:\n" +
                 "  sliceIndex = 4\n" +
                 "  productName = MER_RR__1PPBCM20090804_080408_000000082081_00207_38838_0005.N1\n" +
@@ -63,7 +63,7 @@ public class SliceGenerationTest extends TestCase {
                 "  lastLine = 240\n" +
                 "endSlice:\n" +
                 "  sliceIndex = 4\n" +
-                "  bytesWritten = 1848582\n" +
+                "  bytesWritten = 1848615\n" +
                 "beginSlice:\n" +
                 "  sliceIndex = 5\n" +
                 "  productName = MER_RR__1PPBCM20090804_080416_000000082081_00207_38838_0006.N1\n" +
@@ -79,7 +79,7 @@ public class SliceGenerationTest extends TestCase {
                 "  lastLine = 304\n" +
                 "endSlice:\n" +
                 "  sliceIndex = 6\n" +
-                "  bytesWritten = 651024\n";
+                "  bytesWritten = 651057\n";
 
         assertEquals(expectedTrace, myFragmentHandler.getTrace());
     }

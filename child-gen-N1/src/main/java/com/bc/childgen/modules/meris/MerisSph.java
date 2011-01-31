@@ -36,22 +36,14 @@ public class MerisSph extends Sph {
 
             if (currentDsd.getDsType() == 'A') {
                 if (isSQAD(currentDsd)) {
-                    try {
-                        final int startIndex = getSqadIndex(startLine);
-                        final int endIndex = getSqadIndex(startLine + height);
-
-                        final int numDsr = endIndex - startIndex;
-                        currentDsd.setNumDsr(numDsr);
-                        currentDsd.setDsSize(numDsr * currentDsd.getDsrSize());
-                    } catch (ChildGenException e) {
-                        // @todo 3 tb/tb handle this
-                    }
+                    handleSQADDsd(tpHeight, currentDsd);
                 } else {
                     currentDsd.setNumDsr(tpHeight);
                 }
             } else if (currentDsd.getDsType() == 'M') {
                 currentDsd.setNumDsr(height);
             }
+
             currentDsd.setDsSize(currentDsd.getDsrSize() * currentDsd.getNumDsr());
             currentDsd.setDsOffset(offset);
             offset += currentDsd.getDsSize();
@@ -63,7 +55,7 @@ public class MerisSph extends Sph {
             if (isSQAD(dsd)) {
                 final int sqadIndex;
                 try {
-                    sqadIndex = getSqadIndex(startLine);
+                    sqadIndex = getSQADIndex(startLine);
                     return dsd.getDsOffset() + sqadIndex * dsd.getDsrSize();
                 } catch (ChildGenException e) {
                     // @todo 3 tb/tb handle
@@ -92,8 +84,17 @@ public class MerisSph extends Sph {
         return Constants.QUALITY_ADS_NAME.indexOf(dsName) != -1;
     }
 
-    private int getSqadIndex(int lineNumber) throws ChildGenException {
-        int sqadRaster = getLinesPerTiePoint() * 8;
+    private void handleSQADDsd(int tpHeight, DatasetDescriptor currentDsd) {
+        final int supposedNumSqads = (int) Math.floor((tpHeight - 1) / 8.0 + 1);
+
+        currentDsd.setNumDsr(supposedNumSqads);
+        currentDsd.setDsSize(supposedNumSqads * currentDsd.getDsrSize());
+
+
+    }
+
+    private int getSQADIndex(int lineNumber) throws ChildGenException {
+        final int sqadRaster = getLinesPerTiePoint() * 8;
         return lineNumber / sqadRaster;
     }
 }
