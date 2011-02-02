@@ -7,7 +7,7 @@
     <groupId>com.bc</groupId>
     <artifactId>geo-child-gen</artifactId>
     <name>Geo ChildGen</name>
-    <version>1.7.4</version>
+    <version>1.7.5-SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
