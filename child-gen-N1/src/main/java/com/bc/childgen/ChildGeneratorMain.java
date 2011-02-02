@@ -15,7 +15,7 @@ import java.io.File;
 public class ChildGeneratorMain {
 
     public static final String PROGRAM_NAME = "childgen";
-    public static final String VERSION_INFO = "2.1";
+    public static final String VERSION_INFO = "2.2";
     public static final String COPYRIGHT_INFO = "Copyright (C) 2004-2011 by Brockmann Consult (info@brockmann-consult.de)";
     private static final int IGNORED_NUM_COLUMNS = 1121;
 
