@@ -1,15 +1,41 @@
-README - version 1.7.0
-~~~~~~~~~~~~~~~~~~~~~~
+README - version 1.7.5-SNAPSHOT
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-splitOrbit (.bat/.sh)
-~~~~~~~~~~~~~~~~~~~~~
-- adapted the script
-    * change the JAVAHOME according to your needs
-    * change CHILDGENDIR to the location where you have the zip-file extracted to
-    * change RAL in the parameter list to whatever you like, it is used to set
-      the PROC_CENTER in the MPH of the created products
-- The scripts expects 3 parameters when it is called in the following order
-    1. OUT_DIR - the path to the directory where the generated products are written to
-    2. SPLIT_LINE - the line number where the product should be split
-    3. INPUT_FILE - the path to the Envisat product file
+Geo-Childgen is a command line tool which generates child products by using specified geometries.
 
+INSTALLATION
+~~~~~~~~~~~~
+First unpack the zip-file to any destination folder.
+Within the extracted folder you'll find a script named geochildgen (unix and windows). This scripts has to be adapted
+to your local settings.
+The JAVAHOME variable must be set to a Java installation directory.
+The CHILDGENDIR variable must be set to the location where you have extracted the zip-file to.
+
+
+EXECUTION
+~~~~~~~~~
+If the script is invoked without any parameters the following usage text is displayed.
+
+        Usage: geochildgen [-g <propertiesFile>] [-d <propertiesFile>]
+               [-s <cat_a, cat_b, ...>] [-c]
+               [-o <outputDir>] [-v] <inputFile>...
+
+        Options:
+            -g - select to use geometry properties
+                 from <propertiesFile>
+            -d - select to use Site geometries from database
+                 defined in <propertiesFile>
+            -s - define site categories to be used as comma separated
+                 list of category name. Use together with -d option.
+            -c - select to create a child product in <outputDir>.
+                 If not set, intersecting products are copied.
+            -o - defines the <outputDir>.
+                 If not set, current directory is used.
+            -v - set program to verbose logging.
+
+One ore more input files can be specified on the command line. The file paths must be space separated.
+Example:
+    ./geochildgen.sh -g geochildgen.properties -c -o /data/childProducts /data/input/MER_RR_L1_xxx1.N1 /data/input/MER_RR_L1_xxx2.N1
+
+The properties file (geochildgen.properties) shipped with this delivery can be used as an example. The available
+properties are described within the file.
