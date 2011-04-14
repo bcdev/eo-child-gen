@@ -6,6 +6,12 @@
 
     <files>
         <file>
+            <source>readme.txt</source>
+            <outputDirectory>.</outputDirectory>
+            <destName>readme.txt</destName>
+            <fileMode>0754</fileMode>
+        </file>
+        <file>
             <source>splitOrbit.bat</source>
             <outputDirectory>.</outputDirectory>
             <destName>splitOrbit.bat</destName>
