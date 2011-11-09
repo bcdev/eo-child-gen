@@ -1,0 +1,13 @@
+# This is a comment and shall be treated correctly while parsing this file
+#
+# This input file for GeoChildGen defines the set of input data to be processed
+# It shall be used in all cases where
+#  a) the number of files exceeds the capabilities of the shell
+#  b) the files are spread over a lot of directories (maybe even recursive)
+#
+# Each line in this file is a separate expression that will be treated as one command
+# Example:
+/usr/local/data                         # recurse through all files and subdirs
+/usr/local/data/MER_RR_1Pblabla.N1      # take only file
+/usr/local/data/*.N1                    # take all files in directory that end with .N1
+/usr/local/data/*/*.N1                  # take all files in any subdirectory of data that end with .N1
