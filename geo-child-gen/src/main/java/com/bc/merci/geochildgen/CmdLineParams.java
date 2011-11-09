@@ -12,6 +12,7 @@ class CmdLineParams {
     private boolean databaseUsed;
     private String[] siteCategoryNames;
     private boolean verbose;
+    private String filesFrom;
 
     CmdLineParams() {
         propertiesFileName = CmdLineConstants.PROPERTIES_FILE_NAME_DEFAULT;
@@ -19,6 +20,16 @@ class CmdLineParams {
         createChildOption = CmdLineConstants.CREATE_CHILD_OPTION_DEFAULT;
         inputFileNameList = new ArrayList<String>();
         siteCategoryNames = new String[0];
+    }
+
+    String getFilesFrom() {
+        return this.filesFrom;
+    }
+
+    void setFilesFrom(final String filesFrom) {
+        if (filesFrom != null) {
+            this.filesFrom = filesFrom;
+        }
     }
 
     String getPropertiesFileName() {

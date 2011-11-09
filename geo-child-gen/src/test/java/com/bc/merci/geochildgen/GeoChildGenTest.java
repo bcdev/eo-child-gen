@@ -26,6 +26,10 @@ public class GeoChildGenTest extends TestCase {
                 "         If not set, intersecting products are copied." + lineSep +
                 "    " + CmdLineConstants.OUT_DIR_OPTION + " - defines the <outputDir>." + lineSep +
                 "         If not set, current directory is used." + lineSep +
+                "    " + CmdLineConstants.FILES_FROM_OPTION + " - defines the file which lists each input file or expression, " + lineSep +
+                "         as an alternative to specifying each file on the" + lineSep +
+                "         command line." + lineSep +
+                "         If not set, files are required on command line." + lineSep +
                  "    " + CmdLineConstants.VERBOSE_OPTION + " - set program to verbose logging." + lineSep;
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream(2048);

@@ -82,8 +82,6 @@
         </repository>
     </repositories>
     <build>
-        <sourceDirectory>src</sourceDirectory>
-        <testSourceDirectory>srcTest</testSourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

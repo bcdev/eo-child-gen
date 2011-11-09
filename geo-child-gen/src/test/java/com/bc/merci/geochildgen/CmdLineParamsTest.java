@@ -22,6 +22,16 @@ public class CmdLineParamsTest extends TestCase {
         assertEquals(0, siteCategoryNames.length);
     }
 
+    public void testSetGetFilesFrom() {
+        final String fileName = "inputFilesList.txt";
+
+        params.setFilesFrom(fileName);
+        assertEquals(fileName, params.getFilesFrom());
+
+        params.setFilesFrom(null);
+        assertEquals(fileName, params.getFilesFrom());
+    }
+
     public void testSetGetGeometryFileName() {
         final String fileName = "test";
 

@@ -56,18 +56,34 @@ public class GeoChildGen {
             siteGeometryList = parseGeometryProperties(config.getGeometry());
         }
 
+        FileThingy fileThingy = new FileThingy(params, outputDir, config, siteGeometryList);
         for (int i = 0; i < params.getInputFileNameList().size(); ++i) {
             final String inputFileName = params.getInputFileNameList().get(i);
+            fileThingy.processFile(inputFileName);
+        }
+    }
+
+    static class FileThingy {
+        CmdLineParams params;
+        File outputDir;
+        GeoChildGenProperties config;
+        List<Geometry> siteGeometryList;
+
+        FileThingy(CmdLineParams params, File outputDir, GeoChildGenProperties config, List<Geometry> siteGeometryList) {
+
+        }
+
+        private void processFile(String inputFileName) throws IOException, ChildGenException {
             final File inputFile = new File(inputFileName);
             if (!inputFile.isFile()) {
                 System.err.println("Input file '" + inputFile.getAbsolutePath() + "' does not exist");
-                continue;
+                return;
             }
 
-            final Product product = ProductIO.readProduct(inputFile, null);
+            final Product product = ProductIO.readProduct(inputFile);
             if (product == null) {
                 System.err.println("No product reader was found to open file '" + inputFile.getAbsolutePath() + "'");
-                continue;
+                return;
             }
 
             final Geometry productBoundary = ProductHelper.extractGeoBoundary(product, PRODUCT_BOUNDARY_STEP);
@@ -155,6 +171,12 @@ public class GeoChildGen {
         stream.print(CmdLineConstants.OUT_DIR_OPTION);
         stream.println(" - defines the <outputDir>.");
         stream.println("         If not set, current directory is used.");
+        stream.print("    ");
+        stream.print(CmdLineConstants.FILES_FROM_OPTION);
+        stream.println(" - defines the file which lists each input file or expression, ");
+        stream.println("         as an alternative to specifying each file on the");
+        stream.println("         command line.");
+        stream.println("         If not set, files are required on command line.");
         stream.print("    ");
         stream.print(CmdLineConstants.VERBOSE_OPTION);
         stream.println(" - set program to verbose logging.");

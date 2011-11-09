@@ -24,6 +24,23 @@ public class CmdLineParserTest extends TestCase {
         }
     }
 
+    public void testFilesFromOption() {
+        final String[] args = {"-d", PROPERTIES_FILE_NAME,
+                CmdLineConstants.OUT_DIR_OPTION, OUTPUT_DIR_NAME,
+                CmdLineConstants.FILES_FROM_OPTION, INPUT_FILE_NAME};
+        final CmdLineParams params = CmdLineParser.parse(args);
+
+        assertNotNull(params);
+        assertEquals(PROPERTIES_FILE_NAME, params.getPropertiesFileName());
+        assertFalse(params.isCreateChildOption());
+        assertEquals(OUTPUT_DIR_NAME, params.getOutputDirName());
+        assertNotNull(params.getInputFileNameList());
+        assertEquals(0, params.getInputFileNameList().size());
+        assertTrue(params.getFilesFrom().equals(INPUT_FILE_NAME));
+        assertTrue(params.isDatabaseUsed());
+        assertFalse(params.isVerbose());
+    }
+
     public void testSimpleArgs() {
         final String[] args = {"-g", PROPERTIES_FILE_NAME, INPUT_FILE_NAME};
         final CmdLineParams params = CmdLineParser.parse(args);
@@ -111,7 +128,7 @@ public class CmdLineParserTest extends TestCase {
     }
 
     public void testParseVerbose() {
-        final String[] args = {"-v", "-g",  PROPERTIES_FILE_NAME, INPUT_FILE_NAME};
+        final String[] args = {"-v", "-g", PROPERTIES_FILE_NAME, INPUT_FILE_NAME};
 
         final CmdLineParams params = CmdLineParser.parse(args);
         assertTrue(params.isVerbose());

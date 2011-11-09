@@ -34,6 +34,9 @@ class CmdLineParser {
                         categoryNames[j] = categoryNames[j].trim();
                     }
                     params.setSiteCategoryNames(categoryNames);
+                } else if (CmdLineConstants.FILES_FROM_OPTION.equalsIgnoreCase(current_arg)) {
+                    i++;
+                    params.setFilesFrom(args[i]);
                 } else {
                     params.addInputFileName(current_arg);
                 }
@@ -42,7 +45,7 @@ class CmdLineParser {
 
         if (params.getPropertiesFileName().equals("") ||
                 params.getOutputDirName().equals("") ||
-                params.getInputFileNameList().isEmpty()) {
+                params.getFilesFrom() == null && params.getInputFileNameList().isEmpty()) {
             throw new IllegalArgumentException();
         }
 
