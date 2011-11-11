@@ -38,7 +38,9 @@
             <version>5.1.6</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
+
     <distributionManagement>
         <repository>
             <id>bc-mvn-repo-closed</id>
@@ -109,6 +111,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <skip>false</skip>
+                    <includes>
+                        <!-- This include is required or surefire tries to run the inner class TestDataTest$MD5Encoder as a test case -->
+                        <include>**/*Test.java</include>
+                    </includes>
                     <excludes>
                         <exclude>**/GeoChildGenUtilsTest.java</exclude>
                     </excludes>
