@@ -15,18 +15,19 @@ public class TestDataTest extends TestCase {
 
     public void testAllAcceptanceTestFilesHaveCorrectHash() throws IOException {
         verifyFileHashSum("066fb1148c70ad857d24208ab6cca1a4", "ATS_TOA_1PPTOM20070110_192521_000000822054_00328_25432_0001.N1");
+        verifyFileHashSum("fefb8710fa1d78d618c809b9fc463f1a", "AT1_NR__2PTRAL19930614_131152_000000004013_00338_10002_0000.E1");
     }
 
     public void testCorrectNumberOfAcceptanceTestFiles() throws IOException {
         final File[] files = new File(getTestDataDirPath()).listFiles();
-        assertEquals(1, files.length);
+        assertEquals(2, files.length);
     }
 
     ////////////////////////////////////////////////////////////////////////////////
     /////// END OF PUBLIC
     ////////////////////////////////////////////////////////////////////////////////
 
-    protected String getTestDataDirPath() throws IOException {
+    private String getTestDataDirPath() throws IOException {
         if (StringUtils.isEmpty(testDataDirPath)) {
             testDataDirPath = BcTestUtils.getPropertyFromResource("/com/bc/merci/geochildgen/testData.properties", "testDataPath");
         }

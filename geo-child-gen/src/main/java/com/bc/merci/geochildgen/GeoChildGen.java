@@ -44,7 +44,7 @@ public class GeoChildGen {
 
         if (!(outputDir.isDirectory() || outputDir.mkdirs())) {
             System.err.println("Output directory '" + outputDir.getAbsolutePath() +
-                                       "' does not exist or could not be created");
+                    "' does not exist or could not be created");
             return;
         }
 
@@ -118,7 +118,15 @@ public class GeoChildGen {
         }
     }
 
-    private static File createTargetFile(File outputDir, File inputFile) throws IOException {
+
+    ///////////////////////////////////////////////////////////////////////////
+    /////// END OF PUBLIC
+    ///////////////////////////////////////////////////////////////////////////
+
+    private static final int PRODUCT_BOUNDARY_STEP = 128;
+    private static final int MINIMUM_NUMBER_OF_LINES = 300;
+
+    static File createTargetFile(File outputDir, File inputFile) throws IOException {
         final File outputFile = new File(outputDir.getAbsolutePath() + File.separator + inputFile.getName());
         if (!outputFile.createNewFile()) {
             System.err.println("File '" + outputFile.getAbsolutePath() + "' already exists or could not be created");
@@ -148,7 +156,7 @@ public class GeoChildGen {
         stream.print(CmdLineConstants.OUT_DIR_OPTION);
         stream.print(" <outputDir>] [");
         stream.print(CmdLineConstants.MERGE_INTERSECTIONS_OPTION);
-         stream.print("] [");
+        stream.print("] [");
         stream.print(CmdLineConstants.VERBOSE_OPTION);
         stream.println("] <inputFile>...");
         stream.println();
@@ -176,7 +184,7 @@ public class GeoChildGen {
         stream.print("    ");
         stream.print(CmdLineConstants.MERGE_INTERSECTIONS_OPTION);
         stream.println(" - select to merge geometries in case of multiple intersections.");
-        stream.println( "         If not set a subset will be generated for each intersection");
+        stream.println("         If not set a subset will be generated for each intersection");
         stream.print("    ");
         stream.print(CmdLineConstants.FILES_FROM_OPTION);
         stream.println(" - defines the file which lists each input file or expression, ");
@@ -188,13 +196,6 @@ public class GeoChildGen {
         stream.println(" - set program to verbose logging.");
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-    /////// END OF PUBLIC
-    ///////////////////////////////////////////////////////////////////////////
-
-    private static final int PRODUCT_BOUNDARY_STEP = 128;
-    private static final int MINIMUM_NUMBER_OF_LINES = 300;
-
     private static void copyProduct(File inputFile, File outputFile) throws IOException {
         final FileInputStream fis = new FileInputStream(inputFile);
         final FileOutputStream fos = new FileOutputStream(outputFile);
@@ -204,7 +205,7 @@ public class GeoChildGen {
             System.out.println("copied product '" + inputFile.getPath() + "'");
         } catch (IOException e) {
             System.err.println("Failed to copy '" + inputFile.getAbsolutePath() +
-                                       "' to output directory");
+                    "' to output directory");
         }
 
         fis.close();
@@ -264,7 +265,7 @@ public class GeoChildGen {
                                              final Geometry productBoundary, final GeoCoding geoCoding,
                                              final int width, final int height) {
         final Range[] ranges = RangeConverter.getRangeFromPolygonGeometry(siteGeometry, productBoundary, geoCoding,
-                                                                          width, height);
+                width, height);
 
         for (int i = 0; i < ranges.length; i++) {
             RangeConverter.adjustRange(ranges[i], height, MINIMUM_NUMBER_OF_LINES, ranges[i]);
@@ -275,14 +276,14 @@ public class GeoChildGen {
 
     private static boolean isIntersection(final Geometry geometry, final Geometry geometry2) {
         final int status = GeometryUtils.performGeometryOp(GeometryUtils.GEOM_OP_INTERSECTS,
-                                                           geometry, geometry2);
+                geometry, geometry2);
 
         return status == Geometry.TRUE;
     }
 
     private static boolean contains(final Geometry geometry, final Geometry geometry2) {
         final int status = GeometryUtils.performGeometryOp(GeometryUtils.GEOM_OP_CONTAINS,
-                                                           geometry, geometry2);
+                geometry, geometry2);
 
         return status == Geometry.TRUE;
     }
@@ -322,7 +323,7 @@ public class GeoChildGen {
     }
 
     /**
-     * @param geometries
+     * @param geometries an array of geometry strings as WKT
      * @throws ParseException
      */
     private static List<Geometry> parseGeometryProperties(final String[] geometries)
