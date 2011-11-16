@@ -70,7 +70,10 @@ public class GeoChildGen {
         List<Geometry> siteGeometryList;
 
         FileThingy(CmdLineParams params, File outputDir, GeoChildGenProperties config, List<Geometry> siteGeometryList) {
-
+            this.siteGeometryList = siteGeometryList;
+            this.params = params;
+            this.outputDir = outputDir;
+            this.config = config;
         }
 
         private void processFile(String inputFileName) throws IOException, ChildGenException {
@@ -91,9 +94,7 @@ public class GeoChildGen {
             final int width = product.getSceneRasterWidth();
             final int height = product.getSceneRasterHeight();
 
-            for (int j = 0; j < siteGeometryList.size(); ++j) {
-                final Geometry siteGeometry = siteGeometryList.get(j);
-
+            for (final Geometry siteGeometry : siteGeometryList) {
                 if (contains(siteGeometry, productBoundary)) {
                     final File outputFile = createTargetFile(outputDir, inputFile);
                     copyProduct(inputFile, outputFile);
