@@ -13,7 +13,7 @@ public class GeoChildGenTest extends TestCase {
                 "Usage: geochildgen [" + CmdLineConstants.GEO_PROPS_OPTION + " <propertiesFile>] " +
                 "[" + CmdLineConstants.DB_PROPS_OPTION + " <propertiesFile>]" + lineSep +
                 "       [" + CmdLineConstants.SITE_CAT_OPTION + " <cat_a, cat_b, ...>] [" + CmdLineConstants.CREATE_CHILD_OPTION + "]" + lineSep +
-                "       [" + CmdLineConstants.OUT_DIR_OPTION + " <outputDir>] [" + CmdLineConstants.VERBOSE_OPTION + "] <inputFile>..." + lineSep +
+                "       [" + CmdLineConstants.OUT_DIR_OPTION + " <outputDir>] [" + CmdLineConstants.MERGE_INTERSECTIONS_OPTION + "] [" + CmdLineConstants.VERBOSE_OPTION + "] <inputFile>..." + lineSep +
                 lineSep +
                 "Options:" + lineSep +
                 "    " + CmdLineConstants.GEO_PROPS_OPTION + " - select to use geometry properties" + lineSep +
@@ -26,6 +26,8 @@ public class GeoChildGenTest extends TestCase {
                 "         If not set, intersecting products are copied." + lineSep +
                 "    " + CmdLineConstants.OUT_DIR_OPTION + " - defines the <outputDir>." + lineSep +
                 "         If not set, current directory is used." + lineSep +
+                "    " + CmdLineConstants.MERGE_INTERSECTIONS_OPTION + " - select to merge geometries in case of multiple intersections." + lineSep +
+                "         If not set a subset will be generated for each intersection" + lineSep +
                 "    " + CmdLineConstants.FILES_FROM_OPTION + " - defines the file which lists each input file or expression, " + lineSep +
                 "         as an alternative to specifying each file on the" + lineSep +
                 "         command line." + lineSep +

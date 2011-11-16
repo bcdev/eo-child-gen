@@ -13,6 +13,7 @@ class CmdLineParams {
     private String[] siteCategoryNames;
     private boolean verbose;
     private String filesFrom;
+    private boolean mergeIntersections;
 
     CmdLineParams() {
         propertiesFileName = CmdLineConstants.PROPERTIES_FILE_NAME_DEFAULT;
@@ -92,5 +93,13 @@ class CmdLineParams {
 
     boolean isVerbose() {
         return verbose;
+    }
+
+    void setMergeIntersections(boolean mergeIntersections) {
+        this.mergeIntersections = mergeIntersections;
+    }
+
+    boolean isMergeIntersections() {
+        return mergeIntersections;
     }
 }

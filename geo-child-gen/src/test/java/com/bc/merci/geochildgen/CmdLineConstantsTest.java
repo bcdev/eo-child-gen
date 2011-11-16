@@ -12,6 +12,7 @@ public class CmdLineConstantsTest extends TestCase {
         assertEquals("-s", CmdLineConstants.SITE_CAT_OPTION);
         assertEquals("-v", CmdLineConstants.VERBOSE_OPTION);
         assertEquals("-f", CmdLineConstants.FILES_FROM_OPTION);
+        assertEquals("-m", CmdLineConstants.MERGE_INTERSECTIONS_OPTION);
 
         assertEquals("", CmdLineConstants.PROPERTIES_FILE_NAME_DEFAULT);
         assertEquals(".", CmdLineConstants.OUTPUT_DIR_NAME_DEFAULT);

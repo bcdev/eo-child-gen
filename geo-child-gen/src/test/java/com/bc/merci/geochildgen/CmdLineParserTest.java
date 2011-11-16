@@ -134,6 +134,13 @@ public class CmdLineParserTest extends TestCase {
         assertTrue(params.isVerbose());
     }
 
+    public void testParseMergeIntersections() {
+        final String[] args = {"-g", PROPERTIES_FILE_NAME, "-m", INPUT_FILE_NAME};
+
+        final CmdLineParams params = CmdLineParser.parse(args);
+        assertTrue(params.isMergeIntersections());
+    }
+
     public void testIllegalArgs() {
         final String[] args = {CmdLineConstants.CREATE_CHILD_OPTION, INPUT_FILE_NAME};
 

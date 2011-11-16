@@ -20,6 +20,8 @@ public class CmdLineParamsTest extends TestCase {
         final String[] siteCategoryNames = params.getSiteCategoryNames();
         assertNotNull(siteCategoryNames);
         assertEquals(0, siteCategoryNames.length);
+
+        assertFalse(params.isMergeIntersections());
     }
 
     public void testSetGetFilesFrom() {
@@ -103,6 +105,14 @@ public class CmdLineParamsTest extends TestCase {
         assertFalse(params.isVerbose());
     }
 
+    public void testSetIsMergeIntersections() {
+        params.setMergeIntersections(true);
+        assertTrue(params.isMergeIntersections());
+
+        params.setMergeIntersections(false);
+        assertFalse(params.isMergeIntersections());
+    }
+
     ////////////////////////////////////////////////////////////////////////////////
     /////// END OF PUBLIC
     ////////////////////////////////////////////////////////////////////////////////
@@ -112,6 +122,4 @@ public class CmdLineParamsTest extends TestCase {
     protected void setUp() throws Exception {
         params = new CmdLineParams();
     }
-
-
 }

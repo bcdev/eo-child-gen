@@ -147,6 +147,8 @@ public class GeoChildGen {
         stream.print("       [");
         stream.print(CmdLineConstants.OUT_DIR_OPTION);
         stream.print(" <outputDir>] [");
+        stream.print(CmdLineConstants.MERGE_INTERSECTIONS_OPTION);
+         stream.print("] [");
         stream.print(CmdLineConstants.VERBOSE_OPTION);
         stream.println("] <inputFile>...");
         stream.println();
@@ -171,6 +173,10 @@ public class GeoChildGen {
         stream.print(CmdLineConstants.OUT_DIR_OPTION);
         stream.println(" - defines the <outputDir>.");
         stream.println("         If not set, current directory is used.");
+        stream.print("    ");
+        stream.print(CmdLineConstants.MERGE_INTERSECTIONS_OPTION);
+        stream.println(" - select to merge geometries in case of multiple intersections.");
+        stream.println( "         If not set a subset will be generated for each intersection");
         stream.print("    ");
         stream.print(CmdLineConstants.FILES_FROM_OPTION);
         stream.println(" - defines the file which lists each input file or expression, ");
