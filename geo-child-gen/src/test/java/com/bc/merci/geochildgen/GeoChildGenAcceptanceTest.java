@@ -23,7 +23,7 @@ public class GeoChildGenAcceptanceTest extends TestCase {
 
         final File aatsrFile = getTestDataFile("ATS_TOA_1PPTOM20070110_192521_000000822054_00328_25432_0001.N1");
 
-        final File propsFile = createPropertiesFile("polygon((-170 -68,-159 -70,-164 -74,-176 -71))");
+        final File propsFile = createPropertiesFile("polygon((-170 -68,-159 -70,-164 -74,-176 -71,-170 -68))");
         final CmdLineParams cmdLineParams = new CmdLineParams();
         cmdLineParams.setPropertiesFileName(propsFile.getAbsolutePath());
         cmdLineParams.setOutputDirName(testDir.getAbsolutePath());
@@ -42,7 +42,7 @@ public class GeoChildGenAcceptanceTest extends TestCase {
 
         final File aatsrFile = getTestDataFile("ATS_TOA_1PPTOM20070110_192521_000000822054_00328_25432_0001.N1");
 
-        final File propsFile = createPropertiesFile("polygon((-170 -68,-159 -70,-164 -74,-176 -71))");
+        final File propsFile = createPropertiesFile("polygon((-170 -68,-159 -70,-164 -74,-176 -71,-170 -68))");
         final CmdLineParams cmdLineParams = new CmdLineParams();
         cmdLineParams.setPropertiesFileName(propsFile.getAbsolutePath());
         cmdLineParams.setOutputDirName(testDir.getAbsolutePath());
@@ -54,11 +54,44 @@ public class GeoChildGenAcceptanceTest extends TestCase {
         assertTargetFileCreated("ATS_TOA_1PPMAP20070110_192521_000000772054_00328_25432_0001.N1", 9738161L);
     }
 
-    public void testSubsetFrom_ATSR1_createSplitSubsetSubsets() {
+    public void testSubsetFrom_ATSR1_double_intersection_splitGeometries() throws IOException, SQLException, ChildGenException, ParseException {
         if (isIOTestsSuppressed()) {
-            System.err.println("testSubsetFrom_ATSR1_createSplitSubsetSubsets() suppressed");
+            System.err.println("testSubsetFrom_ATSR1_double_intersection_splitGeometries() suppressed");
             return;
         }
+
+        final File ats1File = getTestDataFile("AT1_NR__2PTRAL19930614_131152_000000004013_00338_10002_0000.E1");
+        final File propsFile = createPropertiesFile("polygon((-52 10,-45 10,-45 -4,-55 -4,-55 -3,-47 -3,-47 9,-52 9,-52 10))");
+        final CmdLineParams cmdLineParams = new CmdLineParams();
+        cmdLineParams.setPropertiesFileName(propsFile.getAbsolutePath());
+        cmdLineParams.setOutputDirName(testDir.getAbsolutePath());
+        cmdLineParams.setCreateChildOption(true);
+        cmdLineParams.addInputFileName(ats1File.getAbsolutePath());
+
+        GeoChildGen.run(cmdLineParams);
+
+        assertTargetFileCreated("AT1_NR__2PTMAP19930614_135859_000000484013_00338_10002_0001.E1", 1062953L);
+        assertTargetFileCreated("AT1_NR__2PTMAP19930614_140240_000000484013_00338_10002_0001.E1", 1062953L);
+    }
+
+    public void testSubsetFrom_ATSR1_double_intersection_mergeGeometries() throws IOException, SQLException, ChildGenException, ParseException {
+        if (isIOTestsSuppressed()) {
+            System.err.println("testSubsetFrom_ATSR1_double_intersection_mergeGeometries() suppressed");
+            return;
+        }
+
+        final File ats1File = getTestDataFile("AT1_NR__2PTRAL19930614_131152_000000004013_00338_10002_0000.E1");
+        final File propsFile = createPropertiesFile("polygon((-52 10,-45 10,-45 -4,-55 -4,-55 -3,-47 -3,-47 9,-52 9,-52 10))");
+        final CmdLineParams cmdLineParams = new CmdLineParams();
+        cmdLineParams.setPropertiesFileName(propsFile.getAbsolutePath());
+        cmdLineParams.setOutputDirName(testDir.getAbsolutePath());
+        cmdLineParams.setCreateChildOption(true);
+        cmdLineParams.addInputFileName(ats1File.getAbsolutePath());
+        cmdLineParams.setMergeIntersections(true);
+
+        GeoChildGen.run(cmdLineParams);
+
+        assertTargetFileCreated("AT1_NR__2PTMAP19930614_135859_000002694013_00338_10002_0001.E1", 5891739L);
     }
 
     ////////////////////////////////////////////////////////////////////////////////

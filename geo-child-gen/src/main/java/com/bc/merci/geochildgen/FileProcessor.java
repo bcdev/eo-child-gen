@@ -61,7 +61,10 @@ class FileProcessor {
                 copyProduct(inputFile, outputFile);
             } else if (isIntersection(siteGeometry, productBoundary)) {
                 if (params.isCreateChildOption()) {
-                    final Range[] ranges = intersectionRange(siteGeometry, productBoundary, geoCoding, width, height);
+                    Range[] ranges = getIntersectionLineRanges(siteGeometry, productBoundary, geoCoding, width, height);
+                    if (params.isMergeIntersections()) {
+                        ranges = mergeIntersectionRanges(ranges);
+                    }
                     for (int k = 0; k < ranges.length; k++) {
                         createChildProduct(inputFile, ranges[k], outputDir, config.getChildProductOriginatorId());
                     }
@@ -77,6 +80,29 @@ class FileProcessor {
         }
 
         product.dispose();
+    }
+
+    // package access for testing only tb 2011-11-17
+    static Range[] mergeIntersectionRanges(Range[] ranges) {
+        if (ranges.length == 0) {
+            return new Range[0];
+        }
+
+        double min = Double.MAX_VALUE;
+        double max = Double.MIN_VALUE;
+
+        for (int i = 0; i < ranges.length; i++) {
+            if (ranges[i].getMin() < min) {
+                min = ranges[i].getMin();
+            }
+            if (ranges[i].getMax() > max) {
+                max = ranges[i].getMax();
+            }
+        }
+
+        final Range[] result = new Range[1];
+        result[0] = new Range(min, max);
+        return result;
     }
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -123,16 +149,16 @@ class FileProcessor {
     }
 
     /**
-     * @param siteGeometry
+     * @param siteGeometry the geometry of the test site
      * @param productBoundary
      * @param geoCoding
      * @param width
      * @param height
-     * @return the line range of the intersection
+     * @return the line ranges of the intersection
      */
-    private static Range[] intersectionRange(final Geometry siteGeometry,
-                                             final Geometry productBoundary, final GeoCoding geoCoding,
-                                             final int width, final int height) {
+    private static Range[] getIntersectionLineRanges(final Geometry siteGeometry,
+                                                     final Geometry productBoundary, final GeoCoding geoCoding,
+                                                     final int width, final int height) {
         final Range[] ranges = RangeConverter.getRangeFromPolygonGeometry(siteGeometry, productBoundary, geoCoding,
                                                                           width, height);
 
