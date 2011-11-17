@@ -40,20 +40,15 @@ public class GeoChildGen {
         }
 
         final GeoChildGenProperties config = readProperties(params.getPropertiesFileName());
-        final List<Geometry> siteGeometryList;
-        if (params.isDatabaseUsed()) {
-            siteGeometryList = getGeometryFromDatabase(config.getDataSourceConfig());
-        } else {
-            siteGeometryList = parseGeometryProperties(config.getGeometry());
-        }
+        final List<Geometry> geometryList = getGeometryList(params, config);
+        final List<String> inputFileList = getInputFileList(params);
 
-        FileProcessor fileProcessor = new FileProcessor(params, outputDir, config, siteGeometryList);
-        for (int i = 0; i < params.getInputFileNameList().size(); ++i) {
-            final String inputFileName = params.getInputFileNameList().get(i);
-            fileProcessor.processFile(inputFileName);
+        final FileProcessor fileProcessor = new FileProcessor(params, outputDir, config, geometryList);
+        for (int i = 0; i < inputFileList.size(); ++i) {
+            final String inputFileName = inputFileList.get(i);
+            fileProcessor.process(inputFileName);
         }
     }
-
 
     ///////////////////////////////////////////////////////////////////////////
     /////// END OF PUBLIC
@@ -122,7 +117,7 @@ public class GeoChildGen {
     }
 
     /**
-     * @param propertiesFileName
+     * @param propertiesFileName the name of the properties file
      * @return
      * @throws IOException
      * @throws ParseException
@@ -169,5 +164,19 @@ public class GeoChildGen {
         System.out.println("Read '" + geometries.length + "' geometry/-ies from file");
 
         return geometryList;
+    }
+
+    private static List<Geometry> getGeometryList(CmdLineParams params, GeoChildGenProperties config) throws SQLException, ParseException {
+        final List<Geometry> geometryList;
+        if (params.isDatabaseUsed()) {
+            geometryList = getGeometryFromDatabase(config.getDataSourceConfig());
+        } else {
+            geometryList = parseGeometryProperties(config.getGeometry());
+        }
+        return geometryList;
+    }
+
+    private static List<String> getInputFileList(CmdLineParams params) {
+        return params.getInputFileNameList();
     }
 }

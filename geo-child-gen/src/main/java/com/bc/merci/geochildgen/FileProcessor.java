@@ -37,7 +37,7 @@ class FileProcessor {
         this.config = config;
     }
 
-    void processFile(String inputFileName) throws IOException, ChildGenException {
+    void process(String inputFileName) throws IOException, ChildGenException {
         final File inputFile = new File(inputFileName);
         if (!inputFile.isFile()) {
             System.err.println("Input file '" + inputFile.getAbsolutePath() + "' does not exist");
