@@ -31,9 +31,7 @@ public class GeoChildGenAcceptanceTest extends TestCase {
 
         GeoChildGen.run(cmdLineParams);
 
-        final File targetFile = new File(testDir, aatsrFile.getName());
-        assertTrue(targetFile.isFile());
-        assertEquals(10365697L, targetFile.length());
+        assertTargetFileCreated(aatsrFile.getName(), 10365697L);
     }
 
     public void testSubsetFrom_AATSR_createSubset() throws IOException, SQLException, ChildGenException, ParseException {
@@ -53,9 +51,14 @@ public class GeoChildGenAcceptanceTest extends TestCase {
 
         GeoChildGen.run(cmdLineParams);
 
-        final File targetFile = new File(testDir, "ATS_TOA_1PPMAP20070110_192521_000000772054_00328_25432_0001.N1");
-        assertTrue(targetFile.isFile());
-        assertEquals(9738161L, targetFile.length());
+        assertTargetFileCreated("ATS_TOA_1PPMAP20070110_192521_000000772054_00328_25432_0001.N1", 9738161L);
+    }
+
+    public void testSubsetFrom_ATSR1_createSplitSubsetSubsets() {
+        if (isIOTestsSuppressed()) {
+            System.err.println("testSubsetFrom_ATSR1_createSplitSubsetSubsets() suppressed");
+            return;
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -87,8 +90,15 @@ public class GeoChildGenAcceptanceTest extends TestCase {
         }
     }
 
+    // @todo 3 tb/** this is also a common check - move to testing framework if exists - tb 2011-11-17
     private static boolean isIOTestsSuppressed() {
         return "true".equals(System.getProperty("noiotests"));
+    }
+
+    private void assertTargetFileCreated(String name, long expected) {
+        final File targetFile = new File(testDir, name);
+        assertTrue(targetFile.isFile());
+        assertEquals(expected, targetFile.length());
     }
 
     private static File getTestDataFile(String filename) throws IOException {
@@ -118,6 +128,7 @@ public class GeoChildGenAcceptanceTest extends TestCase {
 
     // @todo 3 - this code is copied from BcCommons:FileUtils - as Peter stated, we should
     // create a general testing framework that covers this functionality
+    @SuppressWarnings({"ResultOfMethodCallIgnored"})
     private static void deleteFileTree(File treeRoot) {
         File[] files = treeRoot.listFiles();
         if (files != null) {
