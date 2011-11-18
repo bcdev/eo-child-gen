@@ -4,8 +4,9 @@ import com.bc.util.sql.DataSourceConfig;
 
 
 public class GeoChildGenProperties {
-    public static final String CHILD_PRODUCT_ORIGINATOR_ID_DEFAULT = "BCG";
-    
+
+    static final String CHILD_PRODUCT_ORIGINATOR_ID_DEFAULT = "BCG";
+
     public String getChildProductOriginatorId() {
         return childProductOriginatorId;
     }
