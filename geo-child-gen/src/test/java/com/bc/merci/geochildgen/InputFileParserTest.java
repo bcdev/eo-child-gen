@@ -67,6 +67,17 @@ public class InputFileParserTest extends TestCase {
         assertEquals("infopopinfo", inputExpressions.get(2));
     }
 
+    public void testParseRealWorldExample() throws IOException {
+        final InputStream inputStream = getInputStream(REAL_WORLD_INPUT_FILE);
+
+        final List<String> inputExpressions = parser.parse(inputStream);
+        assertEquals(3, inputExpressions.size());
+
+        assertEquals("a/file/path", inputExpressions.get(0));
+        assertEquals("another/path", inputExpressions.get(1));
+        assertEquals("the/special/dir", inputExpressions.get(2));
+    }
+
     ////////////////////////////////////////////////////////////////////////////////
     /////// END OF PUBLIC
     ////////////////////////////////////////////////////////////////////////////////
@@ -95,6 +106,16 @@ public class InputFileParserTest extends TestCase {
     private final static String ENDING_COMMENT_INPUT_FILE = "valid data # comment one\n" +
             "more valid info # comment two\n" +
             "infopopinfo  # and number THREEE!";
+
+    private final static String REAL_WORLD_INPUT_FILE = "# we start wit a comment\n" +
+            "# that covers more than a single line because\n" +
+            "# we rather like to describe what the file contains\n" +
+            "\n" +
+            "a/file/path  # commented\n" +
+            "another/path       # and number THREEE!\n" +
+            "\n" +
+            "# this directory is special\n" +
+            "the/special/dir                \n";
 
     @Override
     protected void setUp() {
