@@ -44,8 +44,7 @@ public class GeoChildGen {
         final List<String> inputFileList = getInputFileList(params);
 
         final FileProcessor fileProcessor = new FileProcessor(params, outputDir, config, geometryList);
-        for (int i = 0; i < inputFileList.size(); ++i) {
-            final String inputFileName = inputFileList.get(i);
+        for (final String inputFileName : inputFileList) {
             fileProcessor.process(inputFileName);
         }
     }
@@ -78,6 +77,8 @@ public class GeoChildGen {
         stream.print(CmdLineConstants.MERGE_INTERSECTIONS_OPTION);
         stream.print("] [");
         stream.print(CmdLineConstants.VERBOSE_OPTION);
+        stream.print("] [");
+        stream.print(CmdLineConstants.FILES_FROM_OPTION);
         stream.println("] <inputFile>...");
         stream.println();
         stream.println("Options:");
@@ -107,10 +108,9 @@ public class GeoChildGen {
         stream.println("         If not set a subset will be generated for each intersection");
         stream.print("    ");
         stream.print(CmdLineConstants.FILES_FROM_OPTION);
-        stream.println(" - defines the file which lists each input file or expression, ");
-        stream.println("         as an alternative to specifying each file on the");
-        stream.println("         command line.");
-        stream.println("         If not set, files are required on command line.");
+        stream.println(" - switch to use a textfile with filepaths as input.");
+        stream.println("         If set, <inputFile> must be a textfile. Please refer to");
+        stream.println("         'inputFiles_example.txt' for the format definition.");
         stream.print("    ");
         stream.print(CmdLineConstants.VERBOSE_OPTION);
         stream.println(" - set program to verbose logging.");
