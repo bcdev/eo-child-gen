@@ -116,7 +116,7 @@ public class GeoChildGenAcceptanceTest extends TestCase {
         }
 
         if (testDir != null) {
-            deleteFileTree(testDir);
+            TestUtils.deleteFileTree(testDir);
             if (testDir.isDirectory()) {
                 fail("unable to delete test directory - check your file streams!");
             }
@@ -159,22 +159,6 @@ public class GeoChildGenAcceptanceTest extends TestCase {
         return propertiesFile;
     }
 
-    // @todo 3 - this code is copied from BcCommons:FileUtils - as Peter stated, we should
-    // create a general testing framework that covers this functionality
-    @SuppressWarnings({"ResultOfMethodCallIgnored"})
-    private static void deleteFileTree(File treeRoot) {
-        File[] files = treeRoot.listFiles();
-        if (files != null) {
-            for (int i = 0; i < files.length; i++) {
-                File file = files[i];
-                if (file.isDirectory()) {
-                    deleteFileTree(file);
-                }
-                file.delete();
-            }
-        }
-        treeRoot.delete();
-    }
 }
 
 
