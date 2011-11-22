@@ -43,7 +43,15 @@ public class GeoChildGen {
 
         final FileProcessor fileProcessor = new FileProcessor(params, outputDir, config, geometryList);
         for (final String inputFileName : inputFileList) {
-            fileProcessor.process(inputFileName);
+            try {
+                fileProcessor.process(inputFileName);
+            } catch (IOException e) {
+                System.err.println("ERROR creating subset of: " + inputFileName);
+                System.err.println(e.getMessage());
+            } catch (ChildGenException e) {
+                System.err.println("ERROR creating subset of: " + inputFileName);
+                System.err.println(e.getMessage());
+            }
         }
     }
 
@@ -117,7 +125,7 @@ public class GeoChildGen {
     /**
      * @param propertiesFileName the name of the properties file
      * @return the properties read from file
-     * @throws IOException
+     * @throws IOException    on disk access failures
      * @throws ParseException
      */
     private static GeoChildGenProperties readProperties(final String propertiesFileName) throws IOException, ParseException {

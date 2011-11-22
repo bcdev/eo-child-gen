@@ -158,7 +158,6 @@ public class GeoChildGenAcceptanceTest extends TestCase {
 
         return propertiesFile;
     }
-
 }
 
 
