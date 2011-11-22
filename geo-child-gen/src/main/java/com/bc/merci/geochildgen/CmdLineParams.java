@@ -12,8 +12,9 @@ class CmdLineParams {
     private boolean databaseUsed;
     private String[] siteCategoryNames;
     private boolean verbose;
-    private String filesFrom;
+    private String inputSource;
     private boolean mergeIntersections;
+    private boolean inputFromFile;
 
     CmdLineParams() {
         propertiesFileName = CmdLineConstants.PROPERTIES_FILE_NAME_DEFAULT;
@@ -23,13 +24,13 @@ class CmdLineParams {
         siteCategoryNames = new String[0];
     }
 
-    String getFilesFrom() {
-        return this.filesFrom;
+    String getInputSource() {
+        return this.inputSource;
     }
 
-    void setFilesFrom(final String filesFrom) {
+    void setInputSource(final String filesFrom) {
         if (filesFrom != null) {
-            this.filesFrom = filesFrom;
+            this.inputSource = filesFrom;
         }
     }
 
@@ -101,5 +102,13 @@ class CmdLineParams {
 
     boolean isMergeIntersections() {
         return mergeIntersections;
+    }
+
+    public void setInputFromFile(boolean inputFromFile) {
+        this.inputFromFile = inputFromFile;
+    }
+
+    public boolean isInputFromFile() {
+        return inputFromFile;
     }
 }

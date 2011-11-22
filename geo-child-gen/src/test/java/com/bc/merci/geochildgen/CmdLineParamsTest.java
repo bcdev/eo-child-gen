@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import java.util.List;
 
 
+@SuppressWarnings({"NullableProblems"})
 public class CmdLineParamsTest extends TestCase {
 
     public void testConstruction() {
@@ -21,17 +22,28 @@ public class CmdLineParamsTest extends TestCase {
         assertNotNull(siteCategoryNames);
         assertEquals(0, siteCategoryNames.length);
 
+        assertFalse(params.isInputFromFile());
+        assertNull(params.getInputSource());
+
         assertFalse(params.isMergeIntersections());
     }
 
-    public void testSetGetFilesFrom() {
+    public void testSetGetInputSource() {
         final String fileName = "inputFilesList.txt";
 
-        params.setFilesFrom(fileName);
-        assertEquals(fileName, params.getFilesFrom());
+        params.setInputSource(fileName);
+        assertEquals(fileName, params.getInputSource());
 
-        params.setFilesFrom(null);
-        assertEquals(fileName, params.getFilesFrom());
+        params.setInputSource(null);
+        assertEquals(fileName, params.getInputSource());
+    }
+
+    public void testSetIsInputFile() {
+        params.setInputFromFile(true);
+        assertTrue(params.isInputFromFile());
+
+        params.setInputFromFile(false);
+        assertFalse(params.isInputFromFile());
     }
 
     public void testSetGetGeometryFileName() {

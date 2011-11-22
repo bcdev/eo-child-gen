@@ -2,6 +2,8 @@ package com.bc.merci.geochildgen;
 
 import junit.framework.TestCase;
 
+import java.util.List;
+
 public class CmdLineParserTest extends TestCase {
 
     public void testNullArgs() {
@@ -36,7 +38,7 @@ public class CmdLineParserTest extends TestCase {
         assertEquals(OUTPUT_DIR_NAME, params.getOutputDirName());
         assertNotNull(params.getInputFileNameList());
         assertEquals(0, params.getInputFileNameList().size());
-        assertTrue(params.getFilesFrom().equals(INPUT_FILE_NAME));
+        assertTrue(params.getInputSource().equals(INPUT_FILE_NAME));
         assertTrue(params.isDatabaseUsed());
         assertFalse(params.isVerbose());
     }
@@ -149,6 +151,18 @@ public class CmdLineParserTest extends TestCase {
             fail("IllegalArgumentException expected");
         } catch (IllegalArgumentException expected) {
         }
+    }
+
+    public void testSetInputFilesFrom() {
+        final String[] args_1 = {"-g", PROPERTIES_FILE_NAME, "-f", INPUT_FILE_NAME};
+
+        final CmdLineParams params = CmdLineParser.parse(args_1);
+        assertTrue(params.isInputFromFile());
+        assertEquals(INPUT_FILE_NAME, params.getInputSource());
+        final List<String> inputFileNameList = params.getInputFileNameList();
+        assertNotNull(inputFileNameList);
+        assertEquals(0, inputFileNameList.size());
+        assertEquals(PROPERTIES_FILE_NAME, params.getPropertiesFileName());
     }
 
     ////////////////////////////////////////////////////////////////////////////////
