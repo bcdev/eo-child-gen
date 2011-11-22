@@ -10,13 +10,11 @@ import com.bc.util.sql.SqlUtils;
 import org.esa.beam.util.logging.BeamLogManager;
 
 import javax.sql.DataSource;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -118,7 +116,7 @@ public class GeoChildGen {
 
     /**
      * @param propertiesFileName the name of the properties file
-     * @return
+     * @return the properties read from file
      * @throws IOException
      * @throws ParseException
      */
@@ -176,7 +174,41 @@ public class GeoChildGen {
         return geometryList;
     }
 
-    private static List<String> getInputFileList(CmdLineParams params) {
-        return params.getInputFileNameList();
+    private static List<String> getInputFileList(CmdLineParams params) throws IOException {
+        if (params.isInputFromFile()) {
+            final String inputSource = params.getInputSource();
+            final List<String> inputExpressions = readInputFile(inputSource);
+
+            final FileTreeExpander fileTreeExpander = new FileTreeExpander();
+
+            final ArrayList<String> result = new ArrayList<String>();
+            for (Iterator<String> iterator = inputExpressions.iterator(); iterator.hasNext(); ) {
+                final List<File> sublist = fileTreeExpander.expand(iterator.next());
+                for (Iterator<File> fileIterator = sublist.iterator(); fileIterator.hasNext(); ) {
+                    result.add(fileIterator.next().getAbsolutePath());
+                }
+            }
+            return result;
+        } else {
+            return params.getInputFileNameList();
+        }
+    }
+
+    private static List<String> readInputFile(String inputSource) throws IOException {
+        List<String> result;
+        FileInputStream inputStream = null;
+
+        try {
+            final File inputSourceFile = new File(inputSource);
+            final InputFileParser inputFileParser = new InputFileParser();
+
+            inputStream = new FileInputStream(inputSourceFile);
+            result = inputFileParser.parse(inputStream);
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
+        return result;
     }
 }
