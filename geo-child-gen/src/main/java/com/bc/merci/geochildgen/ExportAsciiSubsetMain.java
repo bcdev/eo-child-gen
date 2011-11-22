@@ -39,7 +39,7 @@ public class ExportAsciiSubsetMain {
     ////////////////////////////////////////////////////////////////////////////////
 
     private static void writeSubset(float lat, float lon, int width, int halfWith, File inputFile) throws IOException {
-        final Product product = ProductIO.readProduct(inputFile, null);
+        final Product product = ProductIO.readProduct(inputFile);
         final GeoCoding geoCoding = product.getGeoCoding();
         final PixelPos pixelPos = geoCoding.getPixelPos(new GeoPos(lat, lon), null);
         if (pixelPos.isValid()) {

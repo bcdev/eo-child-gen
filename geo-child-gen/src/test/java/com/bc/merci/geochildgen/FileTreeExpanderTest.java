@@ -86,13 +86,58 @@ public class FileTreeExpanderTest extends TestCase {
         createDiskFile("file_two.N1", dir_b);
         createDiskFile("ignored.file", testDir);
 
-        fail("continue here");
+        final String expression = testDir.getAbsolutePath() + "/*/*.N1";
+        final List<File> result = expander.expand(expression);
+        assertEquals(2, result.size());
+        assertFileInResult(result, new File(dir_a, "file_one.N1"));
+        assertFileInResult(result, new File(dir_b, "file_two.N1"));
+    }
 
-//        final String expression = testDir.getAbsolutePath() + "/*/*.N1";
-//        final List<File> result = expander.expand(expression);
-//        assertEquals(2, result.size());
-//        assertFileInResult(result, new File(testDir, "file_one.N1"));
-//        assertFileInResult(result, new File(testDir, "file_two.N1"));
+    public void testExpandWildcard_anyNestedSubDirectory() throws IOException {
+        final File dir_a = createDirectory("dir_a", testDir);
+        final File dir_b = createDirectory("dir_b", testDir);
+        final File dir_a_a = createDirectory("dir_a_a", dir_a);
+        final File dir_b_b = createDirectory("dir_b_b", dir_b);
+        createDiskFile("file_one.N1", dir_a_a);
+        createDiskFile("file_two.N1", dir_b_b);
+        createDiskFile("ignored.file", dir_a);
+        createDiskFile("notMentioned.file", dir_b);
+
+        final String expression = testDir.getAbsolutePath() + "/*/*/*.N1";
+        final List<File> result = expander.expand(expression);
+        assertEquals(2, result.size());
+        assertFileInResult(result, new File(dir_a_a, "file_one.N1"));
+        assertFileInResult(result, new File(dir_b_b, "file_two.N1"));
+    }
+
+    public void testRecurseDirectory() throws IOException {
+        final File dir_a = createDirectory("dir_a", testDir);
+        final File dir_b = createDirectory("dir_b", testDir);
+        createDiskFile("file_one.N1", dir_a);
+        createDiskFile("file_two.N1", dir_b);
+        createDiskFile("any.file", testDir);
+
+        final String expression = testDir.getAbsolutePath();
+        final List<File> result = expander.expand(expression);
+        assertEquals(3, result.size());
+        assertFileInResult(result, new File(dir_a, "file_one.N1"));
+        assertFileInResult(result, new File(dir_b, "file_two.N1"));
+        assertFileInResult(result, new File(testDir, "any.file"));
+    }
+
+    public void testRecurseDirectory_withWildcard() throws IOException {
+        final File dir_a = createDirectory("dir_a", testDir);
+        final File dir_b = createDirectory("dir_b", testDir);
+        createDiskFile("file_one.N1", dir_a);
+        createDiskFile("file_two.N1", dir_b);
+        createDiskFile("any.file", testDir);
+
+        final String expression = testDir.getAbsolutePath() + "/*";
+        final List<File> result = expander.expand(expression);
+        assertEquals(3, result.size());
+        assertFileInResult(result, new File(dir_a, "file_one.N1"));
+        assertFileInResult(result, new File(dir_b, "file_two.N1"));
+        assertFileInResult(result, new File(testDir, "any.file"));
     }
 
     ////////////////////////////////////////////////////////////////////////////////

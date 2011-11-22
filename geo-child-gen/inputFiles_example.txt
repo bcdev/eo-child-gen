@@ -10,4 +10,4 @@
 /usr/local/data/MER_RR_1Pblabla.N1      # take only file
 /usr/local/data/*.N1                    # take all files in directory that end with .N1
 /usr/local/data/*/*.N1                  # take all files in any subdirectory of data that end with .N1
-/usr/local/data                         # recurse through all files and subdirs
+/usr/local/data/*                       # recurse through all files and subdirs
