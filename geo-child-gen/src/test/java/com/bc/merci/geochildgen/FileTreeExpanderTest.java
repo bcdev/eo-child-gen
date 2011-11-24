@@ -71,6 +71,7 @@ public class FileTreeExpanderTest extends TestCase {
         createDiskFile("file_two.N1", testDir);
         createDiskFile("ignored.file", testDir);
         createDirectory("ignored.N1", testDir);
+        createDirectory("a_dir.N1", testDir);
 
         final String expression = testDir.getAbsolutePath() + "/*.N1";
         final List<File> result = expander.expand(expression);
@@ -138,6 +139,30 @@ public class FileTreeExpanderTest extends TestCase {
         assertFileInResult(result, new File(dir_a, "file_one.N1"));
         assertFileInResult(result, new File(dir_b, "file_two.N1"));
         assertFileInResult(result, new File(testDir, "any.file"));
+    }
+
+    public void testDenotesWildcardTree() {
+        assertTrue(FileTreeExpander.denotesWildcardTree("/opt/files/*/*/*.bla"));
+        assertTrue(FileTreeExpander.denotesWildcardTree("C:\\directory\\*\\*.files"));
+
+        assertFalse(FileTreeExpander.denotesWildcardTree("/var/data/*.E1"));
+        assertFalse(FileTreeExpander.denotesWildcardTree("/var/data/"));
+        assertFalse(FileTreeExpander.denotesWildcardTree("/var/data/blabla.data"));
+        assertFalse(FileTreeExpander.denotesWildcardTree("C:\\directory\\*.files"));
+        assertFalse(FileTreeExpander.denotesWildcardTree("C:\\directory\\"));
+        assertFalse(FileTreeExpander.denotesWildcardTree("C:\\directory\\the.file"));
+    }
+
+    public void testDenotesWildcardFile() {
+        assertTrue(FileTreeExpander.denotesWildcardFile("/var/data/*.E1"));
+        assertTrue(FileTreeExpander.denotesWildcardFile("C:\\directory\\*.files"));
+
+        assertFalse(FileTreeExpander.denotesWildcardFile("/opt/files/*/*/*.bla"));
+        assertFalse(FileTreeExpander.denotesWildcardFile("C:\\directory\\*\\*.files"));
+        assertFalse(FileTreeExpander.denotesWildcardFile("/var/data/"));
+        assertFalse(FileTreeExpander.denotesWildcardFile("/var/data/blabla.data"));
+        assertFalse(FileTreeExpander.denotesWildcardFile("C:\\directory\\"));
+        assertFalse(FileTreeExpander.denotesWildcardFile("C:\\directory\\the.file"));
     }
 
     ////////////////////////////////////////////////////////////////////////////////

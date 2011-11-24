@@ -41,6 +41,12 @@
             <destName>geochildgen.properties</destName>
             <fileMode>0754</fileMode>
         </file>
+        <file>
+            <source>inputFiles_example.txt</source>
+            <outputDirectory>.</outputDirectory>
+            <destName>inputFiles_example.txt</destName>
+            <fileMode>0754</fileMode>
+        </file>
        <file>
             <source>target/${artifact.artifactId}-${artifact.version}.jar</source>
             <outputDirectory>lib</outputDirectory>

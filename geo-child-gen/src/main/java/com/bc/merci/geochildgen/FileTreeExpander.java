@@ -13,17 +13,17 @@ class FileTreeExpander {
 
     List<File> expand(String expression) {
         File expressionFile = new File(expression);
-        if (denotesDirectory(expression, expressionFile)) {
+        if (denotesDirectory(expressionFile)) {
             if (expression.endsWith("*")) {
                 expressionFile = expressionFile.getParentFile();
             }
             return expandDirectory(expressionFile);
-        } else if (isWildcardExpression(expression)) {
+        } else if (denotesWildcardTree(expression)) {
             return expandWildcardTree(expressionFile);
+        } else if (denotesWildcardFile(expression)) {
+            return expandWildcardFile(expressionFile);
         } else {
-            final ArrayList<File> result = new ArrayList<File>();
-            addFile(expression, result);
-            return result;
+            return createSingleFileResult(expressionFile);
         }
     }
 
@@ -31,13 +31,32 @@ class FileTreeExpander {
     /////// END OF PUBLIC
     ////////////////////////////////////////////////////////////////////////////////
 
-    private void addFile(String expression, ArrayList<File> result) {
-        final File file = new File(expression);
+    // package access for testing only tb 2011-11-24
+    static boolean denotesWildcardTree(String expression) {
+        final File expressionFile = new File(expression);
+        final File parentFile = expressionFile.getParentFile();
+        return parentFile.getAbsolutePath().contains("*") && expressionFile.getAbsolutePath().contains("*");
+    }
+
+    // package access for testing only tb 2011-11-24
+    static boolean denotesWildcardFile(String expression) {
+        final File expressionFile = new File(expression);
+        final File parentFile = expressionFile.getParentFile();
+        return expressionFile.getAbsolutePath().contains("*") && !parentFile.getAbsolutePath().contains("*");
+    }
+
+    private void addFile(File file, ArrayList<File> result) {
         if (file.isFile()) {
             result.add(file);
         } else {
             System.out.println("File does not exist: " + file.getAbsolutePath());
         }
+    }
+
+     private List<File> createSingleFileResult(File expressionFile) {
+        final ArrayList<File> result = new ArrayList<File>();
+        addFile(expressionFile, result);
+        return result;
     }
 
     private ArrayList<File> expandWildcardTree(File expressionFile) {
@@ -46,13 +65,25 @@ class FileTreeExpander {
         filterStack.push(wildcardFileFilter);
         expressionFile = expressionFile.getParentFile();
 
-        while (isWildcardExpression(expressionFile.getAbsolutePath())) {
+        while (expressionFile.getAbsolutePath().contains("*")) {
             final WildCardDirectoryFilter directoryFilter = new WildCardDirectoryFilter(expressionFile.getName());
             filterStack.push(directoryFilter);
             expressionFile = expressionFile.getParentFile();
         }
 
         return expandWildcard(filterStack, filterStack.pop(), expressionFile);
+    }
+
+    private List<File> expandWildcardFile(File expressionFile) {
+        final ArrayList<File> result = new ArrayList<File>();
+        final WildcardFileFilter wildcardFileFilter = new WildcardFileFilter(expressionFile.getName());
+        final File searchDirectory = expressionFile.getParentFile();
+        final String[] directoryContent = searchDirectory.list(wildcardFileFilter);
+        for (int i = 0; i < directoryContent.length; i++) {
+            addFile(new File(searchDirectory, directoryContent[i]), result);
+        }
+
+        return result;  //To change body of created methods use File | Settings | File Templates.
     }
 
     private ArrayList<File> expandWildcard(Stack<AbstractFileFilter> filterStack, AbstractFileFilter filter, File expressionFile) {
@@ -74,7 +105,7 @@ class FileTreeExpander {
                 final ArrayList<File> subResult = expandWildcard(filterStack, subFilter, file);
                 result.addAll(subResult);
             } else {
-                result.add(file);
+                addFile(file, result);
             }
         }
 
@@ -91,18 +122,14 @@ class FileTreeExpander {
                 final ArrayList<File> subTree = expandDirectory(dirItem);
                 result.addAll(subTree);
             } else {
-                result.add(dirItem);
+                addFile(dirItem, result);
             }
         }
 
         return result;
     }
 
-    private boolean denotesDirectory(String expression, File expressionFile) {
-        return expression.endsWith("*") || expressionFile.isDirectory();
-    }
-
-    private boolean isWildcardExpression(String expression) {
-        return expression.contains("*");
+    private boolean denotesDirectory(File expressionFile) {
+        return expressionFile.getName().endsWith("*") || expressionFile.isDirectory();
     }
 }
