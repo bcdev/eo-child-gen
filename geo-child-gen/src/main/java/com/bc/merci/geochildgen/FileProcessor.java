@@ -51,6 +51,8 @@ class FileProcessor {
         }
 
         final Geometry productBoundary = ProductHelper.extractGeoBoundary(product, PRODUCT_BOUNDARY_STEP);
+        // @todo 1 tb/tb remove debugging code
+        System.out.println("productBoundary = " + productBoundary);
         final GeoCoding geoCoding = product.getGeoCoding();
         final int width = product.getSceneRasterWidth();
         final int height = product.getSceneRasterHeight();
@@ -65,8 +67,8 @@ class FileProcessor {
                     if (params.isMergeIntersections()) {
                         ranges = mergeIntersectionRanges(ranges);
                     }
-                    for (int k = 0; k < ranges.length; k++) {
-                        createChildProduct(inputFile, ranges[k], outputDir, config.getChildProductOriginatorId());
+                    for (Range range : ranges) {
+                        createChildProduct(inputFile, range, outputDir, config.getChildProductOriginatorId());
                     }
                 } else {
                     final File outputFile = createTargetFile(outputDir, inputFile);

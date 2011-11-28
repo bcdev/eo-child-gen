@@ -143,26 +143,37 @@ public class FileTreeExpanderTest extends TestCase {
 
     public void testDenotesWildcardTree() {
         assertTrue(FileTreeExpander.denotesWildcardTree("/opt/files/*/*/*.bla"));
-        assertTrue(FileTreeExpander.denotesWildcardTree("C:\\directory\\*\\*.files"));
 
         assertFalse(FileTreeExpander.denotesWildcardTree("/var/data/*.E1"));
         assertFalse(FileTreeExpander.denotesWildcardTree("/var/data/"));
         assertFalse(FileTreeExpander.denotesWildcardTree("/var/data/blabla.data"));
-        assertFalse(FileTreeExpander.denotesWildcardTree("C:\\directory\\*.files"));
-        assertFalse(FileTreeExpander.denotesWildcardTree("C:\\directory\\"));
-        assertFalse(FileTreeExpander.denotesWildcardTree("C:\\directory\\the.file"));
+
+
+        if (TestUtils.isWindowsSystem()) {
+            // windows syntax searches do not work under linux tb 2011-11-28
+            assertTrue(FileTreeExpander.denotesWildcardTree("C:\\directory\\*\\*.files"));
+
+            assertFalse(FileTreeExpander.denotesWildcardTree("C:\\directory\\*.files"));
+            assertFalse(FileTreeExpander.denotesWildcardTree("C:\\directory\\"));
+            assertFalse(FileTreeExpander.denotesWildcardTree("C:\\directory\\the.file"));
+        }
     }
 
     public void testDenotesWildcardFile() {
         assertTrue(FileTreeExpander.denotesWildcardFile("/var/data/*.E1"));
-        assertTrue(FileTreeExpander.denotesWildcardFile("C:\\directory\\*.files"));
 
         assertFalse(FileTreeExpander.denotesWildcardFile("/opt/files/*/*/*.bla"));
-        assertFalse(FileTreeExpander.denotesWildcardFile("C:\\directory\\*\\*.files"));
-        assertFalse(FileTreeExpander.denotesWildcardFile("/var/data/"));
         assertFalse(FileTreeExpander.denotesWildcardFile("/var/data/blabla.data"));
-        assertFalse(FileTreeExpander.denotesWildcardFile("C:\\directory\\"));
-        assertFalse(FileTreeExpander.denotesWildcardFile("C:\\directory\\the.file"));
+        assertFalse(FileTreeExpander.denotesWildcardFile("/var/data/"));
+
+        if (TestUtils.isWindowsSystem()) {
+            // windows syntax searches do not work under linux tb 2011-11-28
+            assertTrue(FileTreeExpander.denotesWildcardFile("C:\\directory\\*.files"));
+
+            assertFalse(FileTreeExpander.denotesWildcardFile("C:\\directory\\*\\*.files"));
+            assertFalse(FileTreeExpander.denotesWildcardFile("C:\\directory\\"));
+            assertFalse(FileTreeExpander.denotesWildcardFile("C:\\directory\\the.file"));
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////

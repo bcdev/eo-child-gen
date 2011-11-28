@@ -1,6 +1,6 @@
 /**
- * 
- * 
+ *
+ *
  */
 package com.bc.merci.geochildgen;
 
@@ -21,6 +21,7 @@ public class GeoChildGenMain {
             CmdLineParams params = CmdLineParser.parse(args);
             GeoChildGen.run(params);
         } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
             GeoChildGen.printUsageTo(System.out);
         } catch (IOException e) {
             e.printStackTrace();

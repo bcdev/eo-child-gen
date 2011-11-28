@@ -41,7 +41,11 @@ class CmdLineParser {
                 params.setSiteCategoryNames(categoryNames);
             } else if (CmdLineConstants.FILES_FROM_OPTION.equalsIgnoreCase(current_arg)) {
                 i++;
-                params.setInputSource(args[i]);
+                if (i < args.length) {
+                    params.setInputSource(args[i]);
+                } else {
+                    throw new IllegalArgumentException("Missing value for parameter '-f'.");
+                }
                 params.setInputFromFile(true);
             } else {
                 params.addInputFileName(current_arg);

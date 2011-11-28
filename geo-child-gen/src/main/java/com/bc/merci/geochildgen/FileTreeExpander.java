@@ -79,8 +79,8 @@ class FileTreeExpander {
         final WildcardFileFilter wildcardFileFilter = new WildcardFileFilter(expressionFile.getName());
         final File searchDirectory = expressionFile.getParentFile();
         final String[] directoryContent = searchDirectory.list(wildcardFileFilter);
-        for (int i = 0; i < directoryContent.length; i++) {
-            addFile(new File(searchDirectory, directoryContent[i]), result);
+        for (String directoryItem : directoryContent) {
+            addFile(new File(searchDirectory, directoryItem), result);
         }
 
         return result;  //To change body of created methods use File | Settings | File Templates.
@@ -91,8 +91,8 @@ class FileTreeExpander {
 
         AbstractFileFilter subFilter = null;
         final String[] directoryContent = expressionFile.list(filter);
-        for (int i = 0; i < directoryContent.length; i++) {
-            final File file = new File(expressionFile, directoryContent[i]);
+        for (String directoryItem : directoryContent) {
+            final File file = new File(expressionFile, directoryItem);
             if (file.isDirectory()) {
                 if (subFilter == null) {
                     if (filterStack.isEmpty()) {
@@ -116,8 +116,8 @@ class FileTreeExpander {
         final ArrayList<File> result = new ArrayList<File>();
 
         final String[] directoryContent = expressionFile.list();
-        for (int i = 0; i < directoryContent.length; i++) {
-            final File dirItem = new File(expressionFile, directoryContent[i]);
+        for (String directoryItem : directoryContent) {
+            final File dirItem = new File(expressionFile, directoryItem);
             if (dirItem.isDirectory()) {
                 final ArrayList<File> subTree = expandDirectory(dirItem);
                 result.addAll(subTree);

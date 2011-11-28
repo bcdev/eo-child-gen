@@ -165,6 +165,17 @@ public class CmdLineParserTest extends TestCase {
         assertEquals(PROPERTIES_FILE_NAME, params.getPropertiesFileName());
     }
 
+     public void testSetInputFilesFrom_missingFileArgument() {
+        final String[] args_1 = {"-g", PROPERTIES_FILE_NAME, "-f"};
+
+         try {
+             CmdLineParser.parse(args_1);
+             fail("IllegalArgumentException expected");
+         } catch (IllegalArgumentException e) {
+         }
+
+     }
+
     ////////////////////////////////////////////////////////////////////////////////
     /////// END OF PUBLIC
     ////////////////////////////////////////////////////////////////////////////////

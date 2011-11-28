@@ -18,4 +18,9 @@ class TestUtils {
         }
         treeRoot.delete();
     }
+
+    public static boolean isWindowsSystem() {
+        final String osName = System.getProperty("os.name");
+        return osName != null && osName.startsWith("Windows");
+    }
 }
