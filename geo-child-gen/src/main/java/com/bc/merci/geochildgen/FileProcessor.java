@@ -65,8 +65,8 @@ class FileProcessor {
                     if (params.isMergeIntersections()) {
                         ranges = mergeIntersectionRanges(ranges);
                     }
-                    for (int k = 0; k < ranges.length; k++) {
-                        createChildProduct(inputFile, ranges[k], outputDir, config.getChildProductOriginatorId());
+                    for (Range range : ranges) {
+                        createChildProduct(inputFile, range, outputDir, config.getChildProductOriginatorId());
                     }
                 } else {
                     final File outputFile = createTargetFile(outputDir, inputFile);

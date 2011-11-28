@@ -14,6 +14,10 @@ public class TestDataTest extends TestCase {
     private String testDataDirPath;
 
     public void testAllAcceptanceTestFilesHaveCorrectHash() throws IOException {
+        if (isIOTestsSuppressed()) {
+            System.err.println("testAllAcceptanceTestFilesHaveCorrectHash() suppressed");
+            return;
+        }
         verifyFileHashSum("066fb1148c70ad857d24208ab6cca1a4", "ATS_TOA_1PPTOM20070110_192521_000000822054_00328_25432_0001.N1");
         verifyFileHashSum("fefb8710fa1d78d618c809b9fc463f1a", "AT1_NR__2PTRAL19930614_131152_000000004013_00338_10002_0000.E1");
     }
@@ -52,5 +56,10 @@ public class TestDataTest extends TestCase {
     private static String calculateFileHash(File inputFile) throws IOException, NoSuchAlgorithmException {
         final MD5Encoder md5Encoder = new MD5Encoder();
         return md5Encoder.encode(inputFile);
+    }
+
+    // @todo 3 tb/** this is also a common check - move to testing framework if exists - tb 2011-11-28
+    private static boolean isIOTestsSuppressed() {
+        return "true".equals(System.getProperty("noiotests"));
     }
 }
