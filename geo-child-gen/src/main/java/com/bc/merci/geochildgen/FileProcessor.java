@@ -51,8 +51,6 @@ class FileProcessor {
         }
 
         final Geometry productBoundary = ProductHelper.extractGeoBoundary(product, PRODUCT_BOUNDARY_STEP);
-        // @todo 1 tb/tb remove debugging code
-        System.out.println("productBoundary = " + productBoundary);
         final GeoCoding geoCoding = product.getGeoCoding();
         final int width = product.getSceneRasterWidth();
         final int height = product.getSceneRasterHeight();
@@ -93,12 +91,12 @@ class FileProcessor {
         double min = Double.MAX_VALUE;
         double max = Double.MIN_VALUE;
 
-        for (int i = 0; i < ranges.length; i++) {
-            if (ranges[i].getMin() < min) {
-                min = ranges[i].getMin();
+        for (Range range : ranges) {
+            if (range.getMin() < min) {
+                min = range.getMin();
             }
-            if (ranges[i].getMax() > max) {
-                max = ranges[i].getMax();
+            if (range.getMax() > max) {
+                max = range.getMax();
             }
         }
 
@@ -113,7 +111,7 @@ class FileProcessor {
 
     private static boolean contains(final Geometry geometry, final Geometry geometry2) {
         final int status = GeometryUtils.performGeometryOp(GeometryUtils.GEOM_OP_CONTAINS,
-                                                           geometry, geometry2);
+                geometry, geometry2);
 
         return status == Geometry.TRUE;
     }
@@ -136,7 +134,7 @@ class FileProcessor {
             System.out.println("copied product '" + inputFile.getPath() + "'");
         } catch (IOException e) {
             System.err.println("Failed to copy '" + inputFile.getAbsolutePath() +
-                                       "' to output directory");
+                    "' to output directory");
         }
 
         fis.close();
@@ -145,13 +143,13 @@ class FileProcessor {
 
     private static boolean isIntersection(final Geometry geometry, final Geometry geometry2) {
         final int status = GeometryUtils.performGeometryOp(GeometryUtils.GEOM_OP_INTERSECTS,
-                                                           geometry, geometry2);
+                geometry, geometry2);
 
         return status == Geometry.TRUE;
     }
 
     /**
-     * @param siteGeometry the geometry of the test site
+     * @param siteGeometry    the geometry of the test site
      * @param productBoundary
      * @param geoCoding
      * @param width
@@ -162,7 +160,7 @@ class FileProcessor {
                                                      final Geometry productBoundary, final GeoCoding geoCoding,
                                                      final int width, final int height) {
         final Range[] ranges = RangeConverter.getRangeFromPolygonGeometry(siteGeometry, productBoundary, geoCoding,
-                                                                          width, height);
+                width, height);
 
         for (int i = 0; i < ranges.length; i++) {
             RangeConverter.adjustRange(ranges[i], height, MINIMUM_NUMBER_OF_LINES, ranges[i]);
