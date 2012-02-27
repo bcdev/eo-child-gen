@@ -8,11 +8,11 @@ import com.bc.util.file.ZipUtils;
 import com.bc.util.geom.Geometry;
 import com.bc.util.geom.GeometryUtils;
 import com.bc.util.geom.RangeConverter;
+import com.bc.util.geom.SubsetRange;
 import com.bc.util.product.ProductHelper;
 import org.esa.beam.framework.dataio.ProductIO;
 import org.esa.beam.framework.datamodel.GeoCoding;
 import org.esa.beam.framework.datamodel.Product;
-import org.esa.beam.util.math.Range;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -61,11 +61,11 @@ class FileProcessor {
                 copyProduct(inputFile, outputFile);
             } else if (isIntersection(siteGeometry, productBoundary)) {
                 if (params.isCreateChildOption()) {
-                    Range[] ranges = getIntersectionLineRanges(siteGeometry, productBoundary, geoCoding, width, height);
+                    SubsetRange[] ranges = getIntersectionLineRanges(siteGeometry, productBoundary, geoCoding, width, height);
                     if (params.isMergeIntersections()) {
                         ranges = mergeIntersectionRanges(ranges);
                     }
-                    for (Range range : ranges) {
+                    for (SubsetRange range : ranges) {
                         createChildProduct(inputFile, range, outputDir, config.getChildProductOriginatorId());
                     }
                 } else {
@@ -83,15 +83,15 @@ class FileProcessor {
     }
 
     // package access for testing only tb 2011-11-17
-    static Range[] mergeIntersectionRanges(Range[] ranges) {
+    static SubsetRange[] mergeIntersectionRanges(SubsetRange[] ranges) {
         if (ranges.length == 0) {
-            return new Range[0];
+            return new SubsetRange[0];
         }
 
         double min = Double.MAX_VALUE;
         double max = Double.MIN_VALUE;
 
-        for (Range range : ranges) {
+        for (SubsetRange range : ranges) {
             if (range.getMin() < min) {
                 min = range.getMin();
             }
@@ -100,8 +100,8 @@ class FileProcessor {
             }
         }
 
-        final Range[] result = new Range[1];
-        result[0] = new Range(min, max);
+        final SubsetRange[] result = new SubsetRange[1];
+        result[0] = new SubsetRange(min, max);
         return result;
     }
 
@@ -150,20 +150,20 @@ class FileProcessor {
 
     /**
      * @param siteGeometry    the geometry of the test site
-     * @param productBoundary
+     * @param productBoundary the bounding geometry of the product
      * @param geoCoding
      * @param width
      * @param height
      * @return the line ranges of the intersection
      */
-    private static Range[] getIntersectionLineRanges(final Geometry siteGeometry,
-                                                     final Geometry productBoundary, final GeoCoding geoCoding,
-                                                     final int width, final int height) {
-        final Range[] ranges = RangeConverter.getRangeFromPolygonGeometry(siteGeometry, productBoundary, geoCoding,
+    private static SubsetRange[] getIntersectionLineRanges(final Geometry siteGeometry,
+                                                           final Geometry productBoundary, final GeoCoding geoCoding,
+                                                           final int width, final int height) {
+        final SubsetRange[] ranges = RangeConverter.getRangeFromPolygonGeometry(siteGeometry, productBoundary, geoCoding,
                 width, height);
 
-        for (int i = 0; i < ranges.length; i++) {
-            RangeConverter.adjustRange(ranges[i], height, MINIMUM_NUMBER_OF_LINES, ranges[i]);
+        for (SubsetRange range : ranges) {
+            RangeConverter.adjustRange(range, height, MINIMUM_NUMBER_OF_LINES, range);
         }
 
         return ranges;
@@ -177,7 +177,7 @@ class FileProcessor {
      * @throws com.bc.childgen.ChildGenException
      *          when something goes wrong
      */
-    private static void createChildProduct(final File productFile, final Range range,
+    private static void createChildProduct(final File productFile, final SubsetRange range,
                                            final File outputDir, final String childProductOriginatorId) throws ChildGenException {
         final int firstLine = (int) range.getMin();
         final int lastLine = (int) range.getMax();
