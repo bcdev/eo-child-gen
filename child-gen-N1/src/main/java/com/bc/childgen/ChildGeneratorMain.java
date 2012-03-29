@@ -55,7 +55,7 @@ public class ChildGeneratorMain {
 
             System.err.println(
                     "Supported product types: \n" +
-                            "  MER_RR__1P, MER_RR__2P, MER_FR__1P, MER_FR__2P, MER_FRS_1P\n" +
+                            "  MER_RR__1P, MER_RR__2P, MER_FR__1P, MER_FR__2P, MER_FRS_1P, MER_FRS_2P, MER_FSG_1P, MER_FSG_2P\n" +
                             "  ATS_TOA_1P, ATS_NR__2P, AT1_TOA_1P, AT1_NR__2P, AT2_TOA_1P, AT2_NR__2P\n\n" +
                             "Usage: java "
                             + ChildGeneratorMain.class.getName()

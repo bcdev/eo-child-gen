@@ -36,14 +36,13 @@ public final class ChildGeneratorFactory {
     ////////////////////////////////////////////////////////////////////////////////
 
     static Config getConfigFor(String productType) throws ChildGenException {
-        ConfigImpl config = new ConfigImpl();
         final String fileNameCapitals = productType.toUpperCase();
 
         if (fileNameCapitals.startsWith("MER_RR")) {
             return new MerisRRConfig();
         } else if (fileNameCapitals.startsWith("MER_FR_")) {
            return new MerisFRConfig();
-        } else if (fileNameCapitals.startsWith("MER_FRS")) {
+        } else if (fileNameCapitals.startsWith("MER_FRS") || fileNameCapitals.startsWith("MER_FSG")) {
             return new MerisFRSConfig();
         } else if (fileNameCapitals.startsWith("AT")) {
             return new AatsrConfig();

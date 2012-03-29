@@ -12,7 +12,7 @@ public class ChildGeneratorFactoryTest extends TestCase {
         assertEquals("Quality ADS                 ", config.getQualityAdsName());
         assertEquals(13, config.getTiePointLatOffset());
         assertEquals(297, config.getTiePointLonOffset());
-        assertEquals(71, config.getNumberOfGeoCoordinates());            
+        assertEquals(71, config.getNumberOfGeoCoordinates());
     }
 
     public void testGetConfigFor_MERIS_FR() throws ChildGenException {
@@ -37,7 +37,18 @@ public class ChildGeneratorFactoryTest extends TestCase {
         assertEquals(71, config.getNumberOfGeoCoordinates());
     }
 
-     public void testGetConfigFor_MERIS_ATSR() throws ChildGenException {
+    public void testGetConfigFor_MERIS_FSG() throws ChildGenException {
+        final Config config = ChildGeneratorFactory.getConfigFor("MER_FSG_1PNUPA20050515_104058_000001852037_00180_16767_4878.N1");
+        assertNotNull(config);
+
+        assertEquals("Tie points ADS              ", config.getTiePointAdsName());
+        assertEquals("Quality ADS                 ", config.getQualityAdsName());
+        assertEquals(13, config.getTiePointLatOffset());
+        assertEquals(297, config.getTiePointLonOffset());
+        assertEquals(71, config.getNumberOfGeoCoordinates());
+    }
+
+    public void testGetConfigFor_MERIS_ATSR() throws ChildGenException {
         final Config config = ChildGeneratorFactory.getConfigFor("ATS_NR__2PNPDK20060329_103452_000065272046_00223_21319_0188.N1");
         assertNotNull(config);
 
