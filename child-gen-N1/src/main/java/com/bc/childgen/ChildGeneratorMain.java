@@ -1,8 +1,9 @@
 package com.bc.childgen;
 
 
-import java.awt.*;
 import java.io.File;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 
 /**
  * Simple command line client for the  Child Generator. Usage is as follows
@@ -14,19 +15,21 @@ import java.io.File;
  */
 public class ChildGeneratorMain {
 
-    public static final String PROGRAM_NAME = "childgen";
-    public static final String VERSION_INFO = "2.3";
-    public static final String COPYRIGHT_INFO = "Copyright (C) 2004-2011 by Brockmann Consult (info@brockmann-consult.de)";
-    private static final int IGNORED_NUM_COLUMNS = 1121;
+    private static final String PROGRAM_NAME = "childgen";
+    private static final String VERSION_INFO = "2.4";
+    private static final String COPYRIGHT_INFO = "Copyright (C) 2004-2012 by Brockmann Consult (info@brockmann-consult.de)";
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(PROGRAM_NAME + " - Version " + VERSION_INFO);
-        System.out.println(COPYRIGHT_INFO);
+        printVersionInfoTo(System.out);
 
         try {
+            if (args.length != 6) {
+                throw new IllegalArgumentException("Number of cmd-line arguments not matching");
+            }
+
             File inputFile = new File(args[0]);
             File outputDir = new File(args[1]);
 
@@ -39,20 +42,17 @@ public class ChildGeneratorMain {
 
             long start = System.currentTimeMillis();
 
-            ChildGeneratorImpl childGenerator = ChildGeneratorFactory.createChildGenerator(inputFile.getName());
-            int numLines = lastLine - firstLine + 1;
-            // note width is not evaluated so we set anything here (except 0 !)
-            Rectangle region = new Rectangle(0, firstLine, IGNORED_NUM_COLUMNS, numLines);
+            final ChildGeneratorImpl childGenerator = ChildGeneratorFactory.createChildGenerator(inputFile.getName());
             childGenerator.process(inputFile,
                                    outputDir,
                                    originatorId,
                                    fileCounter,
-                                   region);
-            
+                                   firstLine,
+                                   lastLine);
+
             long stop = System.currentTimeMillis();
             System.out.println("Processed in " + (stop - start) + " ms");
         } catch (Exception e) {
-
             System.err.println(
                     "Supported product types: \n" +
                             "  MER_RR__1P, MER_RR__2P, MER_FR__1P, MER_FR__2P, MER_FRS_1P, MER_FRS_2P, MER_FSG_1P, MER_FSG_2P\n" +
@@ -62,5 +62,16 @@ public class ChildGeneratorMain {
                             + " <inputfile> <outputdir> <firstline> <lastline> <pkey> <filecounter>\n\n");
             e.printStackTrace();
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    /////// END OF PUBLIC
+    ////////////////////////////////////////////////////////////////////////////////
+
+    static void printVersionInfoTo(OutputStream outputStream) {
+        final PrintWriter writer = new PrintWriter(outputStream);
+        writer.println(PROGRAM_NAME + " - Version " + VERSION_INFO);
+        writer.println(COPYRIGHT_INFO);
+        writer.flush();
     }
 }
