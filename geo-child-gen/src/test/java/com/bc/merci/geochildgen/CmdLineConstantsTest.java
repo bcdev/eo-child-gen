@@ -20,6 +20,6 @@ public class CmdLineConstantsTest extends TestCase {
     }
 
     public void testVersionConstant() {
-        assertEquals("1.7.6-SNAPSHOT", CmdLineConstants.VERSION_STRING);
+        assertEquals("1.7.6", CmdLineConstants.VERSION_STRING);
     }
 }
