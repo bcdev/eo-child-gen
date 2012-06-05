@@ -48,7 +48,7 @@ public class ChildGeneratorFactoryTest extends TestCase {
         assertEquals(71, config.getNumberOfGeoCoordinates());
     }
 
-    public void testGetConfigFor_MERIS_ATSR() throws ChildGenException {
+    public void testGetConfigFor_ATSR() throws ChildGenException {
         final Config config = ChildGeneratorFactory.getConfigFor("ATS_NR__2PNPDK20060329_103452_000065272046_00223_21319_0188.N1");
         assertNotNull(config);
 
