@@ -23,14 +23,19 @@ public class GeoChildGenMain {
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             GeoChildGen.printUsageTo(System.out);
+            System.exit(1);
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(1);
         } catch (ParseException e) {
             e.printStackTrace();
+            System.exit(1);
         } catch (SQLException e) {
             e.printStackTrace();
+            System.exit(1);
         } catch (ChildGenException e) {
             e.printStackTrace();
+            System.exit(1);
         }
     }
 }
