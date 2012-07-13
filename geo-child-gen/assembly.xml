@@ -47,6 +47,12 @@
             <destName>inputFiles_example.txt</destName>
             <fileMode>0754</fileMode>
         </file>
+        <file>
+            <source>changelog.txt</source>
+            <outputDirectory>.</outputDirectory>
+            <destName>changelog.txt</destName>
+            <fileMode>0754</fileMode>
+        </file>
        <file>
             <source>target/${artifact.artifactId}-${artifact.version}.jar</source>
             <outputDirectory>lib</outputDirectory>

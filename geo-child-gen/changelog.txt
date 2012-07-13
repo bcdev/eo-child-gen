@@ -1,4 +1,12 @@
-Changelog for ENVISAT GeoCildGen
+Changelog for ENVISAT GeoChildGen
+
+Changes from version 1.7.6
+==========================
+- added system exit code != 0 when errors occurred
+
+Changes from version 1.7.5
+==========================
+- added support for MER_FRS_2P, MER_FSG_1P and MER_FSG_2P
 
 Changes from version 1.7.1
 ==========================
