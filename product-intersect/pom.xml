@@ -6,15 +6,15 @@
     
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.bc.eo</groupId>
-    <artifactId>eo-childgen-N1</artifactId>
-    <name>EO ChildGen for Envisat N1</name>
-    <version>2.5</version>
+    <artifactId>product-intersect</artifactId>
+    <name>Product Intersection Tool</name>
+    <version>2.6</version>
 
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.5</version>
+            <version>3.8.2</version>
             <scope>test</scope>
         </dependency>                
     </dependencies>

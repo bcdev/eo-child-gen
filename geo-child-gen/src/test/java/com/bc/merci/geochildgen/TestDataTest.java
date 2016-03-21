@@ -6,6 +6,7 @@ import com.bc.util.test.BcTestUtils;
 import junit.framework.TestCase;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
@@ -23,7 +24,11 @@ public class TestDataTest extends TestCase {
     }
 
     public void testCorrectNumberOfAcceptanceTestFiles() throws IOException {
-        final File[] files = new File(getTestDataDirPath()).listFiles();
+        final File[] files = new File(getTestDataDirPath()).listFiles(new FileFilter() {
+            public boolean accept(File pathname) {
+                return pathname.getName().startsWith("ATS_") || pathname.getName().startsWith("AT1_");
+            }
+        });
         assertEquals(2, files.length);
     }
 

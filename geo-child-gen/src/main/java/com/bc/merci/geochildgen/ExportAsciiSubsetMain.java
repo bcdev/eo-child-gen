@@ -1,16 +1,16 @@
 package com.bc.merci.geochildgen;
 
-import org.esa.beam.dataio.ascii.AsciiProductWriterPlugIn;
-import org.esa.beam.framework.dataio.ProductIO;
-import org.esa.beam.framework.dataio.ProductSubsetDef;
-import org.esa.beam.framework.dataio.ProductWriter;
-import org.esa.beam.framework.datamodel.GeoCoding;
-import org.esa.beam.framework.datamodel.GeoPos;
-import org.esa.beam.framework.datamodel.PixelPos;
-import org.esa.beam.framework.datamodel.Product;
-import org.esa.beam.util.io.FileUtils;
+import com.bc.util.product.AsciiProductWriterPlugIn;
+import org.esa.snap.core.dataio.ProductIO;
+import org.esa.snap.core.dataio.ProductSubsetDef;
+import org.esa.snap.core.dataio.ProductWriter;
+import org.esa.snap.core.datamodel.GeoCoding;
+import org.esa.snap.core.datamodel.GeoPos;
+import org.esa.snap.core.datamodel.PixelPos;
+import org.esa.snap.core.datamodel.Product;
+import org.esa.snap.core.util.io.FileUtils;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class ExportAsciiSubsetMain {
 
     private static void writeSubset(float lat, float lon, int width, int halfWith, File inputFile) throws IOException {
         final Product product = ProductIO.readProduct(inputFile);
-        final GeoCoding geoCoding = product.getGeoCoding();
+        final GeoCoding geoCoding = product.getSceneGeoCoding();
         final PixelPos pixelPos = geoCoding.getPixelPos(new GeoPos(lat, lon), null);
         if (pixelPos.isValid()) {
             try {

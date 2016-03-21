@@ -2,7 +2,7 @@ package com.bc.product.intersect;
 
 import junit.framework.TestCase;
 
-public class ProducIntersectPropertiesTest extends TestCase {
+public class ProductIntersectPropertiesTest extends TestCase {
 
     public void testSetGetGeometries() {
         final ProductIntersectProperties properties = new ProductIntersectProperties();

@@ -7,9 +7,6 @@ import com.bc.util.geom.PointGeometry;
 import com.bc.util.sql.BcDatabase;
 import com.bc.util.sql.DataSourceConfig;
 import com.bc.util.sql.SqlUtils;
-import com.bc.util.sql.dto.Location;
-import com.bc.util.sql.dto.Site;
-import com.bc.util.sql.dto.SiteCategory;
 import junit.framework.TestCase;
 import org.apache.commons.dbcp.BasicDataSource;
 
@@ -124,9 +121,31 @@ public class GeoChildGenUtilsTest extends TestCase {
         db = new BcDatabase(datasource);
 
         try {
-            db.runScriptFromText(Location.SQL_CREATE_TABLE, null);
-            db.runScriptFromText(Site.SQL_CREATE_TABLE, null);
-            db.runScriptFromText(SiteCategory.SQL_CREATE_TABLE, null);
+            db.runScriptFromText("CREATE TABLE Location (\n" +
+                    "\tId\t\t\tVARCHAR(32)\t\tNOT NULL,\n" +
+                    "\tGeometry    GEOMETRY        NOT NULL,\n" +
+                    "\n" +
+                    "\tPRIMARY KEY (Id)\n" +
+                    ") ENGINE=MyISAM DEFAULT CHARSET=latin1;", null);
+            db.runScriptFromText("CREATE TABLE Site (\n" +
+                    "    Id               VARCHAR(32)   NOT NULL,\n" +
+                    "    MetaSiteId       VARCHAR(32)           ,\n" +
+                    "    `Name`             VARCHAR (64)  NOT NULL,\n" +
+                    "    Description      VARCHAR (256),\n" +
+                    "    GeomOpId         INTEGER       NOT NULL,\n" +
+                    "    LocationId       VARCHAR(32)   NOT NULL,\n" +
+                    "    Radius           FLOAT,\n" +
+                    "    PRIMARY KEY (Id),\n" +
+                    "    FOREIGN KEY (GeomOpId) REFERENCES GeomOp (Id) ON DELETE CASCADE,\n" +
+                    "    FOREIGN KEY (LocationId) REFERENCES Location (Id) ON DELETE CASCADE\n" +
+                    ") ENGINE=MyISAM DEFAULT CHARSET=latin1;", null);
+            db.runScriptFromText("CREATE TABLE SiteCategory (\n" +
+                    "    Id               INTEGER       NOT NULL,\n" +
+                    "    `Name`             VARCHAR (64)  NOT NULL,\n" +
+                    "    Description      VARCHAR (256),\n" +
+                    "    PRIMARY KEY (Id),\n" +
+                    "    UNIQUE (Name)\n" +
+                    ") ENGINE=MyISAM DEFAULT CHARSET=latin1;", null);
             db.runScriptFromText(SQL_CREATE_SCS, null);
             db.runScriptFromText(SQL, null);
         } catch (SQLException e) {
@@ -136,9 +155,9 @@ public class GeoChildGenUtilsTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        db.runScriptFromText(Site.SQL_DROP_TABLE, null);
-        db.runScriptFromText(Location.SQL_DROP_TABLE, null);
-        db.runScriptFromText(SiteCategory.SQL_DROP_TABLE, null);
+        db.runScriptFromText("drop table Site", null);
+        db.runScriptFromText("drop table Location", null);
+        db.runScriptFromText("drop table SiteCategory", null);
         db.runScriptFromText(SQL_DROP_SCS, null);
     }
 

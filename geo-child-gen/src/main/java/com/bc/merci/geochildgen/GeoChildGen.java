@@ -7,10 +7,13 @@ import com.bc.util.geom.GeometryParser;
 import com.bc.util.sql.BcDatabase;
 import com.bc.util.sql.DataSourceConfig;
 import com.bc.util.sql.SqlUtils;
-import org.esa.beam.util.logging.BeamLogManager;
 
 import javax.sql.DataSource;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -28,8 +31,6 @@ public class GeoChildGen {
      * @throws SQLException      on database access failures
      */
     public static void run(CmdLineParams params) throws IOException, ParseException, SQLException, ChildGenException {
-        BeamLogManager.removeRootLoggerHandlers();
-
         final String outputDirName = params.getOutputDirName();
         final File outputDir = new File(outputDirName);
         if (!(outputDir.isDirectory() || outputDir.mkdirs())) {

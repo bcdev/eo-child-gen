@@ -10,9 +10,9 @@ import com.bc.util.geom.GeometryUtils;
 import com.bc.util.geom.RangeConverter;
 import com.bc.util.geom.SubsetRange;
 import com.bc.util.product.ProductHelper;
-import org.esa.beam.framework.dataio.ProductIO;
-import org.esa.beam.framework.datamodel.GeoCoding;
-import org.esa.beam.framework.datamodel.Product;
+import org.esa.snap.core.dataio.ProductIO;
+import org.esa.snap.core.datamodel.GeoCoding;
+import org.esa.snap.core.datamodel.Product;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -51,7 +51,7 @@ class FileProcessor {
         }
 
         final Geometry productBoundary = ProductHelper.extractGeoBoundary(product, PRODUCT_BOUNDARY_STEP);
-        final GeoCoding geoCoding = product.getGeoCoding();
+        final GeoCoding geoCoding = product.getSceneGeoCoding();
         final int width = product.getSceneRasterWidth();
         final int height = product.getSceneRasterHeight();
 

@@ -1,7 +1,6 @@
 package com.bc.merci.geochildgen;
 
-import org.esa.beam.util.StringUtils;
-
+import org.esa.snap.core.util.StringUtils;
 
 class CmdLineParser {
 
